@@ -10,10 +10,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemIcon } from "@mui/material";
 import "./CustomDrawer.css";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
 export function CustomDrawer(props) {
+  const navigate = useNavigate()
   const { window, items, icons,hrefs } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -35,7 +37,7 @@ export function CustomDrawer(props) {
 
   const drawer = (
     <div>
-      <img className="drawerImage" src="/logo.png"></img>
+      <img className="drawerImage" src="/logo.png" onClick={() => navigate("/home")}></img>
       <Divider />
       <List >
       {items.map((text, index) => {
