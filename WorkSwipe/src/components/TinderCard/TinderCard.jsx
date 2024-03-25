@@ -10,17 +10,20 @@ import {
   CardActions,
   IconButton,
   Typography,
-  Icon,
   Button,
+  Alert,
+  AlertTitle,
+  Stack,
 } from "@mui/material";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Collapse from "@mui/material/Collapse";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import HouseIcon from "@mui/icons-material/House";
 import StarIcon from "@mui/icons-material/Star";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import MailIcon from "@mui/icons-material/Mail";
+import WorkIcon from "@mui/icons-material/Work";
+import PlaceIcon from "@mui/icons-material/Place";
+
 const SimpleCard = ({ db }) => {
   const [lastDirection, setLastDirection] = useState(null);
   const [expanded, setExpanded] = useState(false);
@@ -77,7 +80,7 @@ const SimpleCard = ({ db }) => {
   // increase current index and show card
   const goBack = async () => {
     if (!canGoBack) return;
-
+    setDBlength(dbLength + 1);
     const newIndex = currentIndex + 1;
     updateCurrentIndex(newIndex);
 
@@ -88,12 +91,17 @@ const SimpleCard = ({ db }) => {
   };
   return (
     <>
+
       {dbLength === 0 ? (
-        <div>No cards to display.</div>
+     
+      <Alert variant="filled" severity="error" sx={{fontWeight:"bold"}}>
+        <AlertTitle sx={{fontWeight:"bold"}}>Error</AlertTitle>
+        There are no more work offers left at the moment
+      </Alert>
       ) : (
+
         <TinderCard
           ref={childRefs[currentIndex]}
-          className="swipe"
           key={db[currentIndex].name}
           onSwipe={(dir) => swiped(dir, db[currentIndex].name, currentIndex)}
           onCardLeftScreen={() =>
@@ -101,7 +109,9 @@ const SimpleCard = ({ db }) => {
           }
           preventSwipe={["up", "down"]}
         >
+          
           <Card sx={{ maxWidth: 345 }}>
+            
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: "#1976D2" }} aria-label="recipe">
@@ -110,98 +120,118 @@ const SimpleCard = ({ db }) => {
               }
               action={
                 <IconButton aria-label="settings">
-                  <MoreVertIcon />
+                  <MoreVertIcon sx={{ color: "#1976D2" }} />
                 </IconButton>
               }
-              title={db[currentIndex].name}
+              title={
+                <Typography variant="h5" style={{ fontWeight: "bold" }}>
+                  {db[currentIndex].name}
+                </Typography>
+              }
             />
 
             <CardContent>
               <CardMedia
+                height="100%"
                 component="img"
-                height="194"
                 image={db[currentIndex].url}
                 alt={db[currentIndex].name}
+                sx={{ pointerEvents: "none" ,padding:"2rem"}}
               />
-              <Typography>
-                <StarIcon />
+              <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
+                <WorkIcon sx={{ marginRight: 1, color: "#1976D2" }} />
+                {db[currentIndex].position}
+              </Typography>
+              <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
+                <StarIcon sx={{ marginRight: 1, color: "#1976D2" }} />
                 {db[currentIndex].exp} years of experience
               </Typography>
-
-              <Typography>
-                <HouseIcon></HouseIcon>
-                {db[currentIndex].residence}
+              <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
+                <PlaceIcon sx={{ marginRight: 1, color: "#1976D2" }} />
+                {db[currentIndex].location}
               </Typography>
-              <Typography>
-                <AlternateEmailIcon />
-                {db[currentIndex].email}
+              <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
+                <MailIcon sx={{ marginRight: 1, color: "#1976D2" }} />
+                <a
+                  href={`mailto:${db[currentIndex].email}`}
+                  style={{ color: "#1976D2" }}
+                >
+                  {db[currentIndex].email}
+                </a>
               </Typography>
             </CardContent>
             <div className="buttons">
-            <CardActions>
-              <a
-                href={db[currentIndex].linkedIn}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconButton aria-label="LinkedIn">
-                  <LinkedInIcon />
+              <CardActions>
+                <a
+                  href={db[currentIndex].linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconButton aria-label="LinkedIn">
+                    <LinkedInIcon sx={{ color: "#1976D2" }} />
+                  </IconButton>
+                </a>
+                <IconButton
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon sx={{ color: "black" }} />
+                  <span style={{ color: "#1976D2", fontWeight: "bold" }}>
+                    Technologies
+                  </span>
                 </IconButton>
-              </a>
-
-              <a
-                href={db[currentIndex].gitHub}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconButton aria-label="GitHub">
-                  <GitHubIcon />
-                </IconButton>
-              </a>
-              <IconButton
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-                <ExpandMoreIcon />
-                Technologies
-              </IconButton>
-
-            </CardActions>
+              </CardActions>
             </div>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
-              <ul>
-                {db[currentIndex].technologies.map((tech)=>{
-                    return <li>{tech}</li>
-                })}
-              </ul>
-
+                <h4>Required:</h4>
+                <ul className="list">
+                  {db[currentIndex].technologies.map((tech, index) => {
+                    return (
+                      <li style={{ fontWeight: "bold" }} key={index}>
+                        {tech}
+                      </li>
+                    );
+                  })}
+                </ul>
+                <h4>Advantage:</h4>
+                <ul className="list">
+                  {db[currentIndex].niceToHave.map((tech, index) => {
+                    return (
+                      <li style={{ fontWeight: "bold" }} key={index}>
+                        {tech}
+                      </li>
+                    );
+                  })}
+                </ul>
               </CardContent>
             </Collapse>
             <div className="buttons">
-            <Button variant="contained"
-              style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-              onClick={() => swipe("left")}
-            >
-              Swipe left!
-            </Button>
-            <Button variant="contained"
-              style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
-              onClick={() => goBack()}
-            >
-              Undo swipe!
-            </Button>
-            <Button variant="contained"
-              style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-              onClick={() => swipe("right")}
-            >
-              Swipe right!
-            </Button>
-          </div>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+                onClick={() => swipe("left")}
+              >
+                Swipe left!
+              </Button>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
+                onClick={() => goBack()}
+              >
+                Undo swipe!
+              </Button>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+                onClick={() => swipe("right")}
+              >
+                Swipe right!
+              </Button>
+            </div>
           </Card>
-         
-         
+
           {lastDirection ? (
             <h2 className="infoText">You swiped {lastDirection}</h2>
           ) : null}
