@@ -8,7 +8,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import Toolbar from "@mui/material/Toolbar";
 import { ListItemIcon } from "@mui/material";
 import "./CustomDrawer.css";
 
@@ -46,7 +45,7 @@ export function CustomDrawer(props) {
             <ListItem key={text} disablePadding>
               <ListItemButton >
                 <ListItemIcon>
-                  <Icon sx={{ color: "#3700FF"}} />
+                  <Icon sx={{ color: "#1976D2"}} />
                 </ListItemIcon>
                 <ListItemText  primaryTypographyProps={{ fontWeight: 'bolder' }} primary={text} />
               </ListItemButton>

@@ -10,7 +10,6 @@ const Homepage = () => {
     const icons = [AccountBoxIcon,JoinInnerIcon,ContactSupportIcon,InfoIcon,LogoutIcon]
   return (
     <>
-    <div>Homepage</div>
     <CustomDrawer items={['Profile', 'Matches','Support','About Us', 'Logout']} icons = {icons}/>
     </>
   )
