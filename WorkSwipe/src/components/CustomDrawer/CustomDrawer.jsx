@@ -35,7 +35,7 @@ export function CustomDrawer(props) {
 
   const drawer = (
     <div>
-      <img src="/logo.png"></img>
+      <img className="drawerImage" src="/logo.png"></img>
       <Divider />
       <List >
         {items.map((text, index) => {

@@ -10,13 +10,7 @@ import SimpleCard from "../../components/TinderCard/TinderCard";
 
 
 const Homepage = () => {
-    const icons = [AccountBoxIcon,JoinInnerIcon,ContactSupportIcon,InfoIcon,LogoutIcon]
-  return (
-    <>
-    <CustomDrawer items={['Profile', 'Matches','Support','About Us', 'Logout']} icons = {icons}/>
-    </>
-  )
-}
+   
   const person = [{
     name: "Nvidia",
     position:"Embedded developer",
@@ -62,6 +56,7 @@ const Homepage = () => {
       </div>
     </div>
   );
+}
 
 
 export default Homepage;

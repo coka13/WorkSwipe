@@ -132,7 +132,7 @@ const SimpleCard = ({ db }) => {
 
             <CardContent>
               <CardMedia
-                height="100%"
+
                 component="img"
                 image={db[currentIndex].url}
                 alt={db[currentIndex].name}
