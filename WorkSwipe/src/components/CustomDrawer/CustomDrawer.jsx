@@ -17,8 +17,7 @@ export function CustomDrawer(props) {
   const { window, items, icons } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-  console.log(items);
-  console.log(icons);
+
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);

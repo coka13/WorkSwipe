@@ -1,0 +1,35 @@
+
+.swipe{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+  .profileInfo{
+    display: flex;
+    align-items: center;
+  }
+
+
+  .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+
+  .list{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0;
+  }
+
+
+  h4{
+    margin: 0;
+    color: #1976D2;
+  }
+
+
