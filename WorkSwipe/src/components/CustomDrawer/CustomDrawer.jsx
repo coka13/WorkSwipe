@@ -14,7 +14,7 @@ import "./CustomDrawer.css";
 const drawerWidth = 240;
 
 export function CustomDrawer(props) {
-  const { window, items, icons } = props;
+  const { window, items, icons,hrefs } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
 
@@ -38,19 +38,23 @@ export function CustomDrawer(props) {
       <img className="drawerImage" src="/logo.png"></img>
       <Divider />
       <List >
-        {items.map((text, index) => {
-          const Icon = icons[index];
-          return (
-            <ListItem key={text} disablePadding>
-              <ListItemButton >
-                <ListItemIcon>
-                  <Icon sx={{ color: "#1976D2"}} />
-                </ListItemIcon>
-                <ListItemText  primaryTypographyProps={{ fontWeight: 'bolder' }} primary={text} />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
+      {items.map((text, index) => {
+  const Icon = icons[index];
+  const href = hrefs[index]; 
+  return (
+    <a className="link" href={href} key={text}>
+      <ListItem>
+        <ListItemButton>
+          <ListItemIcon>
+            <Icon sx={{ color: "#1976D2"}} />
+          </ListItemIcon>
+          <ListItemText primaryTypographyProps={{ fontWeight: 'bolder' }} primary={text} />
+        </ListItemButton>
+      </ListItem>
+    </a>
+  );
+})}
+
       </List>
     </div>
   );

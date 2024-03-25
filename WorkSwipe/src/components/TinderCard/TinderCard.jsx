@@ -114,7 +114,7 @@ const SimpleCard = ({ db }) => {
             
             <CardHeader
               avatar={
-                <Avatar sx={{ bgcolor: "#1976D2" }} aria-label="recipe">
+                <Avatar sx={{ bgcolor: "#1976D2" }} >
                   {db[currentIndex].name.charAt(0)}
                 </Avatar>
               }
