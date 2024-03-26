@@ -1,25 +1,26 @@
 .loginBox {
-  color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #cfedff;
-  border-radius: 8%;
-  margin: 15px;
-  padding: 10px;
-  width: 300px;
-  font-size: 22px;
-}
-
-.loginPage {
-  margin-top: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.registerButton {
-  font-weight: bold;
-}
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #cfedff;
+    border-radius: 8%;
+    margin: 15px;
+    padding: 10px;
+    width: 300px;
+    font-size: 22px;
+  }
+  
+  .loginPage {
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .registerButton {
+    font-weight: bold;
+  }
+  
