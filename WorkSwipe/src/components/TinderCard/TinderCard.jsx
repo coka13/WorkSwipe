@@ -91,15 +91,12 @@ const SimpleCard = ({ db }) => {
   };
   return (
     <>
-
       {dbLength === 0 ? (
-     
-      <Alert variant="filled" severity="error" sx={{fontWeight:"bold"}}>
-        <AlertTitle sx={{fontWeight:"bold"}}>Error</AlertTitle>
-        There are no more work offers left at the moment
-      </Alert>
+        <Alert variant="filled" severity="error" sx={{ fontWeight: "bold" }}>
+          <AlertTitle sx={{ fontWeight: "bold" }}>Error</AlertTitle>
+          There are no more work offers left at the moment
+        </Alert>
       ) : (
-
         <TinderCard
           ref={childRefs[currentIndex]}
           key={db[currentIndex].name}
@@ -109,12 +106,10 @@ const SimpleCard = ({ db }) => {
           }
           preventSwipe={["up", "down"]}
         >
-          
           <Card sx={{ maxWidth: 345 }}>
-            
             <CardHeader
               avatar={
-                <Avatar sx={{ bgcolor: "#1976D2" }} aria-label="recipe">
+                <Avatar sx={{ bgcolor: "#1976D2" }}>
                   {db[currentIndex].name.charAt(0)}
                 </Avatar>
               }
@@ -132,11 +127,10 @@ const SimpleCard = ({ db }) => {
 
             <CardContent>
               <CardMedia
-
                 component="img"
                 image={db[currentIndex].url}
                 alt={db[currentIndex].name}
-                sx={{ pointerEvents: "none" ,padding:"2rem"}}
+                sx={{ pointerEvents: "none", padding: "2rem" }}
               />
               <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
                 <WorkIcon sx={{ marginRight: 1, color: "#1976D2" }} />

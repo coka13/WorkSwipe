@@ -10,11 +10,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemIcon } from "@mui/material";
 import "./CustomDrawer.css";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
 export function CustomDrawer(props) {
-  const { window, items, icons } = props;
+  const navigate = useNavigate()
+  const { window, items, icons,hrefs } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
 
@@ -35,22 +37,26 @@ export function CustomDrawer(props) {
 
   const drawer = (
     <div>
-      <img className="drawerImage" src="/logo.png"></img>
+      <img className="drawerImage" src="/logo.png" onClick={() => navigate("/home")}></img>
       <Divider />
       <List >
-        {items.map((text, index) => {
-          const Icon = icons[index];
-          return (
-            <ListItem key={text} disablePadding>
-              <ListItemButton >
-                <ListItemIcon>
-                  <Icon sx={{ color: "#1976D2"}} />
-                </ListItemIcon>
-                <ListItemText  primaryTypographyProps={{ fontWeight: 'bolder' }} primary={text} />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
+      {items.map((text, index) => {
+  const Icon = icons[index];
+  const href = hrefs[index]; 
+  return (
+    <a className="link" href={href} key={text}>
+      <ListItem>
+        <ListItemButton>
+          <ListItemIcon>
+            <Icon sx={{ color: "#1976D2"}} />
+          </ListItemIcon>
+          <ListItemText primaryTypographyProps={{ fontWeight: 'bolder' }} primary={text} />
+        </ListItemButton>
+      </ListItem>
+    </a>
+  );
+})}
+
       </List>
     </div>
   );
