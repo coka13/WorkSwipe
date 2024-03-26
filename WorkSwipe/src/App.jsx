@@ -10,6 +10,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 
 function App() {
@@ -25,8 +26,8 @@ function App() {
 
   const hrefs = ["/profile", "/matches", "/support", "/about", "/logout"];
 
-  const isHomeRoute = (location.pathname === "/"||location.pathname === "/register");
-  const showDrawer = !isHomeRoute; // Hide drawer on / route
+
+  const showDrawer =  (location.pathname === "/home" || location.pathname === "/profile") //Show drawer only on existing routes
 
   return (
     <>
@@ -38,10 +39,11 @@ function App() {
         />
       )}
       <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/" element={<Login />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );
