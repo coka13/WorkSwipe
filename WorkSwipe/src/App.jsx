@@ -8,6 +8,8 @@ import JoinInnerIcon from "@mui/icons-material/JoinInner";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import InfoIcon from "@mui/icons-material/Info";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Login from './pages/Login/Login';
+
 
 function App() {
   const location = useLocation();
@@ -35,6 +37,7 @@ function App() {
         />
       )}
       <Routes>
+      <Route path="/" element={<Login />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
