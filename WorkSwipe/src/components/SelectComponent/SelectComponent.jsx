@@ -1,4 +1,3 @@
-import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -12,22 +11,20 @@ export default function SelectVariants({ prop }) {
   //   };
   return (
     <>
-   
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id={prop.name}>{prop.placeholder}</InputLabel>
-          <Select
-            labelId={prop.name}
-            id={prop.id}
-            value={prop.value}
-            // onChange={handleChange}
-            placeholder={prop.placeholder}
-          >
-            {prop.options.map((option) => (
-              <MenuItem value={option}>{option}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id={prop.name}>{prop.placeholder}</InputLabel>
+        <Select
+          labelId={prop.name}
+          id={prop.id}
+          value={prop.value}
+          // onChange={handleChange}
+          placeholder={prop.placeholder}
+        >
+          {prop.options.map((option) => (
+            <MenuItem value={option}>{option}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </>
   );
 }

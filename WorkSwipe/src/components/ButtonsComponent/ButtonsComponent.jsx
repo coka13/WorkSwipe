@@ -1,11 +1,17 @@
-import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
-export default function BasicButtons({text}) {
+export default function BasicButtons({
+  text,
+  variant = "outlined",
+  sx = { fontWeight: "bold", border: "1px solid #1976D2" , color: "#1976D2"},
+  
+}) {
   return (
     <Stack spacing={2} direction="row">
-      <Button variant="text" sx={{ fontWeight: "bold", border: "1px solid #1976D2" }}>{text}</Button>
+      <Button variant={variant} sx={sx}>
+        {text}
+      </Button>
     </Stack>
   );
 }

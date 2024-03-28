@@ -1,4 +1,3 @@
-import React from "react";
 import "./Login.css";
 import Waves from "../../components/Waves/Waves";
 import FormComponent from "../../components/FormComponent/FormComponent";
@@ -6,8 +5,8 @@ import BasicButtons from "../../components/ButtonsComponent/ButtonsComponent";
 
 const Login = () => {
   const formProps = [
-    { name: "username", type: "text", placeholder: "username" },
-    { name: "password", type: "password", placeholder: "password" },
+    { name: "username", type: "text", label: "username" ,required: true},
+    { name: "password", type: "password", label: "password" ,required: true},
   ];
   return (
     <>
@@ -15,8 +14,8 @@ const Login = () => {
         <div className="loginBox">
           <h4>Login</h4>
           <FormComponent props={formProps} />
-          <BasicButtons text={"Register"} sx={{color:"#1976D2"}} />
-          <Waves color="#1976D2" />
+          <BasicButtons text={"Register"}  />
+          <Waves  />
         </div>
       </div>
     </>

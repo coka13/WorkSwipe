@@ -9,8 +9,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemIcon } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import "./CustomDrawer.css";
-import { Navigate, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
