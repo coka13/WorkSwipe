@@ -1,0 +1,9 @@
+.options{
+    max-height : 140px;
+    display: flex;
+    align-items: center;
+   
+    flex-direction: column;
+    
+
+}

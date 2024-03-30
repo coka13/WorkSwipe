@@ -2,35 +2,48 @@ import Waves from "../../components/Waves/Waves";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/ButtonsComponent/ButtonsComponent";
 import "./Register.css";
+import SwitchAuthComponent from "../../components/SwitchAuthComponent/SwitchAuthComponent";
 
 const Register = () => {
   const formProps = [
-    { name: "username", type: "text", placeholder: "username" },
-    { name: "password", type: "password", placeholder: "password" },
-    { name: "email", type: "email", placeholder: "Email" },
+    { name: "username", type: "text", label: "username", required: true },
+    { name: "password", type: "password", label: "password", required: true },
+    { name: "email", type: "email", label: "Email", required: true },
     {
       name: "experience-in-years",
       type: "select",
-      placeholder: "Experience in Years",
-      options: ["1", "2", "3", "4-6", "7-9", "10+"],
+      label: "Experience in Years",
+      options: [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20,
+      ],
+      required: true,
     },
     {
       name: "technologies",
       type: "select",
-      placeholder: "Technologies",
+      label: "Technologies",
       options: ["js", "node"],
+      required: true,
     },
   ];
   return (
-    <div className="RegisterBox">
-      Register
-      <div className="TextFieldBox">
-        <FormComponent className="formFields" props={formProps} />
+    <>
+      <div className="registerPage">
+        <div className="registerBox">
+          <h4>Register</h4>
 
-        <BasicButtons text={"Submit"} />
+          <FormComponent props={formProps} />
+          <BasicButtons text={"Submit"} />
+          <SwitchAuthComponent
+            text={"Already have an account?"}
+            to={"/"}
+            label={"Log In"}
+          />
+          <Waves />
+        </div>
       </div>
-      <Waves  />
-    </div>
+    </>
   );
 };
 
