@@ -101,7 +101,7 @@ const RegisterPage = () => {
             to={"/"}
             label={"Log In"}
           />
-          <Waves />
+          <Waves color={"#1976D2"} />
         </div>
       </div>
     </>

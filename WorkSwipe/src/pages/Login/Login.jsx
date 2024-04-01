@@ -21,7 +21,7 @@ const Login = () => {
             to={"/Register"}
             label={"Sign Up"}
           />
-          <Waves />
+          <Waves color={"#1976D2"}/>
         </div>
       </div>
     </>
