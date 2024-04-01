@@ -9,7 +9,7 @@ import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import InfoIcon from "@mui/icons-material/Info";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Contact from './pages/Contact/Contact';
 import Support from './pages/Support/Support';
@@ -42,7 +42,7 @@ function App() {
         />
       )}
       <Routes>
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/" element={<Login />} />

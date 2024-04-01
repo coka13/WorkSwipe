@@ -2,9 +2,9 @@ import Waves from "../../components/Waves/Waves";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/ButtonsComponent/ButtonsComponent";
 import SwitchAuthComponent from "../../components/SwitchAuthComponent/SwitchAuthComponent";
-import "./Register.css";
+import "./RegisterPage.css";
 
-const Register = () => {
+const RegisterPage = () => {
   const formProps = [
     { name: "username", type: "text", label: "username", required: true },
     { name: "password", type: "password", label: "password", required: true },
@@ -47,4 +47,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;
