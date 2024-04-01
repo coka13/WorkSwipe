@@ -9,9 +9,9 @@ import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import InfoIcon from "@mui/icons-material/Info";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import AboutPage from "./pages/About/About";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 function App() {
   const location = useLocation();

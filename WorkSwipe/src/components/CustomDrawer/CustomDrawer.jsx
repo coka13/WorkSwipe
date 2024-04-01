@@ -37,6 +37,7 @@ export function CustomDrawer(props) {
 
   const drawer = (
     <div>
+      
       <img className="drawerImage" src="/logo.png" onClick={() => navigate("/home")}></img>
       <Divider />
       <List >

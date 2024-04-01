@@ -2,7 +2,7 @@ import Waves from "../../components/Waves/Waves";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/ButtonsComponent/ButtonsComponent";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
-import "./Register.css";
+import "./RegisterPage.css";
 
 const RegisterPage = () => {
   const formProps = [
