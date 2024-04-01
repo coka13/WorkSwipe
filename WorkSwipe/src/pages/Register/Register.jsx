@@ -1,7 +1,7 @@
 import Waves from "../../components/Waves/Waves";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/ButtonsComponent/ButtonsComponent";
-import SwitchAuthComponent from "../../components/SwitchAuthComponent/SwitchAuthComponent";
+import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
 import "./Register.css";
 
 const Register = () => {
@@ -35,7 +35,7 @@ const Register = () => {
 
           <FormComponent props={formProps} />
           <BasicButtons text={"Submit"} />
-          <SwitchAuthComponent
+          <CustomLinkNavigate
             text={"Already have an account?"}
             to={"/"}
             label={"Log In"}
