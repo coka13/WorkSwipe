@@ -11,6 +11,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
+import Contact from './pages/Contact/Contact';
+import Support from './pages/Support/Support';
+import About from './pages/About/About';
 
 
 function App() {
@@ -43,6 +46,9 @@ function App() {
         <Route path="/home" element={<Homepage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/" element={<Login />} />
+        <Route path="about" element={<About />} />
+        <Route path="support" element={<Support />} />
+        <Route path="contact" element={<Contact />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
