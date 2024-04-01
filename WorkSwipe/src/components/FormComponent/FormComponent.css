@@ -1,6 +1,11 @@
-.FieldsWraper{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width:100%;
+.FieldsWraper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.scrollable-container {
+  max-height: 200px;
+  overflow-y: auto;
 }
