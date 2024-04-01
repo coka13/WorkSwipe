@@ -1,3 +1,4 @@
+import BasicButtons from "../../components/BasicButtons/BasicButtons";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import "./ContactPage.css";
@@ -17,11 +18,12 @@ const ContactPage = () => {
         <a href="mailto:Work_Swipe@gmail.com">Work_Swipe@gmail.com</a>.
       </p>
       <p>
-        You could also leave you contact below and we will do our best to reach
+        You could also leave your contact below and we will do our best to reach
         You:
       </p>
       <div className="contactForm">
         <FormComponent props={contactProps} />
+        <BasicButtons text={"Submit"}/>
       </div>
       <CustomLinkNavigate 
       text={""}

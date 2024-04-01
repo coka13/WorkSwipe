@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import BasicButtons from "../ButtonsComponent/ButtonsComponent";
+import BasicButtons from "../BasicButtons/BasicButtons";
 import "./CustomModal.css";
 import FormComponent from "../FormComponent/FormComponent";
 

@@ -1,6 +1,6 @@
 import Waves from "../../components/Waves/Waves";
 import FormComponent from "../../components/FormComponent/FormComponent";
-import BasicButtons from "../../components/ButtonsComponent/ButtonsComponent";
+import BasicButtons from "../../components/BasicButtons/BasicButtons";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
 import "./Login.css";
 
