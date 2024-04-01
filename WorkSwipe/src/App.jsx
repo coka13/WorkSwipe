@@ -9,9 +9,10 @@ import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import InfoIcon from "@mui/icons-material/Info";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import AboutPage from "./pages/About/About";
+import ContactPage from "./pages/ContactPage/ContactPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 function App() {
   const location = useLocation();
@@ -29,7 +30,8 @@ function App() {
   const showDrawer =
     location.pathname === "/home" ||
     location.pathname === "/profile" ||
-    location.pathname === "/about"; //Show drawer only on existing routes
+    location.pathname === "/about" ||
+    location.pathname === "/contact"; //Show drawer only on existing routes
 
   return (
     <>
@@ -46,6 +48,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/" element={<Login />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
