@@ -24,9 +24,10 @@ export default function FormComponent({ props }) {
             return (
               <TextField
                 required
-                id={prop.id}
+                name={prop.id}
                 placeholder={prop.placeholder}
                 type={prop.type}
+    
               />
             );
           }

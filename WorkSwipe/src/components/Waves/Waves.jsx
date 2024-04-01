@@ -1,12 +1,13 @@
 import "./Waves.css"
 const Waves = ({color}) => (
-  <div className="svg"
+  <svg className="svg"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     preserveAspectRatio="none"
     viewBox="0 24 150 28"
 
   >
+    
     <defs>
       <path
         id="a"
@@ -18,6 +19,6 @@ const Waves = ({color}) => (
       <use xlinkHref="#a" x={50} y={3} fillOpacity={0.5} />
       <use xlinkHref="#a" x={50} y={6} fillOpacity={0.9} />
     </g>
-  </div>
+  </svg>
 )
 export default Waves
