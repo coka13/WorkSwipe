@@ -3,6 +3,7 @@ import DisplayCard from "../../components/DisplayCard/DisplayCard";
 import "./ProfilePage.css";
 
 const ProfilePage = () => {
+ 
   const person = {
     username: "ShimonP",
     name: "shimon",

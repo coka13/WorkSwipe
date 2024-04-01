@@ -1,4 +1,3 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -11,8 +10,16 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./DisplayCard.css";
+import CustomModal from "../CustomModal/CustomModal";
+import { useState } from "react";
 
 export default function DisplayCard({ db, img }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentEdit, setCurrentEdit] = useState("");
+  const handleEditDetails = (prop) => {
+    setCurrentEdit(prop);
+    setIsModalOpen(true);
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -64,19 +71,32 @@ export default function DisplayCard({ db, img }) {
             );
           } else {
             return (
-              <Typography className="profileInfo" key={index}>
-                <span style={{ fontWeight: "bold" }}>{key}</span>: {value}
-                <IconButton>
-                  <EditIcon
-                    sx={{ marginRight: 1, color: "#1976D2" }}
-                  ></EditIcon>
-                </IconButton>
-              </Typography>
+              <>
+                <Typography className="profileInfo" key={index}>
+                  <span style={{ fontWeight: "bold" }}>{key}</span>: {value}
+                  <IconButton
+                    onClick={() => {
+                      handleEditDetails(key);
+                    }}
+                  >
+                    <EditIcon
+                      sx={{ marginRight: 1, color: "#1976D2" }}
+                    ></EditIcon>
+                  </IconButton>
+                </Typography>
+              </>
             );
           }
         })}
       </CardContent>
       <CardActions disableSpacing></CardActions>
+      <CustomModal
+        title={currentEdit}
+        placeholder={`Edit ${currentEdit}`}
+        description={`Enter your new ${currentEdit} and press the submit button`}
+        open={isModalOpen}
+        setOpen={setIsModalOpen}
+      />
     </Card>
   );
 }

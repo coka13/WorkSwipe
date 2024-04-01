@@ -29,6 +29,7 @@ export default function FormComponent({ props }) {
                 id={prop.id}
                 label={prop.name}
                 type={prop.type}
+    
               />
             );
           }
