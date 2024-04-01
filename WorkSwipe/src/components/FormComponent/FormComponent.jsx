@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SelectVariants from "../SelectComponent/SelectComponent";
+import MultiCheckbox from "../MultiCheckbox/MultiCheckbox";
 import "./FormComponent.css";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 
 export default function FormComponent({ props }) {
   return (
@@ -15,19 +15,10 @@ export default function FormComponent({ props }) {
           if (prop.type === "select") {
             return <SelectVariants prop={prop} />;
           } else if (prop.type === "check") {
+            console.log(prop.options);
             return (
-              <div
-                className="scrollable-container"
-              >
-                <FormGroup>
-                  {prop.options.map((option) => (
-                    <FormControlLabel
-                      key={option}
-                      label={option}
-                      control={<Checkbox />}
-                    />
-                  ))}
-                </FormGroup>
+              <div className="scrollable-container">
+                <MultiCheckbox title={prop.name} options={prop.options} />
               </div>
             );
           } else {
