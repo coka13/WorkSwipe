@@ -23,12 +23,9 @@ const ContactPage = () => {
       </p>
       <div className="contactForm">
         <FormComponent props={contactProps} />
-        <BasicButtons text={"Submit"}/>
+        <BasicButtons text={"Submit"} />
       </div>
-      <CustomLinkNavigate 
-      text={""}
-        to={"/support"}
-        label={"Help & Support"}/>
+      <CustomLinkNavigate text={""} to={"/support"} label={"Help & Support"} />
     </div>
   );
 };

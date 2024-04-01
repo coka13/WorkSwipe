@@ -1,0 +1,17 @@
+.supportPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.5rem;
+    height: 500px;
+   
+}
+.supportPage>h4{
+    text-align: center;
+}
+.supportTopics{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}

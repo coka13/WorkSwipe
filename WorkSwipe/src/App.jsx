@@ -1,4 +1,3 @@
-import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
@@ -13,6 +12,8 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import AboutPage from "./pages/About/About";
 import ContactPage from "./pages/ContactPage/ContactPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import "./App.css";
+import SupportPage from "./pages/SupportPage/SupportPage";
 
 function App() {
   const location = useLocation();
@@ -31,7 +32,8 @@ function App() {
     location.pathname === "/home" ||
     location.pathname === "/profile" ||
     location.pathname === "/about" ||
-    location.pathname === "/contact"; //Show drawer only on existing routes
+    location.pathname === "/contact" ||
+    location.pathname === "/support"; //Show drawer only on existing routes
 
   return (
     <>
@@ -50,6 +52,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/support" element={<SupportPage/>}/>
       </Routes>
     </>
   );
