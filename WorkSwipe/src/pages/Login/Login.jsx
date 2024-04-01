@@ -1,8 +1,8 @@
-import "./Login.css";
 import Waves from "../../components/Waves/Waves";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/ButtonsComponent/ButtonsComponent";
-import SwitchAuthComponent from "../../components/SwitchAuthComponent/SwitchAuthComponent";
+import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
+import "./Login.css";
 
 const Login = () => {
   const formProps = [
@@ -16,7 +16,7 @@ const Login = () => {
           <h4>Login</h4>
           <FormComponent props={formProps} />
           <BasicButtons text={"Submit"} />
-          <SwitchAuthComponent
+          <CustomLinkNavigate
             text={"Doesnt have an account yet?"}
             to={"/Register"}
             label={"Sign Up"}
