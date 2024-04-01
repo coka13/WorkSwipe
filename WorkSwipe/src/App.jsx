@@ -11,6 +11,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Login from "./pages/Login/Login";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import AboutPage from "./pages/About/About";
+import ContactPage from "./pages/ContactPage/ContactPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 function App() {
@@ -29,7 +30,8 @@ function App() {
   const showDrawer =
     location.pathname === "/home" ||
     location.pathname === "/profile" ||
-    location.pathname === "/about"; //Show drawer only on existing routes
+    location.pathname === "/about" ||
+    location.pathname === "/contact"; //Show drawer only on existing routes
 
   return (
     <>
@@ -46,6 +48,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/" element={<Login />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
