@@ -1,0 +1,10 @@
+.aboutUs{
+    font-weight: bold;
+    width: 50%;
+    font-size: larger;
+}
+.aboutPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
