@@ -1,8 +1,8 @@
 import Waves from "../../components/Waves/Waves";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/ButtonsComponent/ButtonsComponent";
-import "./Register.css";
 import SwitchAuthComponent from "../../components/SwitchAuthComponent/SwitchAuthComponent";
+import "./Register.css";
 
 const Register = () => {
   const formProps = [
