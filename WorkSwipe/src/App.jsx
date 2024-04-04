@@ -26,7 +26,7 @@ function App() {
     LogoutIcon,
   ];
 
-  const hrefs = ["/profile", "/matches", "/support", "/about", "/logout"];
+  const hrefs = ["/profile", "/matches", "/support", "/about", "/"];
 
   const showDrawer =
     location.pathname === "/home" ||

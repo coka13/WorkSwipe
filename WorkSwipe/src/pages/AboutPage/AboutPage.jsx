@@ -1,7 +1,7 @@
 import imgDaniel from "../../assets/imgDaniel.png";
 import imgAsaf from "../../assets/imgAsaf.png";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
-import "./About.css";
+import "./AboutPage.css";
 
 const AboutPage = () => {
   return (
