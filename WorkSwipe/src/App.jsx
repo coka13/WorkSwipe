@@ -5,6 +5,7 @@ import CustomDrawer from "./components/CustomDrawer/CustomDrawer";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import JoinInnerIcon from "@mui/icons-material/JoinInner";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
+import SettingsApplicationsSharpIcon from '@mui/icons-material/SettingsApplicationsSharp';
 import InfoIcon from "@mui/icons-material/Info";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Login from "./pages/Login/Login";
@@ -12,8 +13,10 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import AboutPage from "./pages/About/About";
 import ContactPage from "./pages/ContactPage/ContactPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import "./App.css";
 import SupportPage from "./pages/SupportPage/SupportPage";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
+import SecurityPage from "./pages/SecurityPage/SecurityPage";
+import "./App.css";
 
 function App() {
   const location = useLocation();
@@ -23,36 +26,41 @@ function App() {
     JoinInnerIcon,
     ContactSupportIcon,
     InfoIcon,
-    LogoutIcon,
+    SettingsApplicationsSharpIcon,
+    LogoutIcon
   ];
 
-  const hrefs = ["/profile", "/matches", "/support", "/about", "/logout"];
+  const hrefs = ["/profile", "/matches", "/support", "/about","settings", "/"];
 
   const showDrawer =
     location.pathname === "/home" ||
     location.pathname === "/profile" ||
     location.pathname === "/about" ||
     location.pathname === "/contact" ||
-    location.pathname === "/support"; //Show drawer only on existing routes
+    location.pathname === "/support" ||
+    location.pathname === "/settings" ||
+    location.pathname === "/security"; //Show drawer only on existing routes
 
   return (
     <>
       {showDrawer && (
         <CustomDrawer
-          items={["Profile", "Matches", "Support", "About Us", "Logout"]}
+          items={["Profile", "Matches", "Support", "About Us",  "Settings", "Logout"]}
           icons={icons}
           hrefs={hrefs}
         />
       )}
       <Routes>
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/home" element={<Homepage />} />
-        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/" element={<Login />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="home" element={<Homepage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="contact" element={<ContactPage />} />
+        <Route path="support" element={<SupportPage/>}/>
+        <Route path="settings" element={<SettingsPage />} />
+        <Route path="security" element={<SecurityPage/>} />
         <Route path="*" element={<ErrorPage />} />
-        <Route path="/support" element={<SupportPage/>}/>
       </Routes>
     </>
   );

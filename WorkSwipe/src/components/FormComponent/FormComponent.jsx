@@ -1,8 +1,9 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SelectVariants from "../SelectComponent/SelectComponent";
-import "./FormComponent.css";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import "./FormComponent.css";
+import { generateUuid } from "../../utils/uuidGenerator";
 
 export default function FormComponent({ props }) {
   return (
@@ -10,7 +11,7 @@ export default function FormComponent({ props }) {
       <div className="FieldsWraper">
         {props.map((prop) => {
           if (!prop.id) {
-            prop.id = "outlined-basic";
+            prop.id = generateUuid();
           }
           if (prop.type === "select") {
             return <SelectVariants prop={prop} />;
@@ -30,7 +31,10 @@ export default function FormComponent({ props }) {
                 </FormGroup>
               </div>
             );
-          } else {
+          }else if(prop.type==="textarea"){
+            return(console.log(""))
+          } 
+          else {
             return (
               <TextField
                 key={prop.id}
