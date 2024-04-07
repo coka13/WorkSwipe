@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,15 +10,19 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemIcon } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import ChatAssistant from "../ChatAssistant/ChatAssistant";
+import LiveHelpIcon from "@mui/icons-material/LiveHelp";
+
 import "./CustomDrawer.css";
 
 const drawerWidth = 240;
 
 export function CustomDrawer(props) {
-  const navigate = useNavigate()
-  const { window, items, icons,hrefs } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
+  const navigate = useNavigate();
+  const { window, items, icons, hrefs } = props;
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const liveSupportIcon = <LiveHelpIcon sx={{ color: "#1976D2" }} />;
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -37,27 +41,34 @@ export function CustomDrawer(props) {
 
   const drawer = (
     <div>
-      
-      <img className="drawerImage" src="/logo.png" onClick={() => navigate("/home")}></img>
+      <img
+        className="drawerImage"
+        src="/logo.png"
+        onClick={() => navigate("/home")}
+      ></img>
       <Divider />
-      <List >
-      {items.map((text, index) => {
-  const Icon = icons[index];
-  const href = hrefs[index]; 
-  return (
-    <a className="link" href={href} key={text}>
-      <ListItem>
-        <ListItemButton>
-          <ListItemIcon>
-            <Icon sx={{ color: "#1976D2"}} />
-          </ListItemIcon>
-          <ListItemText primaryTypographyProps={{ fontWeight: 'bolder' }} primary={text} />
-        </ListItemButton>
-      </ListItem>
-    </a>
-  );
-})}
-
+      <List>
+        {items.map((text, index) => {
+          const Icon = icons[index];
+          const href = hrefs[index];
+          return (
+            <a className="link" href={href} key={text}>
+              <ListItem>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <Icon sx={{ color: "#1976D2" }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primaryTypographyProps={{ fontWeight: "bolder" }}
+                    primary={text}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </a>
+          );
+        })}
+        {/* Pass liveSupportIcon as a prop to ChatAssistant */}
+        <ChatAssistant text={"Live chat support!"} chatIcon={liveSupportIcon } />
       </List>
     </div>
   );
