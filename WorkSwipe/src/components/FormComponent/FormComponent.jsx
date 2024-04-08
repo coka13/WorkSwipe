@@ -2,9 +2,9 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SelectVariants from "../SelectComponent/SelectComponent";
 import TextArea from "../TextArea/TextArea";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { generateUuid } from "../../utils/uuidGenerator";
 import "./FormComponent.css";
+import CheckBox from "../CheckBox/CheckBox";
 
 export default function FormComponent({ props }) {
   return (
@@ -19,19 +19,7 @@ export default function FormComponent({ props }) {
             return <SelectVariants prop={prop} />;
           } else if (prop.type === "check") {
             return (
-              <div
-                className="scrollable-container"
-              >
-                <FormGroup>
-                  {prop.options.map((option) => (
-                    <FormControlLabel
-                      key={option}
-                      label={option}
-                      control={<Checkbox />}
-                    />
-                  ))}
-                </FormGroup>
-              </div>
+              <CheckBox options={prop.options}/>
             );
           }else if(prop.type==="textarea"){
             
