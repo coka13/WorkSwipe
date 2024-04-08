@@ -12,11 +12,13 @@ const SupportPage = () => {
       type: "text",
       label: "HowCanWeHelp",
       required: false,
+      
     },
   ];
   return (
     <div className="supportPage">
-      <h4>Help & Support</h4>
+      <h2 className="Header">Help & Support</h2>
+      <h4 >How Can We Help?</h4>
      <TextArea props={supportProps} />
       <BasicButtons text={"submit"} />
       <CustomLinkNavigate

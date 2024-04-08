@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SelectVariants from "../SelectComponent/SelectComponent";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import "./FormComponent.css";
-import { generateUuid } from "../../utils/uuidGenerator";
 import TextArea from "../TextArea/TextArea";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { generateUuid } from "../../utils/uuidGenerator";
+import "./FormComponent.css";
 
 export default function FormComponent({ props }) {
   return (
