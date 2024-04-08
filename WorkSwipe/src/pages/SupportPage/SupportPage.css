@@ -9,9 +9,8 @@
 .supportPage>h4{
     text-align: center;
 }
-.supportTopics{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
+.Header{
+    color: #1976D2;
+    font-weight: bold;
+    
 }

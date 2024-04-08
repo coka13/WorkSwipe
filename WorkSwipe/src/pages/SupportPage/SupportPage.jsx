@@ -3,36 +3,29 @@ import "./SupportPage.css";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/BasicButtons/BasicButtons";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
+import TextArea from "../../components/TextArea/TextArea";
 
 const SupportPage = () => {
   const supportProps = [
     {
-      name: "How can we help you",
-      type: "text",
-      label: "HowCanWeHelp",
+      name: "HowCanWeHelpYou",
+      type: "textarea",
+      label: "How Can We Help",
       required: false,
     },
   ];
   return (
     <div className="supportPage">
-      <h4>Help & Support</h4>
+      <h2 className="Header">Help & Support</h2>
+      <h4>How Can We Help?</h4>
       <FormComponent props={supportProps} />
       <BasicButtons text={"submit"} />
-      <div className="supportTopics">
-        <h4>Popular topics:</h4>
-        <CustomLinkNavigate
-          text={""}
-          to={"/"}
-          label={"Account settings"}
-          fontSize="36px"
-        />
-        <CustomLinkNavigate
-          text={""}
-          to={"/"}
-          label={"Security & Password"}
-          fontSize="36px"
-        />
-      </div>
+      <CustomLinkNavigate
+        text={"You can also"}
+        to={"/contact"}
+        label={"contact us"}
+        fontSize="16px"
+      />
     </div>
   );
 };
