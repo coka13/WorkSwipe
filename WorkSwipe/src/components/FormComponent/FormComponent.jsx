@@ -4,6 +4,7 @@ import SelectVariants from "../SelectComponent/SelectComponent";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import "./FormComponent.css";
 import { generateUuid } from "../../utils/uuidGenerator";
+import TextArea from "../TextArea/TextArea";
 
 export default function FormComponent({ props }) {
   return (
@@ -32,7 +33,7 @@ export default function FormComponent({ props }) {
               </div>
             );
           }else if(prop.type==="textarea"){
-            return(console.log(""))
+            <TextArea/>
           } 
           else {
             return (

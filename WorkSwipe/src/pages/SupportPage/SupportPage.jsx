@@ -17,7 +17,7 @@ const SupportPage = () => {
   return (
     <div className="supportPage">
       <h4>Help & Support</h4>
-     <TextArea label={"Write us"} name={"How can we help you"} type={"textarea"} />
+     <TextArea props={supportProps} />
       <BasicButtons text={"submit"} />
       <CustomLinkNavigate
         text={"You can also"}
