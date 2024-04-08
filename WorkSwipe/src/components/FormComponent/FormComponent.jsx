@@ -11,6 +11,7 @@ export default function FormComponent({ props }) {
     <Box component="form" noValidate autoComplete="off">
       <div className="FieldsWraper">
         {props.map((prop) => {
+          console.log(prop)
           if (!prop.id) {
             prop.id = generateUuid();
           }
@@ -33,7 +34,12 @@ export default function FormComponent({ props }) {
               </div>
             );
           }else if(prop.type==="textarea"){
-            <TextArea/>
+            
+            return(
+            <TextArea 
+            label={prop.label}
+            name={prop.name}
+            required/>)
           } 
           else {
             return (
