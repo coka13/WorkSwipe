@@ -1,19 +1,12 @@
 import React from "react";
-import "./SupportPage.css";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/BasicButtons/BasicButtons";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
-import TextArea from "../../components/TextArea/TextArea";
+import { supportProps } from "../../dummyData/constants";
+import "./SupportPage.css";
 
 const SupportPage = () => {
-  const supportProps = [
-    {
-      name: "HowCanWeHelpYou",
-      type: "textarea",
-      label: "How Can We Help",
-      required: false,
-    },
-  ];
+  
   return (
     <div className="supportPage">
       <h2 className="Header">Help & Support</h2>

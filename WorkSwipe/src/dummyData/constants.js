@@ -189,3 +189,12 @@ export const supportText = [
     required: false,
   },
 ];
+
+export const supportProps = [
+  {
+    name: "HowCanWeHelpYou",
+    type: "textarea",
+    label: "How Can We Help",
+    required: false,
+  },
+];
