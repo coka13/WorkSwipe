@@ -57,14 +57,11 @@ const SimpleCard = ({ db }) => {
     currentIndexRef.current = val;
   };
 
-  const canGoBack = currentIndex < offersLength - 1;
-  const canSwipe = currentIndex >= 0;
 
-  const swiped = (direction, nameToDelete, index) => {
+  const swiped = (direction, index) => {
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
     setDBlength(dbLength - 1);
-    console.log("hi")
     dispatch(setDeleteOffer(index));
   };
 
@@ -73,24 +70,7 @@ const SimpleCard = ({ db }) => {
     currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
   };
 
-  const swipe = async (dir) => {
-    if (canSwipe && currentIndex < offersLength && db[currentIndex]) {
-      await childRefs[currentIndex].current.swipe(dir);
-      dispatch(setDeleteOffer(currentIndex));
-    }
-  };
-
-  const goBack = async () => {
-    if (!canGoBack || !db[currentIndex]) return;
-    setDBlength(dbLength + 1);
-    const newIndex = currentIndex + 1;
-    updateCurrentIndex(newIndex);
-
-    const cardRef = childRefs[newIndex].current;
-    if (cardRef) {
-      await cardRef.restoreCard();
-    }
-  };
+  
 
   return (
     <>
