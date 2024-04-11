@@ -24,6 +24,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setAdmin, setTechnologies } = userSlice.actions;
+export const {  setTechnologies,setGeneralDetail } = userSlice.actions;
 
 export default userSlice.reducer;

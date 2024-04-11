@@ -1,7 +1,11 @@
-import { configureWorkSwipe } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import usersReducer from './slices/userSlice'
-export const WorkSwipe = configureWorkSwipe({
+import registerReducer from './slices/registerSlice'
+import jobOffersReducer from './slices/jobOffersSlice'
+
+
+export const store = configureStore({
     reducer: {
-      users: usersReducer
+      users: usersReducer, register: registerReducer, opportunities: jobOffersReducer
     },
   })

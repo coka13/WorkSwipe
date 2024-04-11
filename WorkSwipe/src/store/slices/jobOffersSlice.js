@@ -9,7 +9,7 @@ const jobOffersSlice = createSlice({
   name: "offers",
   initialState,
   reducers: {
-    setOffers: (state, action) => {
+    setOpportunities: (state, action) => {
       state.offers = action.payload.map((offer, index) => ({
         ...offer,
         zIndex: index + 1,
@@ -23,6 +23,6 @@ const jobOffersSlice = createSlice({
   },
 });
 
-export const {setCurrentOffer,setOffers} = jobOffersSlice.actions;
+export const {setCurrentOffer,setOpportunities} = jobOffersSlice.actions;
 
 export default jobOffersSlice.reducer;
