@@ -10,29 +10,26 @@ const jobOffersSlice = createSlice({
   initialState,
   reducers: {
     setOpportunities: (state, action) => {
-      state.offers = action.payload.map((offer, index) => ({
-        ...offer,
-        zIndex: index + 1,
-      }));
-    },
-    setCurrentOffer: (state, action) => {
-      state.currentOffer = state.offers.find((offer) => {
-        offer._id === action.payload.id;
-      });
+      state.offers = action.payload
     },
     setNewOffer: (state, action) => {
       const NewOffer = action.payload;
       state.offers.push(NewOffer);
     },
-    setDeleteffer: (state, action) => {
-      const deleteOffer = state.offers.find((offer) => {
-        offer._id === action.payload.id;
+    setDeleteOffer: (state, action) => {
+      let ind = 0;
+      const deleteOffer = state.offers.find((offer, index) => {
+        if(offer._id === action.payload.id){
+          ind = index
+          return offer
+        }
       });
-      offers.pop(deleteOffer);
+      state.currentOffer = deleteOffer
+      state.offers.splice(ind,1)
     },
   },
 });
 
-export const { setCurrentOffer, setOpportunities } = jobOffersSlice.actions;
+export const { setDeleteOffer,setNewOffer, setOpportunities } = jobOffersSlice.actions;
 
 export default jobOffersSlice.reducer;

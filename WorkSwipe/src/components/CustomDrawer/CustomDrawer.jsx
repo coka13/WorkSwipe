@@ -15,6 +15,7 @@ import ChatAssistant from "../ChatAssistant/ChatAssistant";
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 
 import "./CustomDrawer.css";
+import CustomLinkNavigate from "../CustomLinkNavigate/CustomLinkNavigate";
 
 const drawerWidth = 240;
 
@@ -53,8 +54,9 @@ export function CustomDrawer(props) {
           const Icon = icons[index];
           const href = hrefs[index];
           return (
-            <a className="link" href={href} key={text}>
-              <ListItem>
+            <>
+            <CustomLinkNavigate  to={href} >
+            <ListItem>
                 <ListItemButton>
                   <ListItemIcon>
                     <Icon sx={{ color: "#1976D2" }} />
@@ -65,7 +67,8 @@ export function CustomDrawer(props) {
                   />
                 </ListItemButton>
               </ListItem>
-            </a>
+            </CustomLinkNavigate>      
+</>
           );
         })}
         {/* Pass liveSupportIcon as a prop to ChatAssistant */}

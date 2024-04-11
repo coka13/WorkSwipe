@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const Homepage = () => {
 const swipeProps= useSelector((state)=>state.opportunities.offers)
+console.log(swipeProps)
   return (
     <div className="homePage">
       <div className="swipeArea">
