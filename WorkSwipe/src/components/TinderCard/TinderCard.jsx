@@ -23,14 +23,18 @@ import StarIcon from "@mui/icons-material/Star";
 import MailIcon from "@mui/icons-material/Mail";
 import WorkIcon from "@mui/icons-material/Work";
 import PlaceIcon from "@mui/icons-material/Place";
+import { useSelector } from "react-redux";
 
 const SimpleCard = ({ db }) => {
+  const offersLength=useSelector((state)=>state.opportunities.offers.length)
   const [lastDirection, setLastDirection] = useState(null);
   const [expanded, setExpanded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(
-    db.length > 0 ? db.length - 1 : 0
+    offersLength > 0 ? offersLength - 1 : 0
   ); // Ensure currentIndex is initialized properly
-  const [dbLength, setDBlength] = useState(db.length);
+  const [dbLength, setDBlength] = useState(offersLength);
+
+ 
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -41,10 +45,10 @@ const SimpleCard = ({ db }) => {
 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(offersLength)
         .fill(0)
         .map((i) => React.createRef()),
-    [db.length]
+    [offersLength]
   );
 
   const updateCurrentIndex = (val) => {
@@ -52,7 +56,7 @@ const SimpleCard = ({ db }) => {
     currentIndexRef.current = val;
   };
 
-  const canGoBack = currentIndex < db.length - 1;
+  const canGoBack = currentIndex < offersLength - 1;
   const canSwipe = currentIndex >= 0;
 
   // set last direction and decrease current index
@@ -72,8 +76,9 @@ const SimpleCard = ({ db }) => {
   };
 
   const swipe = async (dir) => {
-    if (canSwipe && currentIndex < db.length) {
+    if (canSwipe && currentIndex < offersLength) {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
+
     }
   };
 
@@ -89,6 +94,7 @@ const SimpleCard = ({ db }) => {
       await cardRef.restoreCard();
     }
   };
+  
   return (
     <>
       {dbLength === 0 ? (

@@ -20,9 +20,19 @@ const jobOffersSlice = createSlice({
         offer._id === action.payload.id;
       });
     },
+    setNewOffer: (state, action) => {
+      const NewOffer = action.payload;
+      state.offers.push(NewOffer);
+    },
+    setDeleteffer: (state, action) => {
+      const deleteOffer = state.offers.find((offer) => {
+        offer._id === action.payload.id;
+      });
+      offers.pop(deleteOffer);
+    },
   },
 });
 
-export const {setCurrentOffer,setOpportunities} = jobOffersSlice.actions;
+export const { setCurrentOffer, setOpportunities } = jobOffersSlice.actions;
 
 export default jobOffersSlice.reducer;

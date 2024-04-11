@@ -2,11 +2,12 @@ import React from "react";
 
 import "./Homepage.css";
 import SimpleCard from "../../components/TinderCard/TinderCard";
-import { swipeProps } from "../../dummyData/constants";
+import { useSelector } from "react-redux";
+
 
 
 const Homepage = () => {
-
+const swipeProps= useSelector((state)=>state.opportunities.offers)
   return (
     <div className="homePage">
       <div className="swipeArea">
