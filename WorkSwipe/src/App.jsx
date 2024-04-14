@@ -13,7 +13,7 @@ import { useDrawerLogic } from "./utils/drawerRoutes";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { person, swipeProps } from "./dummyData/constants";
-import { setGeneralDetail } from "./store/slices/userSlice";
+import { setGeneralDetail, setTechnologies } from "./store/slices/userSlice";
 import { setOpportunities } from "./store/slices/jobOffersSlice";
 import "./App.css";
 
