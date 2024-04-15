@@ -11,8 +11,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemIcon } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import ChatAssistant from "../ChatAssistant/ChatAssistant";
-import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import "./CustomDrawer.css";
 import CustomLinkNavigate from "../CustomLinkNavigate/CustomLinkNavigate";
 
@@ -23,7 +21,6 @@ export function CustomDrawer(props) {
   const { window, items, icons, hrefs } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const liveSupportIcon = <LiveHelpIcon sx={{ color: "#1976D2" }} />;
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -68,7 +65,6 @@ export function CustomDrawer(props) {
             </CustomLinkNavigate>
           );
         })}
-        <ChatAssistant text={"Live chat support!"} chatIcon={liveSupportIcon} />
       </List>
     </div>
   );

@@ -242,5 +242,6 @@ export const person = {
   technologies: ["c", "cpp"],
   linkedIn: "https://www.linkedin.com",
   location: "Haifa",
+  isEmployer: true
 };
 

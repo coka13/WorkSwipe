@@ -10,6 +10,7 @@ const initialState = {
   experience: 0,
   location: "",
   url: "",
+  email:""
 };
 
 const userSlice = createSlice({
@@ -26,6 +27,7 @@ const userSlice = createSlice({
       state.isAdmin = action.payload.isAdmin;
       state.technologies = action.payload.technologies;
       state.isEmployer = action.payload.isEmployer;
+      state.email = action.payload.email;
     },
     setTechnologies: (state, action) => {
       state.technologies.push([...action.payload]);
