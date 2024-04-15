@@ -1,3 +1,4 @@
+// CustomDrawer.js
 import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -8,12 +9,10 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-
 import { ListItemIcon } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ChatAssistant from "../ChatAssistant/ChatAssistant";
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
-
 import "./CustomDrawer.css";
 import CustomLinkNavigate from "../CustomLinkNavigate/CustomLinkNavigate";
 
@@ -54,10 +53,9 @@ export function CustomDrawer(props) {
           const Icon = icons[index];
           const href = hrefs[index];
           return (
-            <>
-            <CustomLinkNavigate  to={href} >
-            <ListItem>
-                <ListItemButton>
+            <CustomLinkNavigate to={href} key={text} color="black" >
+              <ListItem>
+                <ListItemButton >
                   <ListItemIcon>
                     <Icon sx={{ color: "#1976D2" }} />
                   </ListItemIcon>
@@ -67,12 +65,10 @@ export function CustomDrawer(props) {
                   />
                 </ListItemButton>
               </ListItem>
-            </CustomLinkNavigate>      
-</>
+            </CustomLinkNavigate>
           );
         })}
-        {/* Pass liveSupportIcon as a prop to ChatAssistant */}
-        <ChatAssistant text={"Live chat support!"} chatIcon={liveSupportIcon } />
+        <ChatAssistant text={"Live chat support!"} chatIcon={liveSupportIcon} />
       </List>
     </div>
   );
