@@ -18,12 +18,8 @@ export default function FormComponent({ props }) {
           if (prop.type === "select") {
             return <SelectVariants prop={prop} />;
           } else if (prop.type === "check") {
-            console.log(prop.options);
             return (
-              <div className="scrollable-container">
-                <MultiCheckbox title={prop.name} options={prop.options} />
-              </div>
-             
+              <CheckBox options={prop.options}/>
             );
           }else if(prop.type==="textarea"){
             
