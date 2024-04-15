@@ -10,7 +10,7 @@ const jobOffersSlice = createSlice({
   initialState,
   reducers: {
     setOpportunities: (state, action) => {
-      state.offers = action.payload
+      state.offers = action.payload;
     },
     setNewOffer: (state, action) => {
       const NewOffer = action.payload;
@@ -19,17 +19,18 @@ const jobOffersSlice = createSlice({
     setDeleteOffer: (state, action) => {
       let ind = 0;
       const deleteOffer = state.offers.find((offer, index) => {
-        if(offer._id === action.payload.id){
-          ind = index
-          return offer
+        if (offer._id === action.payload.id) {
+          ind = index;
+          return offer;
         }
       });
-      state.currentOffer = deleteOffer
-      state.offers.splice(ind,1)
+      state.currentOffer = deleteOffer;
+      state.offers.splice(ind, 1);
     },
   },
 });
 
-export const { setDeleteOffer,setNewOffer, setOpportunities } = jobOffersSlice.actions;
+export const { setCurrentOffer,setDeleteOffer, setNewOffer, setOpportunities } =
+  jobOffersSlice.actions;
 
 export default jobOffersSlice.reducer;

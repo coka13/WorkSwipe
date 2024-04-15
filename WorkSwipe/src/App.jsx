@@ -16,6 +16,7 @@ import { person, swipeProps } from "./dummyData/constants";
 import { setGeneralDetail, setTechnologies } from "./store/slices/userSlice";
 import { setOpportunities } from "./store/slices/jobOffersSlice";
 import "./App.css";
+import MatchesPage from "./pages/MatchesPage/MatchesPage";
 
 function App() {
   const { showDrawer, icons, hrefs, items } = useDrawerLogic();
@@ -32,6 +33,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/matches" element={<MatchesPage />} />
         <Route path="/" element={<LoginPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
