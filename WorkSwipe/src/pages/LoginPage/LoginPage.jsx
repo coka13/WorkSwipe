@@ -2,29 +2,28 @@ import Waves from "../../components/Waves/Waves";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/BasicButtons/BasicButtons";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
-import { formProps } from "../../dummyData/constants";
-import "./RegisterPage.css";
+import { loginProps } from "../../dummyData/constants";
+import "./LoginPage.css";
 
-const RegisterPage = () => {
+const LoginPage = () => {
   
   return (
     <>
-      <div className="registerPage">
-        <div className="registerBox">
-          <h4>Register</h4>
-
-          <FormComponent props={formProps} />
+      <div className="loginPage">
+        <div className="loginBox">
+          <h4>Login</h4>
+          <FormComponent props={loginProps} />
           <BasicButtons text={"Submit"} />
           <CustomLinkNavigate
-            text={"Already have an account?"}
-            to={"/"}
-            label={"Log In"}
+            text={"Doesnt have an account yet?"}
+            to={"/Register"}
+            label={"Sign Up"}
           />
-          <Waves color={"#1976D2"} />
+          <Waves color={"#1976D2"}/>
         </div>
       </div>
     </>
   );
 };
 
-export default RegisterPage;
+export default LoginPage;

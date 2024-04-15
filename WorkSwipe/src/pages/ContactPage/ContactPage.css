@@ -1,0 +1,22 @@
+.contactBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.5rem;
+    height: 500px;  
+}
+.contactUs{
+    font-weight: bold;
+    width: 50%;
+}
+.contactForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:25%;
+    border-radius: 8%;
+    background-color: #cfedff;
+    margin: 15px;
+    padding: 10px; 
+}

@@ -1,4 +1,5 @@
-import * as React from "react";
+// CustomDrawer.js
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,14 +12,15 @@ import ListItemText from "@mui/material/ListItemText";
 import { ListItemIcon } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./CustomDrawer.css";
+import CustomLinkNavigate from "../CustomLinkNavigate/CustomLinkNavigate";
 
 const drawerWidth = 240;
 
 export function CustomDrawer(props) {
-  const navigate = useNavigate()
-  const { window, items, icons,hrefs } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
+  const navigate = useNavigate();
+  const { window, items, icons, hrefs } = props;
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -37,26 +39,32 @@ export function CustomDrawer(props) {
 
   const drawer = (
     <div>
-      <img className="drawerImage" src="/logo.png" onClick={() => navigate("/home")}></img>
+      <img
+        className="drawerImage"
+        src="/logo.png"
+        onClick={() => navigate("/home")}
+      ></img>
       <Divider />
-      <List >
-      {items.map((text, index) => {
-  const Icon = icons[index];
-  const href = hrefs[index]; 
-  return (
-    <a className="link" href={href} key={text}>
-      <ListItem>
-        <ListItemButton>
-          <ListItemIcon>
-            <Icon sx={{ color: "#1976D2"}} />
-          </ListItemIcon>
-          <ListItemText primaryTypographyProps={{ fontWeight: 'bolder' }} primary={text} />
-        </ListItemButton>
-      </ListItem>
-    </a>
-  );
-})}
-
+      <List>
+        {items.map((text, index) => {
+          const Icon = icons[index];
+          const href = hrefs[index];
+          return (
+            <CustomLinkNavigate to={href} key={text} color="black" >
+              <ListItem>
+                <ListItemButton >
+                  <ListItemIcon>
+                    <Icon sx={{ color: "#1976D2" }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primaryTypographyProps={{ fontWeight: "bolder" }}
+                    primary={text}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </CustomLinkNavigate>
+          );
+        })}
       </List>
     </div>
   );

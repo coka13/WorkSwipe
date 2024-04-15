@@ -1,5 +1,5 @@
 import "./Waves.css"
-const Waves = ({color= "#1976D2"}) => (
+const Waves = ({color}) => (
   <svg className="svg"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -7,6 +7,7 @@ const Waves = ({color= "#1976D2"}) => (
     viewBox="0 24 150 28"
 
   >
+    
     <defs>
       <path
         id="a"
