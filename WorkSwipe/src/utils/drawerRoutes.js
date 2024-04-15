@@ -26,7 +26,7 @@ export function useDrawerLogic() {
     JoinInnerIcon,
     ContactSupportIcon,
     InfoIcon,
-    WorkIcon,
+    //WorkIcon,
     LogoutIcon,
   ];
 
