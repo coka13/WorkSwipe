@@ -9,7 +9,7 @@ const AboutPage = () => {
       <h4>About Us</h4>
 
       <p className="aboutUs">
-        WorkSwipe is a project made by Daniel Uralslky & Asaf Karaso, with the
+        WorkSwipe is a project made by Daniel Uralsky & Asaf Karaso, with the
         help and mentoring of Almog Ram. Our goal was creating the perfect
         interface for job seekers and HR offices all over the computering
         market. our application is easy to access, fun and afficient for you-

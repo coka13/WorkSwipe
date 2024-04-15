@@ -15,10 +15,10 @@ import { useEffect } from "react";
 import { person, swipeProps } from "./dummyData/constants";
 import { setGeneralDetail, setTechnologies } from "./store/slices/userSlice";
 import { setOpportunities } from "./store/slices/jobOffersSlice";
-import "./App.css";
 import MatchesPage from "./pages/MatchesPage/MatchesPage";
 import EmployerPage from "./pages/EmployerPage/EmployerPage";
-
+import { Toaster } from 'react-hot-toast';
+import "./App.css";
 function App() {
   const { showDrawer, icons, hrefs, items } = useDrawerLogic();
   const dispatch = useDispatch();
@@ -30,6 +30,7 @@ function App() {
   }, []);
   return (
     <>
+    <Toaster/>
       {showDrawer && <CustomDrawer items={items} icons={icons} hrefs={hrefs} isEmployer={isEmployer} />}
       <Routes>
         <Route path="/register" element={<RegisterPage />} />

@@ -1,0 +1,26 @@
+
+ 
+  .profileInfo{
+    display: flex;
+    align-items: center;
+  }
+
+
+  .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+
+  .list{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .match-card{
+    overflow-y: scroll;
+    height: 420px;
+  }
