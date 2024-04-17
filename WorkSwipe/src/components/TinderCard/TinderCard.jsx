@@ -107,7 +107,6 @@ if(db.length===0 && !match){
               <CardContent
                 sx={{
                   display: "flex",
-                  justifyContent: "center",
                   flexDirection: "column",
                 }}
               >
@@ -122,7 +121,6 @@ if(db.length===0 && !match){
                     height: "100px",
                     objectFit: "contain",
                     marginBottom: "20px",
-                    alignItems: "center",
                     display: "flex",
                     alignSelf: "center",
                   }}
