@@ -24,15 +24,13 @@ export default function CustomModal({
   placeholder,
   open,
   setOpen,
-
 }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const modalProps = [{id: title, placeholder:placeholder, type:"text"}]
+  const modalProps = [{ id: title, placeholder: placeholder, type: "text" }];
 
   return (
     <Modal
-      
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
@@ -44,7 +42,6 @@ export default function CustomModal({
         </Typography>
 
         <FormComponent props={modalProps} />
-
         <BasicButtons text={"Submit"} placeholder={placeholder} />
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           {description}

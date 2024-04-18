@@ -1,7 +1,7 @@
-import Waves from "../../components/Waves/Waves";
-import FormComponent from "../../components/FormComponent/FormComponent";
-import BasicButtons from "../../components/BasicButtons/BasicButtons";
+import { useState } from "react";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
+import FormComponent from "../../components/FormComponent/FormComponent";
+import Waves from "../../components/Waves/Waves";
 import { formProps } from "../../dummyData/constants";
 import "./RegisterPage.css";
 
@@ -14,7 +14,7 @@ const RegisterPage = () => {
           <h4>Register</h4>
 
           <FormComponent props={formProps} />
-          <BasicButtons text={"Submit"} />
+
           <CustomLinkNavigate
             text={"Already have an account?"}
             to={"/"}
@@ -26,5 +26,4 @@ const RegisterPage = () => {
     </>
   );
 };
-
 export default RegisterPage;

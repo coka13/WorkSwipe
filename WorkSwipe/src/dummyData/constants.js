@@ -14,6 +14,8 @@ export const formProps = [
     required: true,
   },
   {
+    title:"Choose technologies",
+    description:"Select the technologies you are competent in and press Submit",
     name: "technologies",
     type: "check",
     label: "Technologies",
