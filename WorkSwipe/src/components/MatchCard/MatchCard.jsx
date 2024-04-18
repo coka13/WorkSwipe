@@ -11,7 +11,6 @@ import {
     
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Collapse from "@mui/material/Collapse";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import StarIcon from "@mui/icons-material/Star";
@@ -19,9 +18,10 @@ import MailIcon from "@mui/icons-material/Mail";
 import WorkIcon from "@mui/icons-material/Work";
 import PlaceIcon from "@mui/icons-material/Place";
 import { useState } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
 import "./MatchCard.css";
 
-const MatchCard = ({match}) => {
+const MatchCard = ({match,index,handleDelete}) => {
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -37,8 +37,8 @@ const MatchCard = ({match}) => {
         </Avatar>
       }
       action={
-        <IconButton aria-label="settings">
-          <MoreVertIcon sx={{ color: "#1976D2" }} />
+        <IconButton onClick={()=>handleDelete(index)} aria-label="settings">
+          <DeleteIcon sx={{ color: "#1976D2" }} />
         </IconButton>
       }
       title={

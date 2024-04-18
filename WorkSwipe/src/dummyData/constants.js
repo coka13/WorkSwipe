@@ -225,7 +225,7 @@ export const swipeProps = [
     position: "Fullstack developer",
     url: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
     email: "AppleHR@gmail.com",
-    technologies: ["c", "cpp"],
+    technologies: ["c", "c#"],
     niceToHave: ["css"],
     linkedIn: "https://www.linkedin.com",
     exp: 5,

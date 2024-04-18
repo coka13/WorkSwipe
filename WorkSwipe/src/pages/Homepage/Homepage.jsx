@@ -16,8 +16,7 @@ const Homepage = () => {
   const handleRightSwipe = (direction) => {
     if (
       direction === "right" &&
-      currentOfferTechnologies &&
-      arraysAreEqual(userTechnologies, currentOfferTechnologies)
+      currentOfferTechnologies 
     ) {
       dispatch( setAddMatch(currentOffer));
       return true;

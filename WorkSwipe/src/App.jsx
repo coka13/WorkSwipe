@@ -1,4 +1,3 @@
-// App.js
 import { Route, Routes } from "react-router-dom";
 import CustomDrawer from "./components/CustomDrawer/CustomDrawer";
 import Homepage from "./pages/Homepage/Homepage";
@@ -13,25 +12,38 @@ import { useDrawerLogic } from "./utils/drawerRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { person, swipeProps } from "./dummyData/constants";
-import { setGeneralDetail, setTechnologies } from "./store/slices/userSlice";
-import { setOpportunities } from "./store/slices/jobOffersSlice";
+import { setGeneralDetail} from "./store/slices/userSlice";
+import { setNewOffer, setOpportunities } from "./store/slices/jobOffersSlice";
 import MatchesPage from "./pages/MatchesPage/MatchesPage";
 import EmployerPage from "./pages/EmployerPage/EmployerPage";
-import { Toaster } from 'react-hot-toast';
+import { arraysAreEqual } from "./utils/arraysEqual";
 import "./App.css";
+
 function App() {
   const { showDrawer, icons, hrefs, items } = useDrawerLogic();
   const dispatch = useDispatch();
-  const isEmployer= useSelector(state=>state.users.isEmployer)
+  dispatch(setGeneralDetail(person));
+  const isEmployer = useSelector((state) => state.users.isEmployer);
+  const userTechnologies=useSelector((state)=>state.users.technologies)
+  
 
   useEffect(() => {
-    dispatch(setGeneralDetail(person));
-    dispatch(setOpportunities(swipeProps));
-  }, []);
+   
+    dispatch(setOpportunities({technologies:person.technologies,opportunities:swipeProps}))
+  }, [userTechnologies]);
+  
+  
   return (
     <>
-    <Toaster/>
-      {showDrawer && <CustomDrawer items={items} icons={icons} hrefs={hrefs} isEmployer={isEmployer} />}
+
+      {showDrawer && (
+        <CustomDrawer
+          items={items}
+          icons={icons}
+          hrefs={hrefs}
+          isEmployer={isEmployer}
+        />
+      )}
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<Homepage />} />

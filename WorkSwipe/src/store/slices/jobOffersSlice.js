@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { arraysAreEqual } from "../../utils/arraysEqual";
 
 const initialState = {
   offers: [],
@@ -10,7 +11,9 @@ const jobOffersSlice = createSlice({
   initialState,
   reducers: {
     setOpportunities: (state, action) => {
-      state.offers = action.payload;
+      state.offers = action.payload.opportunities.filter((op)=>{
+        return arraysAreEqual(op.technologies,action.payload.technologies)
+      });
     },
     setNewOffer: (state, action) => {
       const NewOffer = action.payload;
