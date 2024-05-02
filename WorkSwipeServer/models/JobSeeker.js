@@ -9,7 +9,8 @@ const jobSeekerSchema = new mongoose.Schema({
     technologies:  [{type:mongoose.Schema.Types.ObjectId , ref:"Technologies" , required:true}] ,
     linkedInUrl: { type: String },
     gitHubUrl: { type: String },
-    dateCreated: { type: Date, default: Date.now() }
+    dateCreated: { type: Date, default: Date.now() },
+    matches: { type: [String], required: true }
 });
 
 export const JobSeeker = mongoose.model("JobSeeker", jobSeekerSchema);

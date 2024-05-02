@@ -1,16 +1,16 @@
 
-import { createJobSeekerService, deleteJobSeekerService, getAllJobSeekersService, getSingleJobSeekerService } from "../services/JobSeeker.js"
+import { createJobSeekerService, deleteJobSeekerService, getAllJobSeekersService, getSingleJobSeekerByNameService, getSingleJobSeekerService } from "../services/JobSeeker.js"
 
 export const getAllJobSeekersController = async (req, res) => {
     try {
         const allJobSeekers = await getAllJobSeekersService()
-        if (allJobSeekers.length === 0 || !JobSeekers) {
-            return res.status(204).send({ message: "no Job Seeker found" })
+        if (allJobSeekers.length === 0 || !allJobSeekers) {
+            return serverResponse(res, 204, { message: "no job seeker found" })
 
         }
-        return res.status(200).send(JobSeekers)
+        return serverResponse(res, 200, allJobSeekers)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, { message: e.message })
 
     }
 
@@ -22,11 +22,11 @@ export const getSingleJobSeekerController = async (req, res) => {
         const id = req.params.id
         const jobSeeker = await getSingleJobSeekerService(id)
         if (!jobSeeker) {
-            return res.status(404).send({ message: "no job Seeker found" })
+            return serverResponse(res, 404, { message: "no job seeker found" })
         }
-        return res.status(200).send(jobSeeker)
+        return serverResponse(res, 200, jobSeeker)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, { message: e.message })
     }
 }
 
@@ -35,22 +35,23 @@ export const createJobSeekerController = async (req, res) => {
     try {
 
         const jobSeekerForm = { ...req.body }
+        jobSeekerForm["password"] = hashPassword(req.body.password)
         const jobSeeker = createJobSeekerService(jobSeekerForm)
         await jobSeeker.save()
-        res.status(200).send(jobSeeker)
+        return serverResponse(res, 200, jobSeeker)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, { message: e.message })
     }
 
 }
 
 export const updateJobSeekerController = async (req, res) => {
-    const jobSeekerAllowedUpdates = ["password", "technologies", "location" , "linkedInUrl", "gitHubUrl"]
+    const jobSeekerAllowedUpdates = ["technologies", "location", "linkedInUrl", "gitHubUrl"]
     const updates = Object.keys(req.body)
     const isValidOperation = jobSeeker.every((update) =>
-    jobSeekerAllowedUpdates.includes(update))
+        jobSeekerAllowedUpdates.includes(update))
     if (!isValidOperation) {
-        return res.status(400).send({ message: "invalid updates" })
+        return serverResponse(res, 404, { message: "no job seeker found" })
     }
 
     try {
@@ -58,26 +59,66 @@ export const updateJobSeekerController = async (req, res) => {
         const jobSeeker = await getSingleJobSeekerService(id)
 
         if (!jobSeeker) {
-            return res.status(404).send({ message: "job seeker does not exist" });
+            return serverResponse(res, 404, { message: "no job seeker found" })
         }
 
         updates.forEach((update) => (jobSeeker[update] = req.body[update]));
         await jobSeeker.save();
-        return res.status(200).send(jobSeeker);
+        return serverResponse(res, 200, jobSeeker)
     } catch (e) {
-        return res.status(500).send({ message: e.message });
+        return serverResponse(res, 500, { message: e.message });
     }
 }
+
+export const updateJobSeekerPasswordController = async (req, res) => {
+
+    const jobSeekerPasswordUpdate = ["password"]
+    const updates = Object.keys(req.body)
+    const isValidOperation = updates.every((update) =>
+        jobSeekerPasswordUpdate.includes(update))
+    if (!isValidOperation) {
+        return serverResponse(res, 400, { message: "password invalid" })
+    }
+
+    try {
+        const id = req.params.id;
+        const jobSeeker = await getSingleJobSeekerService(id)
+        if (!jobSeeker) {
+            return serverResponse(res, 404, { message: "jobSeeker not found" })
+        }
+        jobSeeker["password"] = hashPassword(req.body.password)
+        await jobSeeker.save();
+        return serverResponse(res, 200, jobSeeker)
+    } catch (e) {
+        return serverResponse(res, 500, { message: e.message })
+    }
+}
+
 
 export const deleteJobSeekerController = async (req, res) => {
     try {
         const id = req.params.id;
         const deletedJobSeeker = await deleteJobSeekerService(id);
         if (!deletedJobSeeker) {
-            return res.status(404).send({ message: "no Job Seeker found" });
+            return serverResponse(res, 404, { message: "jobSeeker not found" })
         }
-        return res.status(200).send(deletedJobSeeker);
+        return serverResponse(res, 200, deletedJobSeeker)
     } catch (e) {
-        return res.status(500).send({ message: e.message });
+        return serverResponse(res, 500, { message: e.message });
+    }
+}
+
+export const jobSeekerLoginController = async (req, res) => {
+    try {
+        const loginForm = { ...req.body }
+        const jobSeeker = await getSingleJobSeekerByNameService(loginForm.name)
+        if (!jobSeeker) { return serverResponse(res, 404, { message: "userName or password incorrect" }) }
+        const isValidPassword = compareHashedPassword(loginForm.password, jobSeeker.password)
+        if (!isValidPassword) {
+            return serverResponse(res, 404, { message: "userName or password incorrect" })
+        }
+        return serverResponse(res, 200, jobSeeker)
+    } catch (e) {
+        return serverResponse(res, 500, { message: e.message })
     }
 }

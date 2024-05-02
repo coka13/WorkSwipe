@@ -1,31 +1,31 @@
 
-import { createJobOpportunityService, deleteJobOpportunityService, getAllJobOpportunitiesService, getSingleJobOpportunityService } from "../services/JobOpportunity.js"
+import { deleteJobOpportunitiesByEmployerIDService, createJobOpportunityService, deleteJobOpportunityService, getAllJobOpportunitiesService, getSingleJobOpportunityService } from "../services/JobOpportunity.js"
 
 export const getAllJobOpportunitiesController = async (req, res) => {
     try {
         const allJobOpportunities = await getAllJobOpportunitiesService()
         if (allJobOpportunities.length === 0 || !allJobOpportunities) {
-            return res.status(204).send({ message: "no Job Opportunity found" })
+            return serverResponse(res, 204, { message: "no job Opportunity found" })
 
         }
-        return res.status(200).send(allJobOpportunities)
+        return serverResponse(res, 200, allJobOpportunities)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
-
+        return serverResponse(res, 500, {message: e.message})
     }
 
 }
+
 
 export const getSingleJobOpportunityController = async (req, res) => {
     try {
         const id = req.params.id
         const jobOpportunity = await getSingleJobOpportunityService(id)
         if (!jobOpportunity) {
-            return res.status(404).send({ message: "no jobOpportunity found" })
+            return serverResponse(res, 404, { message: "no job Opportunity found" })
         }
-        return res.status(200).send(jobOpportunity)
+        return serverResponse(res, 200, jobOpportunity)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, {message: e.message})
     }
 }
 
@@ -36,20 +36,20 @@ export const createJobOpportunityController = async (req, res) => {
         const jobOpportunityForm = { ...req.body }
         const jobOpportunity = createJobOpportunityService(jobOpportunityForm)
         await jobOpportunity.save()
-        res.status(200).send(jobOpportunity)
+        serverResponse(res, 200, jobOpportunity)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, {message: e.message})
     }
 
 }
 
 export const updateJobOpportunityController = async (req, res) => {
-    const jobOpportunityAllowedUpdates = [" expirience","position","technologies", "location","emailHR","website","isActive",""]
+    const jobOpportunityAllowedUpdates = [" expirience", "position", "technologies", "location", "emailHR", "website", "isActive", ""]
     const updates = Object.keys(req.body)
     const isValidOperation = JobOpportunity.every((update) =>
-    jobOpportunityAllowedUpdates.includes(update))
+        jobOpportunityAllowedUpdates.includes(update))
     if (!isValidOperation) {
-        return res.status(400).send({ message: "invalid updates" })
+        return serverResponse(res, 400, { message: "no job Opportunity found" })
     }
 
     try {
@@ -57,14 +57,14 @@ export const updateJobOpportunityController = async (req, res) => {
         const jobOpportunity = await getSingleJobOpportunityService(id)
 
         if (!jobOpportunity) {
-            return res.status(404).send({ message: "Job Opportunity does not exist" });
+            return serverResponse(res, 404, { message: "no job Opportunity not found" })
         }
 
         updates.forEach((update) => (jobOpportunity[update] = req.body[update]));
         await jobOpportunity.save();
-        return res.status(200).send(jobOpportunity);
+        return serverResponse(res, 200, jobOpportunity)
     } catch (e) {
-        return res.status(500).send({ message: e.message });
+        return serverResponse(res, 500, {message: e.message})
     }
 }
 
@@ -73,10 +73,23 @@ export const deleteJobOpportunityController = async (req, res) => {
         const id = req.params.id;
         const deletedJobOpportunity = await deleteJobOpportunityService(id);
         if (!deletedJobOpportunity) {
+            return serverResponse(res, 404, { message: "no job Opportunity not found" })
+        }
+        return serverResponse(res, 200, deletedJobOpportunity)
+    } catch (e) {
+        return serverResponse(res, 500, {message: e.message})
+    }
+}
+
+export const deleteJobOpportunityByEmployerIDController = async (req, res) => {
+    try {
+        const id = req.params.employerId;
+        const deletedJobOpportunityByEmployerID = await deleteJobOpportunitiesByEmployerIDService(id);
+        if (!deletedJobOpportunityByEmployerID) {
             return res.status(404).send({ message: "no JobOpportunity found" });
         }
-        return res.status(200).send(deletedJobOpportunity);
+        return serverResponse(res, 200, deletedJobOpportunityByEmployerID)
     } catch (e) {
-        return res.status(500).send({ message: e.message });
+        return serverResponse(res, 500, {message: e.message})
     }
 }

@@ -1,19 +1,21 @@
 
-import { createAdminService, deleteAdminService, getAllAdminsService, getSingleAdminService } from "../services/Admin"
+import { createAdminService, deleteAdminService, getAllAdminsService, getSingleAdminByNameService, getSingleAdminByNameService, getSingleAdminService } from "../services/Admin"
+import { compareHashedPassword } from "../utils/compareHashedPassword"
+import { hashPassword } from "../utils/passwordHashing"
+import { serverResponse } from "../utils/serverResponse"
 
 export const getAllAdminsController = async (req, res) => {
     try {
         const allAdmins = await getAllAdminsService()
         if (allAdmins.length === 0 || !allAdmins) {
-            return res.status(204).send({ message: "no Admin found" })
+            return serverResponse(res, 204, { message: "no admin found" })
 
         }
-        return res.status(200).send(allAdmins)
+        return serverResponse(res, 200, allAdmins)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, { message: e.message })
 
     }
-
 }
 
 export const getSingleAdminController = async (req, res) => {
@@ -21,11 +23,11 @@ export const getSingleAdminController = async (req, res) => {
         const id = req.params.id
         const admin = await getSingleAdminService(id)
         if (!admin) {
-            return res.status(404).send({ message: "no admin found" })
+            return serverResponse(res, 404, { message: "no admin found" })
         }
-        return res.status(200).send(admin)
+        return serverResponse(res, 200, admin)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, { message: e.message })
     }
 }
 
@@ -34,37 +36,38 @@ export const createAdminController = async (req, res) => {
     try {
 
         const adminForm = { ...req.body }
+        adminForm["password"] = hashPassword(req.body.password)
         const admin = createAdminService(adminForm)
         await admin.save()
-        res.status(200).send(admin)
+        return serverResponse(res, 200, admin)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, { message: e.message })
     }
 
 }
 
 export const updateAdminController = async (req, res) => {
-    const adminAllowedUpdates = ["password"]
+
+    const adminPasswordUpdate = ["password"]
     const updates = Object.keys(req.body)
-    const isValidOperation = admin.every((update) =>
-        adminAllowedUpdates.includes(update))
+    const isValidOperation = updates.every((update) =>
+        adminPasswordUpdate.includes(update))
     if (!isValidOperation) {
-        return res.status(400).send({ message: "invalid updates" })
+        return serverResponse(res, 400, { message: "password invalid" })
     }
 
     try {
         const id = req.params.id;
         const admin = await getSingleAdminService(id)
-
         if (!admin) {
-            return res.status(404).send({ message: "admin does not exist" });
+            return serverResponse(res, 404, { message: "admin not found" })
         }
-
+        admin["password"] = hashPassword(req.body.password)
         updates.forEach((update) => (admin[update] = req.body[update]));
         await admin.save();
-        return res.status(200).send(admin);
+        return serverResponse(res, 200, admin)
     } catch (e) {
-        return res.status(500).send({ message: e.message });
+        return serverResponse(res, 500, { message: e.message })
     }
 }
 
@@ -73,10 +76,25 @@ export const deleteAdminController = async (req, res) => {
         const id = req.params.id;
         const deletedAdmin = await deleteAdminService(id);
         if (!deletedAdmin) {
-            return res.status(404).send({ message: "no admin found" });
+            return serverResponse(res, 404, { message: "admin not found" })
         }
-        return res.status(200).send(deletedAdmin);
+        return serverResponse(res, 200, deletedAdmin)
     } catch (e) {
-        return res.status(500).send({ message: e.message });
+        return serverResponse(res, 500, { message: e.message })
+    }
+}
+
+export const adminLoginController = async (req, res) => {
+    try {
+        const loginForm = { ...req.body }
+        const admin = await getSingleAdminByNameService(loginForm.name)
+        if (!admin) { return serverResponse(res, 404, { message: "userName or password incorrect" }) }
+        const isValidPassword = compareHashedPassword(loginForm.password, admin.password)
+        if (!isValidPassword) {
+            return serverResponse(res, 404, { message: "userName or password incorrect" })
+        }
+        return serverResponse(res, 200, admin)
+    } catch (e) {
+        return serverResponse(res, 500, { message: e.message })
     }
 }

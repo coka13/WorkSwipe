@@ -1,16 +1,18 @@
 
-import { createEmployerService, deleteEmployerService, getAllEmployersService, getSingleEmployerService } from "../services/Employer"
+import { createEmployerService, deleteEmployerService, getAllEmployersService,  getSingleEmployerByNameService, getSingleEmployerService } from "../services/Employer"
+import { deleteJobOpportunitiesByEmployerIDService } from "../services/JobOpportunity"
+
 
 export const getAllEmployersController = async (req, res) => {
     try {
         const allEmployers = await getAllEmployersService()
         if (allEmployers.length === 0 || !allEmployers) {
-            return res.status(204).send({ message: "no employer found" })
+            return serverResponse(res, 204, { message: "no employer found" })
 
         }
-        return res.status(200).send(allEmployers)
+        return serverResponse(res, 200, allEmployers)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, {message:e.message})
 
     }
 
@@ -22,12 +24,12 @@ export const getSingleEmployerController = async (req, res) => {
         const id = req.params.id
         const employer = await getSingleEmployerService(id)
         if (!employer) {
-            return res.status(404).send({ message: "no employer found" })
+            return serverResponse(res, 404, { message: "employer not found" })
         }
-        return res.status(200).send(employer)
+        return serverResponse(res, 200, employer)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
-    }
+        return serverResponse(res, 500, {message:e.message})
+}
 }
 
 
@@ -35,49 +37,64 @@ export const createEmployerController = async (req, res) => {
     try {
 
         const employerForm = { ...req.body }
+        employerForm["password"] = hashPassword(req.body.password)
         const employer = createEmployerService(employerForm)
         await employer.save()
-        res.status(200).send(employer)
+        serverResponse(res, 200, employer)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, { message: e.message })
     }
 
 }
 
 export const updateEmployerController = async (req, res) => {
-    const employerAllowedUpdates = ["password"]//האם גם חברה ?
+    const employerAllowedUpdates = ["password"]
     const updates = Object.keys(req.body)
     const isValidOperation = employer.every((update) =>
         employerAllowedUpdates.includes(update))
     if (!isValidOperation) {
-        return res.status(400).send({ message: "invalid updates" })
+        return serverResponse(res, 400, { message: "invalid updates" })
     }
 
     try {
         const id = req.params.id;
         const employer = await getSingleEmployerService(id)
-
         if (!employer) {
-            return res.status(404).send({ message: "employer does not exist" });
+            return serverResponse(res, 404, { message: "employer not found" })
         }
-
+        employer["password"] = hashPassword(req.body.password)
         updates.forEach((update) => (employer[update] = req.body[update]));
         await employer.save();
-        return res.status(200).send(employer);
+        return serverResponse(res, 200, employer)
     } catch (e) {
-        return res.status(500).send({ message: e.message });
+        return serverResponse(res, 500, { message: e.message })
     }
 }
 
 export const deleteEmployerController = async (req, res) => {
     try {
         const id = req.params.id;
-        const deletedEmployer = await deleteEmployerService(id);
+        const deletedEmployer = await Promise.all([deleteJobOpportunitiesByEmployerIDService(employerId), deleteEmployerService(id)])[1];
         if (!deletedEmployer) {
-            return res.status(404).send({ message: "no employer found" });
+            return serverResponse(res, 404, { message: "employer not found" })
         }
-        return res.status(200).send(deletedEmployer);
+        return serverResponse(res, 200, deletedEmployer)
     } catch (e) {
-        return res.status(500).send({ message: e.message });
+        return serverResponse(res, 500, {message:e.message})
+    }
+}
+
+export const employerLoginController = async (req, res) => {
+    try {
+        const loginForm = { ...req.body }
+        const employer = await getSingleEmployerByNameService(loginForm.name)
+        if (!employer) { return serverResponse(res, 404, { message: "userName or password incorrect" }) }
+        const isValidPassword = compareHashedPassword(loginForm.password, employer.password)
+        if (!isValidPassword) {
+            return serverResponse(res, 404, { message: "userName or password incorrect" })
+        }
+        return serverResponse(res, 200, employer)
+    } catch (e) {
+        return serverResponse(res, 500, { message: e.message })
     }
 }

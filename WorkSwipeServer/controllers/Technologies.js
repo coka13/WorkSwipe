@@ -6,12 +6,12 @@ export const getAllTechnologiesController = async (req, res) => {
     try {
         const allTechnologies = await getAllTechnologiesService()
         if (allTechnologies.length === 0 || !allTechnologies) {
-            return res.status(204).send({ message: "no Technology found" })
+            return serverResponse(res,204, {message:"technology not found"})
 
         }
-        return res.status(200).send(allTechnologies)
+        return serverResponse(res, 200, allTechnologies)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, {message:e.message})
 
     }
 
@@ -23,11 +23,11 @@ export const getSingleTechnologyController = async (req, res) => {
         const id = req.params.id
         const technology = await getSingleTechnologyService(id)
         if (!technology) {
-            return res.status(404).send({ message: "no technology found" })
+            return serverResponse(res,404, {message:"technology not found"})
         }
-        return res.status(200).send(technology)
+        return serverResponse(res, 200, technology)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, {message:e.message})
     }
 }
 
@@ -38,9 +38,9 @@ export const createTechnologyController = async (req, res) => {
         const technologyForm = { ...req.body }
         const technology = createTechnologyService(technologyForm)
         await technology.save()
-        res.status(200).send(technology)
+        serverResponse(res, 200, technology)
     } catch (e) {
-        return res.status(500).send({ message: e.message })
+        return serverResponse(res, 500, {message:e.message})
     }
 
 }
@@ -49,17 +49,15 @@ export const createTechnologyController = async (req, res) => {
 
 
 
-//update
-
-// export const deleteTechnologyController = async (req, res) => {
-//     try {
-//         const id = req.params.id;
-//         const deletedTechnology = await deleteTechnologyService(id);
-//         if (!deletedTechnology) {
-//             return res.status(404).send({ message: "no technology found" });
-//         }
-//         return res.status(200).send(deletedTechnology);
-//     } catch (e) {
-//         return res.status(500).send({ message: e.message });
-//     }
-// }
+export const deleteTechnologyController = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deletedTechnology = await deleteTechnologyService(id);
+        if (!deletedTechnology) {
+            return serverResponse(res, 404, { message: "technology not found" })
+        }
+        return serverResponse(res, 200, deletedTechnology)
+    } catch (e) {
+        return serverResponse(res, 500, {message:e.message})
+    }
+}
