@@ -1,10 +1,10 @@
-import { Technologies } from "../models/Technologies";
+import { Technologies } from "../models/Technologies.js";
 
 export const getAllTechnologiesService = () => Technologies.find({})
 
 export const getTechnologiesByListOfIDsService = (idsList) => Technologies.find({ _id: { $in: idsList } })
 
-export const createTechnologiesService = (form) => new Technologies(form)
+export const createTechnologyService = (form) => new Technologies(form)
 
-export const deleteTechnologiesService = (id) => Technologies.findOneAndDelete({ _id: id });
+export const deleteTechnologyService = (id) => Technologies.findOneAndDelete({ _id: id });
 

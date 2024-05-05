@@ -1,6 +1,6 @@
 
-import { createEmployerService, deleteEmployerService, getAllEmployersService,  getSingleEmployerByNameService, getSingleEmployerService } from "../services/Employer"
-import { deleteJobOpportunitiesByEmployerIDService } from "../services/JobOpportunity"
+import { createEmployerService, deleteEmployerService, getAllEmployersService,  getSingleEmployerByNameService, getSingleEmployerService } from "../services/Employer.js"
+import { deleteJobOpportunitiesByEmployerIDService } from "../services/JobOpportunity.js"
 
 
 export const getAllEmployersController = async (req, res) => {

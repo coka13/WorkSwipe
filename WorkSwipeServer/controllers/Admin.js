@@ -1,8 +1,8 @@
 
-import { createAdminService, deleteAdminService, getAllAdminsService, getSingleAdminByNameService, getSingleAdminByNameService, getSingleAdminService } from "../services/Admin"
-import { compareHashedPassword } from "../utils/compareHashedPassword"
-import { hashPassword } from "../utils/passwordHashing"
-import { serverResponse } from "../utils/serverResponse"
+import { createAdminService, deleteAdminService, getAllAdminsService, getSingleAdminByNameService, getSingleAdminService } from "../services/Admin.js"
+import { compareHashedPassword } from "../utils/compareHashedPassword.js"
+import { hashPassword } from "../utils/passwordHashing.js"
+import { serverResponse } from "../utils/serverResponse.js"
 
 export const getAllAdminsController = async (req, res) => {
     try {

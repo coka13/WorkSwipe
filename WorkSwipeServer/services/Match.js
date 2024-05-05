@@ -1,4 +1,4 @@
-import { Match } from "../models/Match";
+import { Match } from "../models/Match.js";
 
 export const getAllMatchesByEmployerIdService = (employerId, isDeprecated) => {
     return !isDeprecated ? Match.find({ employer: employerId, isDeprecated: false }) :

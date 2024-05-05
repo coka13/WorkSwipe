@@ -1,4 +1,4 @@
-import { JobSeeker } from "../models/JobSeeker";
+import { JobSeeker } from "../models/JobSeeker.js";
 
 export const getAllJobSeekersService = () => JobSeeker.find({})
 

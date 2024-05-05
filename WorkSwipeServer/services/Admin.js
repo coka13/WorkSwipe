@@ -1,8 +1,8 @@
-import { Admin } from "../models/Admin";
+import { Admin } from "../models/Admin.js";
 
 export const getAllAdminsService = () => Admin.find({})
 
-export const getSingleAdminsService = (id) => Admin.findOne({ _id: id })
+export const getSingleAdminService = (id) => Admin.findOne({ _id: id })
 
 export const registerAdminService = (form) => new Admin(form)
 

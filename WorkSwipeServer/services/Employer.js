@@ -1,4 +1,4 @@
-import { Employer } from "../models/Employer" 
+import { Employer } from "../models/Employer.js" 
 
 export const getAllEmployersService = () => Employer.find({})
 
