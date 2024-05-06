@@ -13,22 +13,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { person, swipeProps } from "./dummyData/constants";
 import { setGeneralDetail} from "./store/slices/userSlice";
-import { setNewOffer, setOpportunities } from "./store/slices/jobOffersSlice";
+import {  setOpportunities } from "./store/slices/jobOffersSlice";
 import MatchesPage from "./pages/MatchesPage/MatchesPage";
 import EmployerPage from "./pages/EmployerPage/EmployerPage";
-import { arraysAreEqual } from "./utils/arraysEqual";
 import "./App.css";
 
 function App() {
   const { showDrawer, icons, hrefs, items } = useDrawerLogic();
   const dispatch = useDispatch();
-  dispatch(setGeneralDetail(person));
+
+  
   const isEmployer = useSelector((state) => state.users.isEmployer);
   const userTechnologies=useSelector((state)=>state.users.technologies)
   
+  useEffect(() => {
+    dispatch(setGeneralDetail(person));
+  }, []);
 
   useEffect(() => {
-   
     dispatch(setOpportunities({technologies:person.technologies,opportunities:swipeProps}))
   }, [userTechnologies]);
   

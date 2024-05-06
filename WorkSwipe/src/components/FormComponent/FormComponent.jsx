@@ -3,16 +3,16 @@ import TextField from "@mui/material/TextField";
 import SelectVariants from "../SelectComponent/SelectComponent";
 import TextArea from "../TextArea/TextArea";
 import { generateUuid } from "../../utils/uuidGenerator";
-import "./FormComponent.css";
 import CheckBox from "../CheckBox/CheckBox";
-import CustomModal2 from "../CustomModal2/CustomModal2";
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import BiotechIcon from "@mui/icons-material/Biotech";
+import CustomChildrenModal from "../CustomChildrenModal/CustomChildrenModal";
+import "./FormComponent.css";
 
-export default function FormComponent({ props }) {
+export default function FormComponent({ props,checkedList }) {
+  console.log("props",props)
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -21,7 +21,7 @@ export default function FormComponent({ props }) {
     <Box component="form" noValidate autoComplete="off">
       <div className="FieldsWraper">
         {props.map((prop) => {
-          console.log(prop);
+          
           if (!prop.id) {
             prop.id = generateUuid();
           }
@@ -32,18 +32,18 @@ export default function FormComponent({ props }) {
               <>
                 <IconButton onClick={handleOpenModal}>
                   <span style={{ fontWeight: "bold" }}>
-                    Choose technologies
+                    {prop.title}
                   </span>
                   <BiotechIcon />
                 </IconButton>
-                <CustomModal2
+                <CustomChildrenModal
                   open={isModalOpen}
                   setOpen={setIsModalOpen}
                   title={prop.title}
                   description={prop.description}
                 >
-                  <CheckBox options={prop.options} />
-                </CustomModal2>
+                  <CheckBox options={prop.options} checkedList={checkedList}  />
+                </CustomChildrenModal>
               </>
             );
           } else if (prop.type === "textarea") {
@@ -64,6 +64,7 @@ export default function FormComponent({ props }) {
                 id={prop.id}
                 label={prop.name}
                 type={prop.type}
+                onChange={prop.onChange} 
               />
             );
           }

@@ -1,9 +1,9 @@
 import { Modal, Box, Typography } from "@mui/material";
-import "./CustomModal2.css";
 import React from "react";
 import BasicButtons from "../BasicButtons/BasicButtons";
+import "./CustomChildrenModal.css";
 
-const CustomModal2 = ({ children, open, setOpen, title, description, placeholder }) => {
+const CustomChildrenModal = ({ children, open, setOpen, title, description, placeholder }) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -38,4 +38,4 @@ const CustomModal2 = ({ children, open, setOpen, title, description, placeholder
   );
 };
 
-export default CustomModal2;
+export default CustomChildrenModal;

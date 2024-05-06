@@ -8,7 +8,7 @@ const initialState = {
   isAdmin: false,
   linkedIn: "",
   experience: 0,
-  location: "",
+  residence: "",
   url: "",
   email:""
 };
@@ -18,10 +18,12 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setGeneralDetail: (state, action) => {
+      console.log(action.payload)
       state.name = action.payload.name;
       state.linkedIn = action.payload.linkedIn;
       state.experience = action.payload.experience;
-      state.location = action.payload.location;
+      state.residence = action.payload.residence;
+  
       state.url = action.payload.url;
       state.username = action.payload.username;
       state.isAdmin = action.payload.isAdmin;
@@ -32,9 +34,25 @@ const userSlice = createSlice({
     setTechnologies: (state, action) => {
       state.technologies.push([...action.payload]);
     },
+    updateUserField: (state, action) => {
+      const { field, value } = action.payload;
+      if(field==="experience"){
+        if(isNaN(value) || (+value<0)){
+          return
+        }
+      }
+      state[field] = value;
+    },
+    deleteTech: (state, action) => {
+      const techToDel = action.payload; 
+      console.log(techToDel)
+      state.technologies = state.technologies.filter((tech) => tech !== techToDel);
+      console.log(state.technologies)
+    },
+    
   },
 });
 
-export const { setTechnologies, setGeneralDetail } = userSlice.actions;
+export const { deleteTech,setTechnologies, setGeneralDetail,updateUserField } = userSlice.actions;
 
 export default userSlice.reducer;

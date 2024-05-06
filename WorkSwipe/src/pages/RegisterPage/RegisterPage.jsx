@@ -13,7 +13,7 @@ const RegisterPage = () => {
         <div className="registerBox">
           <h4>Register</h4>
 
-          <FormComponent props={formProps} />
+          <FormComponent props={formProps} checkedList={[]}></FormComponent>
 
           <CustomLinkNavigate
             text={"Already have an account?"}

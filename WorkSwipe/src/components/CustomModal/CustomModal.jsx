@@ -1,10 +1,10 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import BasicButtons from "../BasicButtons/BasicButtons";
-import "./CustomModal.css";
 import FormComponent from "../FormComponent/FormComponent";
+import "./CustomModal.css";
 
 const style = {
   position: "absolute",
@@ -18,16 +18,33 @@ const style = {
   p: 4,
 };
 
-export default function CustomModal({
-  title,
-  description,
-  placeholder,
-  open,
-  setOpen,
-}) {
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const modalProps = [{ id: title, placeholder: placeholder, type: "text" }];
+export default function CustomModal({ title, description, placeholder, open, setOpen, onSubmit }) {
+  const [inputValue, setInputValue] = React.useState("");
+
+  const handleClose = () => {
+    setInputValue("");
+    setOpen(false);
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (onSubmit) {
+      if(inputValue!==""){
+      onSubmit(inputValue);
+      }
+    }
+    handleClose();
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSubmit();
+    }
+  };
 
   return (
     <Modal
@@ -36,13 +53,13 @@ export default function CustomModal({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style} className="modal-box">
+      <Box sx={style} className="modal-box" onKeyDown={handleKeyDown}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
           {title}
         </Typography>
 
-        <FormComponent props={modalProps} />
-        <BasicButtons text={"Submit"} placeholder={placeholder} />
+        <FormComponent props={[{ id: title, placeholder, type: "text", value: inputValue, onChange: handleInputChange }]} />
+        <BasicButtons text={"Submit"} onClick={handleSubmit} />
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           {description}
         </Typography>
