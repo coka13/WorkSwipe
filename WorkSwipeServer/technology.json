@@ -1,14 +1,44 @@
 [
     {
-      "name": "javaScript"
-      
+      "name": "JavaScript"      
     },
     {
-      "name": "c++"
-      
+      "name": "C++"     
     },
     {
-      "name": "python"
-      
+      "name": "Python"      
+    },
+    {
+      "name": "C"      
+    },
+    {
+      "name": "Java"      
+    },
+    {
+      "name": "HTML"  
+    },
+    {
+      "name": "CSS" 
+    },
+    {
+      "name": "PHP"  
+    },
+    {
+      "name": "C#"  
+    },
+    {
+      "name": "SQL"  
+    },
+    {
+      "name": "Ruby"    
+    },
+    {
+      "name": "Go" 
+    },
+    {
+      "name": "Objective C"      
+    },
+    {
+      "name": "Swift"     
     }
   ]
