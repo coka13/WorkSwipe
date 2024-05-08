@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import "./DisplayCard.css";
 
 
-export default function DisplayCard({ db, img, handleEdit,handleDeleteList,checkedList }) {
+export default function DisplayCard({ db, img, handleEdit,handleDeleteList,handleListCheck,handleListUncheck,checkedList }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [currentEdit, setCurrentEdit] = useState("");

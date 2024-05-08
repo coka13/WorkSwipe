@@ -3,7 +3,7 @@ import React from "react";
 import BasicButtons from "../BasicButtons/BasicButtons";
 import "./CustomChildrenModal.css";
 
-const CustomChildrenModal = ({ children, open, setOpen, title, description, placeholder }) => {
+const CustomChildrenModal = ({ children, open, setOpen, title, description, placeholder,onSubmit }) => {
   const style = {
     position: "absolute",
     top: "50%",
