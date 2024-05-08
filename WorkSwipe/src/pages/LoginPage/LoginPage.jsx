@@ -2,7 +2,6 @@ import Waves from "../../components/Waves/Waves";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/BasicButtons/BasicButtons";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
-import { loginProps } from "../../dummyData/constants";
 import "./LoginPage.css";
 
 const LoginPage = () => {
@@ -12,7 +11,10 @@ const LoginPage = () => {
       <div className="loginPage">
         <div className="loginBox">
           <h4>Login</h4>
-          <FormComponent props={loginProps} />
+          <FormComponent props={[
+  { name: "username", type: "text", label: "username", required: true },
+  { name: "password", type: "password", label: "password", required: true },
+]} />
           <BasicButtons text={"Submit"} />
           <CustomLinkNavigate
             text={"Doesnt have an account yet?"}

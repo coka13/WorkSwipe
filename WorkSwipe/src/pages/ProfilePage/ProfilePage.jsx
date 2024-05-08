@@ -3,13 +3,11 @@ import DisplayCard from "../../components/DisplayCard/DisplayCard";
 import "./ProfilePage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteTech, updateUserField } from "../../store/slices/userSlice";
-import FormComponent from "../../components/FormComponent/FormComponent";
-import {  techList } from "../../dummyData/constants";
+
 
 
 const ProfilePage = () => {
   const person = useSelector((state) => state.users);
-  console.log(person)
   const dispatch = useDispatch();
 
   const personProfile = {
@@ -22,6 +20,7 @@ const ProfilePage = () => {
     Technologies: person.technologies,
   };
 
+  
   const img = person.url;
 
 
@@ -29,7 +28,6 @@ const ProfilePage = () => {
 
 
   const handleEdit = (field, value) => {
-    console.log("field "+field,"value "+value)
     dispatch(updateUserField({field, value }));
   };
 

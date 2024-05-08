@@ -2,7 +2,6 @@ import React from "react";
 import "./Homepage.css";
 import SimpleCard from "../../components/TinderCard/TinderCard";
 import { useDispatch, useSelector } from "react-redux";
-import { arraysAreEqual } from "../../utils/arraysEqual";
 import { setAddMatch } from "../../store/slices/matchesSlice";
 
 const Homepage = () => {

@@ -18,7 +18,6 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setGeneralDetail: (state, action) => {
-      console.log(action.payload)
       state.name = action.payload.name;
       state.linkedIn = action.payload.linkedIn;
       state.experience = action.payload.experience;
@@ -45,9 +44,7 @@ const userSlice = createSlice({
     },
     deleteTech: (state, action) => {
       const techToDel = action.payload; 
-      console.log(techToDel)
       state.technologies = state.technologies.filter((tech) => tech !== techToDel);
-      console.log(state.technologies)
     },
     
   },

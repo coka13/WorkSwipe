@@ -11,9 +11,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustomModal from "../CustomModal/CustomModal";
 import { useState } from "react";
-import { techList } from "../../dummyData/constants";
-import "./DisplayCard.css";
 import FormComponent from "../FormComponent/FormComponent";
+import { useSelector } from "react-redux";
+import "./DisplayCard.css";
 
 
 export default function DisplayCard({ db, img, handleEdit,handleDeleteList,checkedList }) {
@@ -26,6 +26,8 @@ export default function DisplayCard({ db, img, handleEdit,handleDeleteList,check
     setIsModalOpen(true);
   };
   
+  const techList=useSelector((state)=>state.technologies.technologies)
+
   
 
   return (
@@ -103,8 +105,10 @@ export default function DisplayCard({ db, img, handleEdit,handleDeleteList,check
         onSubmit={(newValue) => handleEdit(currentEdit, newValue)} // Pass the field and value to handleEdit
       />
       
-      <FormComponent  props={techList} checkedList={checkedList} />
 
+      <FormComponent  props={[{title:"Technologies",description:"Choose technologies", type: "check", options: techList}]} checkedList={checkedList} />
+
+     
     </Card>
   );
 }
