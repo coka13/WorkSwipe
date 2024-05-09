@@ -6,7 +6,6 @@ import { setAddMatch } from "../../store/slices/matchesSlice";
 
 const Homepage = () => {
   const swipeProps = useSelector((state) => state.opportunities.offers);
-  const userTechnologies = useSelector((state) => state.users.technologies);
   const currentOfferTechnologies = useSelector(
     (state) => state.opportunities.currentOffer?.technologies
   );

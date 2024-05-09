@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
 import DisplayCard from "../../components/DisplayCard/DisplayCard";
-import "./ProfilePage.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTech, updateUserField } from "../../store/slices/userSlice";
-
-
+import {
+  deleteTech,
+  setTechnologies,
+  updateUserField,
+} from "../../store/slices/userSlice";
+import ScienceIcon from '@mui/icons-material/Science';
+import "./ProfilePage.css";
 
 const ProfilePage = () => {
   const person = useSelector((state) => state.users);
+  const userTechnologies = useSelector((state) => state.users.technologies);
   const dispatch = useDispatch();
+
+ 
 
   const personProfile = {
     Username: person.username,
@@ -20,26 +25,36 @@ const ProfilePage = () => {
     Technologies: person.technologies,
   };
 
-  
   const img = person.url;
 
-
-
-
+  const handleListCheck = (techs) => {
+    console.log("hi");
+    dispatch(setTechnologies(techs));
+  };
 
   const handleEdit = (field, value) => {
-    dispatch(updateUserField({field, value }));
+    dispatch(updateUserField({ field, value }));
   };
 
   const handleDeleteTech = (tech) => {
     dispatch(deleteTech(tech));
   };
 
-
-
   return (
     <div className="card">
-      <DisplayCard db={personProfile} img={img} handleEdit={handleEdit} handleDeleteList={handleDeleteTech} checkedList={person.technologies}  />
+      <DisplayCard
+        db={personProfile}
+        img={img}
+        handleEdit={handleEdit}
+        handleDeleteList={handleDeleteTech}
+        handleListCheck={handleListCheck}
+        checkedList={userTechnologies}
+        formIcon={<ScienceIcon/>}
+        title={"Choose your technologies"}
+        description={"Choose the technologies you are competent in and press Submit"}
+        type={"check"}
+
+      />
     </div>
   );
 };

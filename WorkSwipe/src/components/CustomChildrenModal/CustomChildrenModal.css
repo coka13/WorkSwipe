@@ -1,6 +1,10 @@
-.modal-box{
-    display: flex;
-    flex-direction: column;
-    justify-content:center ;
-    align-items: center;
+.modal-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-btn {
+  margin-top: 1rem;
 }

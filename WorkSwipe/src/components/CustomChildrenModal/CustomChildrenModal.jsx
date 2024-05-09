@@ -3,7 +3,7 @@ import React from "react";
 import BasicButtons from "../BasicButtons/BasicButtons";
 import "./CustomChildrenModal.css";
 
-const CustomChildrenModal = ({ children, open, setOpen, title, description, placeholder,onSubmit }) => {
+const CustomChildrenModal = ({ children, open, setOpen, title, description, placeholder }) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -29,7 +29,9 @@ const CustomChildrenModal = ({ children, open, setOpen, title, description, plac
           {title}
         </Typography>
         {children}
-        <BasicButtons text={"Submit"} placeholder={placeholder} />
+        <div className="submit-btn" > 
+        <BasicButtons text={"Submit"} placeholder={placeholder} onClick={handleClose} />
+        </div>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           {description}
         </Typography>

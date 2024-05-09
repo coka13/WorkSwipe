@@ -15,20 +15,26 @@ import FormComponent from "../FormComponent/FormComponent";
 import { useSelector } from "react-redux";
 import "./DisplayCard.css";
 
-
-export default function DisplayCard({ db, img, handleEdit,handleDeleteList,handleListCheck,handleListUncheck,checkedList }) {
+export default function DisplayCard({
+  db,
+  img,
+  handleEdit,
+  handleDeleteList,
+  checkedList,
+  formIcon,
+  title,
+  description,
+  type
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [currentEdit, setCurrentEdit] = useState("");
-  
+
   const handleEditDetails = (key) => {
     setCurrentEdit(key.charAt(0).toLowerCase() + key.slice(1));
     setIsModalOpen(true);
   };
-  
-  const techList=useSelector((state)=>state.technologies.technologies)
 
-  
+  const techList = useSelector((state) => state.technologies.technologies);
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -45,49 +51,48 @@ export default function DisplayCard({ db, img, handleEdit,handleDeleteList,handl
           </Typography>
         }
       />
-      <CardContent>
+      <CardContent sx={{padding:"16px 16px 0px 16px",margin:"0"}} >
         <CardMedia
           component="img"
           image={img}
           alt={db.name}
-          sx={{ pointerEvents: "none", padding: "2rem" }}
+          sx={{ pointerEvents: "none"}}
         />
         {Object.keys(db).map((key, index) => {
           const value = db[key];
-          {console.log(value,value.length)}
-          if (Array.isArray(value) ) {
+          {
+            console.log(value, value.length);
+          }
+          if (Array.isArray(value)) {
             return (
               <div key={index}>
                 <div className="header">{key}:</div>
-                <ul className="list">
+                <ul className="list" >
                   {value.map((tech, techIndex) => (
                     <li key={techIndex}>
                       <Typography className="profileInfo">
                         {tech}
-                      
-                        
-                        {value.length>1 && <IconButton onClick={() => handleDeleteList(tech)}>
-                          <DeleteIcon
-                            sx={{ marginRight: 1, color: "#1976D2" }}
-                          />
-                        </IconButton>}
+
+                        {value.length > 1 && (
+                          <IconButton onClick={() => handleDeleteList(tech)}>
+                            <DeleteIcon
+                              sx={{ marginRight: 1, color: "#1976D2" }}
+                            />
+                          </IconButton>
+                        )}
                       </Typography>
                     </li>
                   ))}
                 </ul>
               </div>
             );
-          } else  {
+          } else {
             return (
               <>
                 <Typography className="profileInfo" key={index}>
                   <span style={{ fontWeight: "bold" }}>{key}</span>: {value}
-                  <IconButton
-                    onClick={() => handleEditDetails(key)}
-                  >
-                    <EditIcon
-                      sx={{ marginRight: 1, color: "#1976D2" }}
-                    />
+                  <IconButton onClick={() => handleEditDetails(key)}>
+                    <EditIcon sx={{ marginRight: 1, color: "#1976D2" }} />
                   </IconButton>
                 </Typography>
               </>
@@ -95,7 +100,7 @@ export default function DisplayCard({ db, img, handleEdit,handleDeleteList,handl
           }
         })}
       </CardContent>
-      <CardActions disableSpacing />
+      <CardActions disableSpacing sx={{padding:"0",margin:"0"}} />
       <CustomModal
         title={currentEdit}
         placeholder={`Edit ${currentEdit}`}
@@ -104,11 +109,19 @@ export default function DisplayCard({ db, img, handleEdit,handleDeleteList,handl
         setOpen={setIsModalOpen}
         onSubmit={(newValue) => handleEdit(currentEdit, newValue)} // Pass the field and value to handleEdit
       />
-      
 
-      <FormComponent  props={[{title:"Technologies",description:"Choose technologies", type: "check", options: techList}]} checkedList={checkedList} />
-
-     
+      <FormComponent
+        props={[
+          {
+            title: title,
+            description: description,
+            type: type,
+            options: techList,
+          },
+        ]}
+        Icon={formIcon}
+        checkedList={checkedList}
+      />
     </Card>
   );
 }

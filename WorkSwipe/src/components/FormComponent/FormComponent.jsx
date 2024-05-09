@@ -6,22 +6,20 @@ import { generateUuid } from "../../utils/uuidGenerator";
 import CheckBox from "../CheckBox/CheckBox";
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
-import BiotechIcon from "@mui/icons-material/Biotech";
 import CustomChildrenModal from "../CustomChildrenModal/CustomChildrenModal";
 import "./FormComponent.css";
 
-export default function FormComponent({ props,checkedList }) {
-  console.log("props",props)
+export default function FormComponent({ props, checkedList,Icon}) {
+  console.log("props", props);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
-
+ 
   return (
     <Box component="form" noValidate autoComplete="off">
       <div className="FieldsWraper">
         {props.map((prop) => {
-          
           if (!prop.id) {
             prop.id = generateUuid();
           }
@@ -31,18 +29,17 @@ export default function FormComponent({ props,checkedList }) {
             return (
               <>
                 <IconButton onClick={handleOpenModal}>
-                  <span style={{ fontWeight: "bold" }}>
-                    {prop.title}
-                  </span>
-                  <BiotechIcon />
+                  <span style={{ fontWeight: "bold" }}>{prop.title}</span>
+                {Icon && Icon}
                 </IconButton>
                 <CustomChildrenModal
                   open={isModalOpen}
                   setOpen={setIsModalOpen}
                   title={prop.title}
                   description={prop.description}
+                  checkedList={checkedList}
                 >
-                  <CheckBox options={prop.options} checkedList={checkedList}  />
+                  <CheckBox options={prop.options} checkedList={checkedList} />
                 </CustomChildrenModal>
               </>
             );
@@ -64,7 +61,7 @@ export default function FormComponent({ props,checkedList }) {
                 id={prop.id}
                 label={prop.name}
                 type={prop.type}
-                onChange={prop.onChange} 
+                onChange={prop.onChange}
               />
             );
           }

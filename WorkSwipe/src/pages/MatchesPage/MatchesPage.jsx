@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MatchCard from "../../components/MatchCard/MatchCard";
-import "./MatchesPage.css"
 import { setDeleteMatch } from "../../store/slices/matchesSlice";
+import "./MatchesPage.css"
 
 const MatchesPage = () => {
   const dispatch=useDispatch()
