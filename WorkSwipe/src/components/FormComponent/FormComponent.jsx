@@ -7,15 +7,29 @@ import CheckBox from "../CheckBox/CheckBox";
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CustomChildrenModal from "../CustomChildrenModal/CustomChildrenModal";
+import { useDispatch, useSelector } from "react-redux";
 import "./FormComponent.css";
 
-export default function FormComponent({ props, checkedList,Icon}) {
-  console.log("props", props);
+export default function FormComponent({
+  props,
+  checkedList,
+  Icon,
+  dispatchFunc,
+}) {
+  console.log(Icon);
+  const dispatch = useDispatch();
+  const registerForm = useSelector((state) => state.register.registerForm);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
- 
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    dispatch(dispatchFunc({ name, value }));
+  };
+
   return (
     <Box component="form" noValidate autoComplete="off">
       <div className="FieldsWraper">
@@ -23,14 +37,26 @@ export default function FormComponent({ props, checkedList,Icon}) {
           if (!prop.id) {
             prop.id = generateUuid();
           }
+
           if (prop.type === "select") {
-            return <SelectVariants prop={prop} key={prop.id} />;
+            return (
+              <SelectVariants
+                key={prop.id}
+                prop={prop}
+                value={
+                  registerForm[prop.name] !== undefined
+                    ? registerForm[prop.name]
+                    : ""
+                }
+                onChange={handleInputChange}
+              />
+            );
           } else if (prop.type === "check") {
             return (
               <>
-                <IconButton onClick={handleOpenModal}>
+                <IconButton key={prop.id} onClick={handleOpenModal}>
                   <span style={{ fontWeight: "bold" }}>{prop.title}</span>
-                {Icon && Icon}
+                  {Icon}
                 </IconButton>
                 <CustomChildrenModal
                   open={isModalOpen}
@@ -39,17 +65,27 @@ export default function FormComponent({ props, checkedList,Icon}) {
                   description={prop.description}
                   checkedList={checkedList}
                 >
-                  <CheckBox options={prop.options} checkedList={checkedList} />
+                  <CheckBox
+                    options={prop.options}
+                    checkedList={checkedList}
+                    dispatchFunc={dispatchFunc}
+                  />
                 </CustomChildrenModal>
               </>
             );
           } else if (prop.type === "textarea") {
             return (
               <TextArea
+                key={prop.id}
                 label={prop.label}
                 name={prop.name}
-                required
-                key={prop.id}
+                required={prop.required}
+                value={
+                  registerForm[prop.name] !== undefined
+                    ? registerForm[prop.name]
+                    : ""
+                }
+                onChange={handleInputChange}
               />
             );
           } else {
@@ -57,11 +93,17 @@ export default function FormComponent({ props, checkedList,Icon}) {
               <TextField
                 key={prop.id}
                 required={prop.required}
-                variant={prop.variant}
+                variant={prop.variant || "outlined"}
                 id={prop.id}
-                label={prop.name}
+                label={prop.label}
+                name={prop.name}
                 type={prop.type}
-                onChange={prop.onChange}
+                value={
+                  registerForm[prop.name] !== undefined
+                    ? registerForm[prop.name]
+                    : ""
+                }
+                onChange={handleInputChange}
               />
             );
           }

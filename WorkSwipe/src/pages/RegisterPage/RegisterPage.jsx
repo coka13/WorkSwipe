@@ -1,59 +1,151 @@
-
+import React from "react";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import Waves from "../../components/Waves/Waves";
-
+import BasicButtons from "../../components/BasicButtons/BasicButtons";
+import { setRegisterForm } from "../../store/slices/registerSlice";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setGeneralDetail,
+  setTechnologies,
+} from "../../store/slices/userSlice";
+import ScienceIcon from "@mui/icons-material/Science";
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
-  
+  const dispatch = useDispatch();
+  const registerForm = useSelector((state) => state.register.registerForm);
+
+  const handleSubmit = () => {
+    dispatch(setGeneralDetail(registerForm));
+  };
+
   return (
-    <>
-      <div className="registerPage">
-        <div className="registerBox">
-          <h4>Register</h4>
+    <div className="registerPage">
+      <h4>Register</h4>
+      <div className="registerBox">
+        <FormComponent
+          props={[
+            {
+              name: "username",
+              type: "text",
+              label: "Username",
+              required: true,
+            },
+          ]}
+          dispatchFunc={setRegisterForm}
+        />
 
-          <FormComponent props={[
-  { name: "username", type: "text", label: "username", required: true },
-  { name: "password", type: "password", label: "password", required: true },
-  { name: "email", type: "email", label: "Email", required: true },
-  {
-    name: "experience-in-years",
-    type: "select",
-    label: "Experience in years",
-    options: [
-      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    ],
-    required: true,
-  },
-  {
-    title:"Choose technologies",
-    description:"Select the technologies you are competent in and press Submit",
-    name: "technologies",
-    type: "check",
-    label: "Technologies",
-    options: [
-      "js",
-      "node",
-      "c",
-      "cpp",
-      "HTML",
-      "css",
-      "Python"
-    ],
-    required: true
-  },
-]} checkedList={[]}></FormComponent>
+        <FormComponent
+          props={[
+            {
+              name: "password",
+              type: "password",
+              label: "Password",
+              required: true,
+            },
+          ]}
+          dispatchFunc={setRegisterForm}
+        />
 
-          <CustomLinkNavigate
-            text={"Already have an account?"}
-            to={"/"}
-            label={"Log In"}
-          />
-          <Waves color={"#1976D2"} />
-        </div>
+        <FormComponent
+          props={[
+            {
+              name: "email",
+              type: "email",
+              label: "Email",
+              required: true,
+            },
+          ]}
+          dispatchFunc={setRegisterForm}
+        />
+        <FormComponent
+          props={[
+            {
+              name: "name",
+              type: "name",
+              label: "Name",
+              required: true,
+            },
+          ]}
+          dispatchFunc={setRegisterForm}
+        />
+
+        <FormComponent
+          props={[
+            {
+              name: "url",
+              type: "url",
+              label: "Image link",
+              required: false,
+            },
+          ]}
+          dispatchFunc={setRegisterForm}
+        />
+
+        <FormComponent
+          props={[
+            {
+              name: "linkedIn",
+              type: "linkedIn",
+              label: "LinkedIn link",
+              required: false,
+            },
+          ]}
+          dispatchFunc={setRegisterForm}
+        />
+
+<FormComponent
+          props={[
+            {
+              name: "residence",
+              type: "residence",
+              label: "residence",
+              required: false,
+            },
+          ]}
+          dispatchFunc={setRegisterForm}
+        />
+
+        <FormComponent
+          props={[
+            {
+              name: "experience",
+              type: "select",
+              label: "Experience in years",
+              options: Array.from({ length: 21 }, (_, i) => i),
+              required: true,
+            },
+          ]}
+          dispatchFunc={setRegisterForm}
+        />
+
+        <FormComponent
+          props={[
+            {
+              title: "Choose technologies",
+              description:
+                "Select the technologies you are competent in and press Submit",
+              type: "check",
+              label: "Technologies",
+              options: ["js", "node", "c", "cpp", "HTML", "css", "Python"],
+              required: true,
+            },
+          ]}
+          Icon={<ScienceIcon />}
+          checkedList={[]}
+          dispatchFunc={setTechnologies}
+        />
       </div>
-    </>
+      <BasicButtons text={"Submit"} onClick={handleSubmit} />
+      <CustomLinkNavigate
+        text={"Already have an account?"}
+        to={"/"}
+        label={"Log In"}
+      />
+      <Waves color={"#1976D2"} />
+    </div>
   );
 };
+
 export default RegisterPage;

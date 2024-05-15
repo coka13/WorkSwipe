@@ -6,12 +6,14 @@ import {
   updateUserField,
 } from "../../store/slices/userSlice";
 import ScienceIcon from '@mui/icons-material/Science';
+
 import "./ProfilePage.css";
 
 const ProfilePage = () => {
   const person = useSelector((state) => state.users);
   const userTechnologies = useSelector((state) => state.users.technologies);
   const dispatch = useDispatch();
+  const dispatchFunc= setTechnologies
 
  
 
@@ -28,7 +30,6 @@ const ProfilePage = () => {
   const img = person.url;
 
   const handleListCheck = (techs) => {
-    console.log("hi");
     dispatch(setTechnologies(techs));
   };
 
@@ -53,7 +54,7 @@ const ProfilePage = () => {
         title={"Choose your technologies"}
         description={"Choose the technologies you are competent in and press Submit"}
         type={"check"}
-
+        dispatchFunc={dispatchFunc}
       />
     </div>
   );

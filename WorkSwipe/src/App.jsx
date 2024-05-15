@@ -11,12 +11,11 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import { useDrawerLogic } from "./utils/drawerRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setGeneralDetail } from "./store/slices/userSlice";
 import {  setOpportunities } from "./store/slices/jobOffersSlice";
 import MatchesPage from "./pages/MatchesPage/MatchesPage";
 import EmployerPage from "./pages/EmployerPage/EmployerPage";
-import "./App.css";
 import { setSystemTechnologies } from "./store/slices/techSlice";
+import "./App.css";
 
 function App() {
   const { showDrawer, icons, hrefs, items } = useDrawerLogic();
@@ -31,19 +30,7 @@ function App() {
 
 
 
-  useEffect(() => {
-    dispatch(setGeneralDetail({
-      username: "ShimonP",
-      name: "shimon",
-      url: "https://ichef.bbci.co.uk/news/976/cpsprodpb/0384/production/_87700900_74846549.jpg",
-      email: "Peres@gmail.com",
-      experience: 5,
-      linkedIn: "https://www.linkedin.com",
-      residence: "Haifa",
-      isEmployer: true,
-      technologies: ["c", "cpp"],
-    }));
-  }, []);
+ 
 
   useEffect(() => {
     dispatch(

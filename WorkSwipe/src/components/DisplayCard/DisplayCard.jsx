@@ -24,7 +24,8 @@ export default function DisplayCard({
   formIcon,
   title,
   description,
-  type
+  type,
+  dispatchFunc
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEdit, setCurrentEdit] = useState("");
@@ -108,6 +109,7 @@ export default function DisplayCard({
         open={isModalOpen}
         setOpen={setIsModalOpen}
         onSubmit={(newValue) => handleEdit(currentEdit, newValue)} // Pass the field and value to handleEdit
+        type={"text"}
       />
 
       <FormComponent
@@ -121,6 +123,7 @@ export default function DisplayCard({
         ]}
         Icon={formIcon}
         checkedList={checkedList}
+        dispatchFunc={dispatchFunc}
       />
     </Card>
   );

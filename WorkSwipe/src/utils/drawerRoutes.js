@@ -18,7 +18,8 @@ export function useDrawerLogic() {
         location.pathname === "/about" ||
         location.pathname === "/contact" ||
         location.pathname === "/support" ||
-        location.pathname ==="/matches"
+        location.pathname ==="/matches" ||
+        location.pathname === "/register"
     );
   }, [location.pathname]);
 
@@ -36,7 +37,6 @@ export function useDrawerLogic() {
     "/matches",
     "/support",
     "/about",
-    "/employer",
     "/",
   ];
 

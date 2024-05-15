@@ -57,7 +57,7 @@ export function CustomDrawer(props) {
                     <Icon sx={{ color: "#1976D2" }} />
                   </ListItemIcon>
                   <ListItemText
-                    primaryTypographyProps={{ fontWeight: "bolder" }}
+                    primaryTypographyProps={{ fontWeight: "bolder", fontFamily:"cursive" }}
                     primary={text}
                   />
                 </ListItemButton>

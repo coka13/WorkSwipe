@@ -1,6 +1,7 @@
-.card{
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
+.card {
+  margin: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }

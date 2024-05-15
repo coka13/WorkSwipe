@@ -5,24 +5,36 @@ import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNa
 import "./LoginPage.css";
 
 const LoginPage = () => {
-  
   return (
     <>
       <div className="loginPage">
+        <h4>Login</h4>
         <div className="loginBox">
-          <h4>Login</h4>
-          <FormComponent props={[
-  { name: "username", type: "text", label: "username", required: true },
-  { name: "password", type: "password", label: "password", required: true },
-]} />
-          <BasicButtons text={"Submit"} />
+          <FormComponent
+            props={[
+              {
+                name: "username",
+                type: "text",
+                label: "username",
+                required: true,
+              },
+              {
+                name: "password",
+                type: "password",
+                label: "password",
+                required: true,
+              },
+            ]}
+          />
+         
+        </div>
+        <BasicButtons text={"Submit"} />
           <CustomLinkNavigate
-            text={"Doesnt have an account yet?"}
+            text={"Doesn't have an account yet?"}
             to={"/Register"}
             label={"Sign Up"}
           />
-          <Waves color={"#1976D2"}/>
-        </div>
+          <Waves color={"#1976D2"} />
       </div>
     </>
   );

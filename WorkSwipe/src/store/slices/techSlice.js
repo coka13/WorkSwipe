@@ -10,7 +10,6 @@ const techSlice = createSlice({
   reducers: {
     setSystemTechnologies: (state, action) => {
         state.technologies=action.payload
-        console.log("technologies",state.technologies)
     },
 
   }

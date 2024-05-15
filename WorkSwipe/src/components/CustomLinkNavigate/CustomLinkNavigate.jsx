@@ -5,8 +5,8 @@ import "./CustomLinkNavigate.css"
 
 const CustomLinkNavigate = ({ text, to, label, fontSize = "medium", children ,color="#1976D2"}) => {
   return (
-    <span className='switchauth' style={{ fontSize: fontSize }}>
-      {text} <Link to={to} style={{ color: color, textDecoration: 'none' }}>
+    <span className='switchauth' style={{ fontSize: fontSize,fontFamily:"cursive"}}>
+      {text} <Link to={to} style={{ color: color, textDecoration: 'none',fontFamily:"cursive" }}>
         {label} 
         {children}
       </Link>

@@ -5,11 +5,13 @@ import { MenuItem } from "@mui/material";
 import { useState } from "react";
 import "./SelectComponent.css";
 
-export default function SelectVariants({ prop }) {
-  const [value, setValue] = useState('');
+export default function SelectVariants({ prop,onChange}) {
 
+  
+
+  
   const handleChange = (event) => {
-    setValue(event.target.value)
+    onChange(event)
   };
 
   return (
@@ -17,9 +19,10 @@ export default function SelectVariants({ prop }) {
       <FormControl variant="standard" sx={{ m: 1, minWidth: 190 }}>
         <InputLabel id={prop.name}>{prop.label}</InputLabel>
         <Select 
+        name={prop.name}
           labelId={prop.name}
           id={prop.id}
-          value={value}
+          value={prop.value}
           onChange={handleChange}
           label={prop.label}
           MenuProps={{
