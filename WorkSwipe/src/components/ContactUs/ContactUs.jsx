@@ -32,7 +32,7 @@ export const ContactUs = () => {
       <input type="email" name="user_email" />
       <label>Message</label>
       <textarea name="message" />
-      <BasicButtons type="submit" value="Send" text={"Submit"}/>
+      <input type="submit" value="Send" />
     </form>
   );
 };

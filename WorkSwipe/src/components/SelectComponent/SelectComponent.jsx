@@ -2,14 +2,10 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { MenuItem } from "@mui/material";
-import { useState } from "react";
 import "./SelectComponent.css";
 
 export default function SelectVariants({ prop,onChange}) {
 
-  
-
-  
   const handleChange = (event) => {
     onChange(event)
   };
@@ -19,6 +15,7 @@ export default function SelectVariants({ prop,onChange}) {
       <FormControl variant="standard" sx={{ m: 1, minWidth: 190 }}>
         <InputLabel id={prop.name}>{prop.label}</InputLabel>
         <Select 
+        defaultValue={0}
         name={prop.name}
           labelId={prop.name}
           id={prop.id}

@@ -7,7 +7,7 @@ import CheckBox from "../CheckBox/CheckBox";
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CustomChildrenModal from "../CustomChildrenModal/CustomChildrenModal";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./FormComponent.css";
 
 export default function FormComponent({
@@ -15,10 +15,9 @@ export default function FormComponent({
   checkedList,
   Icon,
   dispatchFunc,
+  form
 }) {
-  console.log(Icon);
   const dispatch = useDispatch();
-  const registerForm = useSelector((state) => state.register.registerForm);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -44,8 +43,8 @@ export default function FormComponent({
                 key={prop.id}
                 prop={prop}
                 value={
-                  registerForm[prop.name] !== undefined
-                    ? registerForm[prop.name]
+                  form[prop.name] !== undefined
+                    ? form[prop.name]
                     : ""
                 }
                 onChange={handleInputChange}
@@ -81,8 +80,8 @@ export default function FormComponent({
                 name={prop.name}
                 required={prop.required}
                 value={
-                  registerForm[prop.name] !== undefined
-                    ? registerForm[prop.name]
+                  form[prop.name] !== undefined
+                    ? form[prop.name]
                     : ""
                 }
                 onChange={handleInputChange}
@@ -99,8 +98,8 @@ export default function FormComponent({
                 name={prop.name}
                 type={prop.type}
                 value={
-                  registerForm[prop.name] !== undefined
-                    ? registerForm[prop.name]
+                  form[prop.name] !== undefined
+                    ? form[prop.name]
                     : ""
                 }
                 onChange={handleInputChange}

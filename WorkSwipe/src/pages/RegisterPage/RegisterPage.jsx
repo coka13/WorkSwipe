@@ -19,7 +19,7 @@ const RegisterPage = () => {
   const handleSubmit = () => {
     dispatch(setGeneralDetail(registerForm));
   };
-
+  
   return (
     <div className="registerPage">
       <h4>Register</h4>
@@ -33,6 +33,7 @@ const RegisterPage = () => {
               required: true,
             },
           ]}
+          form={registerForm }
           dispatchFunc={setRegisterForm}
         />
 
@@ -45,6 +46,7 @@ const RegisterPage = () => {
               required: true,
             },
           ]}
+          form={registerForm }
           dispatchFunc={setRegisterForm}
         />
 
@@ -57,6 +59,7 @@ const RegisterPage = () => {
               required: true,
             },
           ]}
+          form={registerForm }
           dispatchFunc={setRegisterForm}
         />
         <FormComponent
@@ -68,6 +71,7 @@ const RegisterPage = () => {
               required: true,
             },
           ]}
+          form={registerForm }
           dispatchFunc={setRegisterForm}
         />
 
@@ -80,6 +84,7 @@ const RegisterPage = () => {
               required: false,
             },
           ]}
+          form={registerForm }
           dispatchFunc={setRegisterForm}
         />
 
@@ -92,6 +97,7 @@ const RegisterPage = () => {
               required: false,
             },
           ]}
+          form={registerForm }
           dispatchFunc={setRegisterForm}
         />
 
@@ -104,6 +110,7 @@ const RegisterPage = () => {
               required: false,
             },
           ]}
+          form={registerForm }
           dispatchFunc={setRegisterForm}
         />
 
@@ -117,6 +124,7 @@ const RegisterPage = () => {
               required: true,
             },
           ]}
+          form={registerForm }
           dispatchFunc={setRegisterForm}
         />
 
