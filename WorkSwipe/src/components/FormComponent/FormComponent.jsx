@@ -10,13 +10,7 @@ import CustomChildrenModal from "../CustomChildrenModal/CustomChildrenModal";
 import { useDispatch } from "react-redux";
 import "./FormComponent.css";
 
-export default function FormComponent({
-  props,
-  checkedList,
-  Icon,
-  dispatchFunc,
-  form
-}) {
+export default function FormComponent({ props }) {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -24,85 +18,82 @@ export default function FormComponent({
     setIsModalOpen(true);
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event, prop) => {
     const { name, value } = event.target;
-    dispatch(dispatchFunc({ name, value }));
+    dispatch(prop.dispatchFunc({ name, value }));
   };
 
   return (
     <Box component="form" noValidate autoComplete="off">
       <div className="FieldsWraper">
-        {props.map((prop) => {
-          if (!prop.id) {
-            prop.id = generateUuid();
-          }
-
+        {props.map((prop,index) => {
           if (prop.type === "select") {
             return (
               <SelectVariants
-                key={prop.id}
+                key={index}
                 prop={prop}
-                value={
-                  form[prop.name] !== undefined
-                    ? form[prop.name]
-                    : ""
-                }
-                onChange={handleInputChange}
+                value={prop.form[prop.name]}
+                onChange={(event) => handleInputChange(event, prop)}
               />
             );
           } else if (prop.type === "check") {
             return (
-              <>
-                <IconButton key={prop.id} onClick={handleOpenModal}>
+              <div key={index}>
+                <IconButton onClick={handleOpenModal}>
                   <span style={{ fontWeight: "bold" }}>{prop.title}</span>
-                  {Icon}
+                  {prop.Icon}
                 </IconButton>
                 <CustomChildrenModal
                   open={isModalOpen}
                   setOpen={setIsModalOpen}
                   title={prop.title}
                   description={prop.description}
-                  checkedList={checkedList}
+                  checkedList={prop.checkedList}
                 >
                   <CheckBox
                     options={prop.options}
-                    checkedList={checkedList}
-                    dispatchFunc={dispatchFunc}
+                    checkedList={prop.checkedList}
+                    dispatchFunc={prop.dispatchFunc}
                   />
                 </CustomChildrenModal>
-              </>
+              </div>
             );
           } else if (prop.type === "textarea") {
             return (
               <TextArea
-                key={prop.id}
+                key={index}
                 label={prop.label}
                 name={prop.name}
                 required={prop.required}
-                value={
-                  form[prop.name] !== undefined
-                    ? form[prop.name]
-                    : ""
-                }
-                onChange={handleInputChange}
+                value={prop.form[prop.name]}
+                onChange={(event) => handleInputChange(event, prop)}
+              />
+            );
+          } else if (prop.type === "profile") {
+            return (
+              <TextField
+                id={prop.id}
+                variant={prop.variant || "outlined"}
+                key={index}
+                label={prop.label}
+                name={prop.name}
+                required={prop.required}
+                value={prop.value}
+                onChange={prop.onChange}
               />
             );
           } else {
             return (
               <TextField
-                key={prop.id}
+                key={index}
                 required={prop.required}
                 variant={prop.variant || "outlined"}
                 id={prop.id}
                 label={prop.label}
                 name={prop.name}
                 type={prop.type}
-                value={
-                  form[prop.name] !== undefined
-                    ? form[prop.name]
-                    : ""
-                }
-                onChange={handleInputChange}
+                value={prop.form[prop.name]}
+                onChange={(event) => handleInputChange(event, prop)}
               />
             );
           }

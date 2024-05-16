@@ -15,11 +15,22 @@ import "./RegisterPage.css";
 const RegisterPage = () => {
   const dispatch = useDispatch();
   const registerForm = useSelector((state) => state.register.registerForm);
+  const userTechnologies = useSelector((state) => state.users.technologies);
 
   const handleSubmit = () => {
-    dispatch(setGeneralDetail(registerForm));
+    console.log(registerForm);
+    console.log(userTechnologies);
+    if (
+      registerForm.username &&
+      registerForm.password &&
+      registerForm.name &&
+      registerForm.email &&
+      userTechnologies.length>0
+    ) {
+      dispatch(setGeneralDetail(registerForm));
+    }
   };
-  
+
   return (
     <div className="registerPage">
       <h4>Register</h4>
@@ -31,105 +42,66 @@ const RegisterPage = () => {
               type: "text",
               label: "Username",
               required: true,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
             },
-          ]}
-          form={registerForm }
-          dispatchFunc={setRegisterForm}
-        />
-
-        <FormComponent
-          props={[
             {
               name: "password",
               type: "password",
               label: "Password",
               required: true,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
             },
-          ]}
-          form={registerForm }
-          dispatchFunc={setRegisterForm}
-        />
-
-        <FormComponent
-          props={[
             {
               name: "email",
               type: "email",
               label: "Email",
               required: true,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
             },
-          ]}
-          form={registerForm }
-          dispatchFunc={setRegisterForm}
-        />
-        <FormComponent
-          props={[
             {
               name: "name",
               type: "name",
               label: "Name",
               required: true,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
             },
-          ]}
-          form={registerForm }
-          dispatchFunc={setRegisterForm}
-        />
-
-        <FormComponent
-          props={[
             {
               name: "url",
               type: "url",
               label: "Image link",
               required: false,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
             },
-          ]}
-          form={registerForm }
-          dispatchFunc={setRegisterForm}
-        />
-
-        <FormComponent
-          props={[
             {
               name: "linkedIn",
               type: "linkedIn",
               label: "LinkedIn link",
               required: false,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
             },
-          ]}
-          form={registerForm }
-          dispatchFunc={setRegisterForm}
-        />
-
-<FormComponent
-          props={[
             {
               name: "residence",
               type: "residence",
               label: "residence",
               required: false,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
             },
-          ]}
-          form={registerForm }
-          dispatchFunc={setRegisterForm}
-        />
-
-        <FormComponent
-          props={[
             {
               name: "experience",
               type: "select",
               label: "Experience in years",
               options: Array.from({ length: 21 }, (_, i) => i),
               required: true,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
             },
-          ]}
-          form={registerForm }
-          dispatchFunc={setRegisterForm}
-        />
-
-        <FormComponent
-          props={[
             {
               title: "Choose technologies",
               description:
@@ -138,11 +110,11 @@ const RegisterPage = () => {
               label: "Technologies",
               options: ["js", "node", "c", "cpp", "HTML", "css", "Python"],
               required: true,
+              checkedList: [],
+              Icon: <ScienceIcon />,
+              dispatchFunc: setTechnologies,
             },
           ]}
-          Icon={<ScienceIcon />}
-          checkedList={[]}
-          dispatchFunc={setTechnologies}
         />
       </div>
       <BasicButtons text={"Submit"} onClick={handleSubmit} />

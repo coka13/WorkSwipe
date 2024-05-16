@@ -18,7 +18,9 @@ const style = {
   p: 4,
 };
 
-export default function CustomModal({ title, description, placeholder, open, setOpen, onSubmit,type }) {
+export default function CustomModal({ title, description, open, setOpen, onSubmit,type }) {
+
+
   const [inputValue, setInputValue] = React.useState("");
 
   const handleClose = () => {
@@ -58,7 +60,7 @@ export default function CustomModal({ title, description, placeholder, open, set
           {title}
         </Typography>
 
-        <FormComponent props={[{ id: title, placeholder, type: type, value: inputValue, onChange: handleInputChange }]} />
+        <FormComponent props={[{ name: title, type: type, value: inputValue, onChange: handleInputChange }]} />
         <BasicButtons text={"Submit"} onClick={handleSubmit} />
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           {description}

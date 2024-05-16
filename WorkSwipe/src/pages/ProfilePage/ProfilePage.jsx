@@ -60,6 +60,7 @@ const ProfilePage = () => {
         description={"Choose the technologies you are competent in and press Submit"}
         type={"check"}
         dispatchFunc={dispatchFunc}
+        form={person}
       />
     </div>
     </>
