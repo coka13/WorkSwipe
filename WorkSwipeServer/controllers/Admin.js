@@ -1,5 +1,6 @@
 
 import { createAdminService, deleteAdminService, getAllAdminsService, getSingleAdminByNameService, getSingleAdminService } from "../services/Admin.js"
+import { setAuthCookie } from "../services/Auth.js"
 import { compareHashedPassword } from "../utils/compareHashedPassword.js"
 import { hashPassword } from "../utils/passwordHashing.js"
 import { serverResponse } from "../utils/serverResponse.js"
@@ -37,7 +38,11 @@ export const createAdminController = async (req, res) => {
 
         const adminForm = { ...req.body }
         adminForm["password"] = hashPassword(req.body.password)
-        const admin = createAdminService(adminForm)
+        const {admin, cookieToken} = createAdminService(adminForm)
+        res.cookie("authorization", cookieToken, {
+            httpOnly:true,
+            maxAge: 60*60*5
+        })
         await admin.save()
         return serverResponse(res, 200, admin)
     } catch (e) {
@@ -95,6 +100,11 @@ export const adminLoginController = async (req, res) => {
         if (!isValidPassword) {
             return serverResponse(res, 404, { message: "userName or password incorrect" })
         }
+        const cookieToken = setAuthCookie(`${loginForm.name} Admin`)
+        res.cookie("authorization", cookieToken, {
+            httpOnly:true,
+            maxAge: 60*60*5
+        })
         return serverResponse(res, 200, admin)
     } catch (e) {
         return serverResponse(res, 500, { message: e.message })

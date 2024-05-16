@@ -1,6 +1,6 @@
 
 import {
-    createTechnologyService, getAllTechnologiesService, 
+    createTechnologyService, getAllTechnologiesService,
     deleteTechnologyService
 } from "../services/Technologies.js"
 

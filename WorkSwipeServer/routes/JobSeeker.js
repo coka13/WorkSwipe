@@ -2,13 +2,14 @@ import express from "express"
 const router = express.Router()
 
 import { createJobSeekerController, deleteJobSeekerController, getAllJobSeekersController, getSingleJobSeekerController, jobSeekerLoginController, updateJobSeekerController } from "../controllers/JobSeeker.js"
+import { verifyUser } from "../utils/verifyUser.js"
 
-router.get('/api/jobSeekerLogin', jobSeekerLoginController)
-router.get('/api/singleJobSeeker/:id', getSingleJobSeekerController)
-router.get('/api/allJobSeekers', getAllJobSeekersController)
-router.post('/api/createJobSeeker', createJobSeekerController)
-router.put('/api/updateJobSeeker/:id', updateJobSeekerController)
-router.delete('/api/deleteJobSeeker/:id', deleteJobSeekerController)
+router.get('/singleJobSeeker/:id',verifyUser, getSingleJobSeekerController)
+router.get('/allJobSeekers', verifyUser,getAllJobSeekersController)
+router.post('/createJobSeeker', createJobSeekerController)
+router.post('/jobSeekerLogin', jobSeekerLoginController)
+router.put('/updateJobSeeker/:id',verifyUser, updateJobSeekerController)
+router.delete('/deleteJobSeeker/:id', verifyUser, deleteJobSeekerController)
 
 
 

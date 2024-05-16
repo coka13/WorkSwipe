@@ -6,6 +6,8 @@ export const DB_USERNAME = process.env.DB_USERNAME
 export const DB_PASS = process.env.DB_PASS
 export const DB_CLUSTER = process.env.DB_CLUSTER
 export const DB_NAME = process.env.DB_NAME
+export const COOKIE_SECRET = process.env.COOKIE_SECRET
+
 
 export let connectionString= ``
 if(!DB_USERNAME || !DB_PASS ||!DB_CLUSTER ||!DB_NAME){

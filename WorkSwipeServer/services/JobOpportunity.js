@@ -10,6 +10,6 @@ export const createJobOpportunityService = (form) => new JobOpportunity(form)
 
 export const deleteJobOpportunityService = (id) => JobOpportunity.findOneAndDelete({ _id: id })
 
-export const deleteJobOpportunitiesByEmployerIDService = (employerId) => JobOpportunity.deleteMany({ _id: employerId })
+export const deleteJobOpportunitiesByEmployerIDService = (employerId) => JobOpportunity.deleteMany({ employer: employerId })
 
 // getoppbyfilterservice

@@ -78,12 +78,15 @@ export const updateEmployerController = async (req, res) => {
 export const deleteEmployerController = async (req, res) => {
     try {
         const id = req.params.id;
-        const deletedEmployer = await Promise.all([deleteJobOpportunitiesByEmployerIDService(employerId), deleteEmployerService(id)])[1];
+        console.log(id)
+        const deletedEmployer = await Promise.all([deleteJobOpportunitiesByEmployerIDService(id), deleteEmployerService(id)]);
+        console.log(deletedEmployer)
         if (!deletedEmployer) {
             return serverResponse(res, 404, { message: "employer not found" })
         }
         return serverResponse(res, 200, deletedEmployer)
     } catch (e) {
+        console.log(e.message)
         return serverResponse(res, 500, {message:e.message})
     }
 }
