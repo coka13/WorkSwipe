@@ -61,8 +61,6 @@ export const updateJobSeekerController = async (req, res) => {
         if (!jobSeeker) {
             return serverResponse(res, 404, { message: "no job seeker found" })
         }
-
-        updates.forEach((update) => (jobSeeker[update] = req.body[update]));
         await jobSeeker.save();
         return serverResponse(res, 200, jobSeeker)
     } catch (e) {

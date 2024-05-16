@@ -1,6 +1,9 @@
 
 import { createEmployerService, deleteEmployerService, getAllEmployersService,  getSingleEmployerByNameService, getSingleEmployerService } from "../services/Employer.js"
 import { deleteJobOpportunitiesByEmployerIDService } from "../services/JobOpportunity.js"
+import { compareHashedPassword } from "../utils/compareHashedPassword.js"
+import { hashPassword } from "../utils/passwordHashing.js"
+import { serverResponse } from "../utils/serverResponse.js"
 
 
 export const getAllEmployersController = async (req, res) => {
@@ -49,13 +52,15 @@ export const createEmployerController = async (req, res) => {
 
 export const updateEmployerController = async (req, res) => {
     const employerAllowedUpdates = ["password"]
+    const id = req.params.id;
     const updates = Object.keys(req.body)
-    const isValidOperation = employer.every((update) =>
-        employerAllowedUpdates.includes(update))
+    // const employer = await getSingleEmployerService(id)
+    const isValidOperation = updates.every((update) =>
+    employerAllowedUpdates.includes(update))
     if (!isValidOperation) {
         return serverResponse(res, 400, { message: "invalid updates" })
     }
-
+    
     try {
         const id = req.params.id;
         const employer = await getSingleEmployerService(id)
@@ -63,7 +68,6 @@ export const updateEmployerController = async (req, res) => {
             return serverResponse(res, 404, { message: "employer not found" })
         }
         employer["password"] = hashPassword(req.body.password)
-        updates.forEach((update) => (employer[update] = req.body[update]));
         await employer.save();
         return serverResponse(res, 200, employer)
     } catch (e) {

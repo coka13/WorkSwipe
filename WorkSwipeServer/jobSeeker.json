@@ -1,0 +1,65 @@
+[
+    {
+        "username": "AsafJobSeeker",
+        "password": "Aa123456!",
+        "experience": 3 , 
+        "location": "Jerusalem",
+        "email": "Jerusalem@gmsil.com",
+        "technologies": [ "HTML" , "CSS" , "JavaScript"],
+        "linkedInUrl": "AsafJerusalem.linkedIn.com",
+        "gitHubUrl": "AsafJerusalem.gitHub.com"
+    
+    },
+    {
+        "username": "DanielJobSeeker",
+        "password": "Aa123456!",
+        "experience": 12 , 
+        "location": "Haifa",
+        "email": "Haifa@gmsil.com",
+        "technologies": [ "Python" , "C++" , "Java"],
+        "linkedInUrl": "DanielHaifa.linkedIn.com",
+        "gitHubUrl": "DanielHaifa.gitHub.com"
+  
+    },
+    {
+        "username": "OriJobSeeker",
+        "password": "Aa123456!",
+        "experience": 5 , 
+        "location": "TelAviv",
+        "email": "TelAviv@gmsil.com",
+        "technologies": [ "HTML" , "PHP" , "JavaScript"],
+        "linkedInUrl": "OriTelAviv.linkedIn.com",
+        "gitHubUrl": "OriTelAviv.gitHub.com"
+       
+    },
+    {
+        "username": "ShaiJobSeeker",
+        "password": "Aa123456!",
+        "experience": 7 , 
+        "location": "Rishon",
+        "email": "Rishon@gmsil.com",
+        "technologies": [ "CSS" , "SQL" , "Go"],
+        "linkedInUrl": "ShaiRishon.linkedIn.com",
+        "gitHubUrl": "ShaiRishon.gitHub.com"
+    },
+    {
+        "username": "AlmogJobSeeker",
+        "password": "Aa123456!",
+        "experience": 30 , 
+        "location": "Harish",
+        "email": "Harish@gmsil.com",
+        "technologies": [ "CSS" , "SQL" , "JavaScript", "HTML", "C", "Python"],
+        "linkedInUrl": "AlmogHarish.linkedIn.com",
+        "gitHubUrl": "AlmogHarish.gitHub.com"
+    },
+    {
+        "username": "AnotherJobSeeker",
+        "password": "Aa123456!",
+        "experience": 6 , 
+        "location": "Eilat",
+        "email": "Eilat@gmsil.com",
+        "technologies": [ "HTML"],
+        "linkedInUrl": "AnotherEilat.linkedIn.com",
+        "gitHubUrl": "AnotherEilat.gitHub.com"
+    }
+]

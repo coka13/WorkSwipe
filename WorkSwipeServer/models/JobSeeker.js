@@ -10,7 +10,7 @@ const jobSeekerSchema = new mongoose.Schema({
     linkedInUrl: { type: String },
     gitHubUrl: { type: String },
     dateCreated: { type: Date, default: Date.now() },
-    matches: { type: [String], required: true }
+   
 });
 
 export const JobSeeker = mongoose.model("JobSeeker", jobSeekerSchema);

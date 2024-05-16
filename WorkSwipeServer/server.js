@@ -25,7 +25,7 @@ app.use(cors())
 
 app.use('/api/admin', adminRoutes)
 app.use('/api/employer', employerRoutes)
-app.use('/api/employer', jobSeekerRoutes)
+app.use('/api/jobSeeker', jobSeekerRoutes)
 app.use('/api/jobOpportunity', jobOpportunityRoutes)
 app.use('/api/match', matchRoutes)
 app.use('/api/technology', technologyRoutes)

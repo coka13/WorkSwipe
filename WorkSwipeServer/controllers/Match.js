@@ -104,7 +104,7 @@ export const createMatchController = async (req, res) => {
             return serverResponse(res, 404, { message: "job Opportunity not found" })
         }
         
-        const matchObject= {employer , jobSeeker , jobOpportunity}
+        const matchObject= { jobSeeker , jobOpportunity}
         const match =  createMatchService(matchObject)
         await match.save()
         if (match.length === 0 || !match) {

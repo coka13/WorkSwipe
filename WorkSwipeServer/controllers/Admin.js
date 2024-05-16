@@ -62,8 +62,10 @@ export const updateAdminController = async (req, res) => {
         if (!admin) {
             return serverResponse(res, 404, { message: "admin not found" })
         }
+        
         admin["password"] = hashPassword(req.body.password)
-        updates.forEach((update) => (admin[update] = req.body[update]));
+        console.log(hashPassword(req.body.password))
+        
         await admin.save();
         return serverResponse(res, 200, admin)
     } catch (e) {

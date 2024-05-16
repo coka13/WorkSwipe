@@ -35,6 +35,37 @@ const resetDB = async () => {
         const technologiesInDB = await Technologies.insertMany(technologiesFromJSON)
         console.log(technologiesInDB)
 
+        const jobSeekersFromJSON = JSON.parse(fs.readFileSync('jobSeeker.json', 'utf8'))
+        jobSeekersFromJSON.forEach(jobSeeker => {
+            jobSeeker.technologies.forEach((tech, index) => {
+                const foundTech = technologiesInDB.find(techDB => techDB.name === tech)
+                jobSeeker['technologies'][index] = foundTech._id
+                jobSeeker['password'] = hashPassword(jobSeeker['password'])
+            })
+        })
+        const jobSeekersInDB = await JobSeeker.insertMany(jobSeekersFromJSON)
+        console.log(jobSeekersInDB)
+
+        const jobOpportunitiesFromJSON = JSON.parse(fs.readFileSync('jobOpportunity.json', 'utf8'))
+        jobOpportunitiesFromJSON.forEach(jobOpp => {
+            jobOpp.technologies.forEach((tech,index) => {
+                const foundTech = technologiesInDB.find(techDB => techDB.name === tech)
+                jobOpp['technologies'][index] = foundTech._id
+            })
+            jobOpp['employer'] = employersInDB[jobOpp.employer]._id
+        })
+        const jobOpportunitiesInDB = await JobOpportunity.insertMany(jobOpportunitiesFromJSON)
+        console.log(jobOpportunitiesInDB);
+
+        const matchesFromJSON= JSON.parse(fs.readFileSync('matches.json', 'utf8'))
+        matchesFromJSON.forEach(match=>{
+            match['jobSeeker']=jobSeekersInDB[match.jobSeeker]._id
+            match['jobOpportunity']=jobOpportunitiesInDB[match.jobOpportunity]._id
+        })
+        const matchesInDB= await Match.insertMany(matchesFromJSON);
+        console.log(matchesInDB)
+
+
     } catch (e) {
         console.log(e)
     }
