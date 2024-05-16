@@ -3,3 +3,8 @@
     flex-wrap: wrap;
     margin-left: 300px;
 }
+
+.title{
+    display: flex;
+    justify-content: center;
+}

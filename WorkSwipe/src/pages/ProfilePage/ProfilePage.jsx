@@ -42,6 +42,11 @@ const ProfilePage = () => {
   };
 
   return (
+    <>
+    <div className="title">
+    <h4>Profile</h4>
+    </div>
+   
     <div className="card">
       <DisplayCard
         db={personProfile}
@@ -57,6 +62,7 @@ const ProfilePage = () => {
         dispatchFunc={dispatchFunc}
       />
     </div>
+    </>
   );
 };
 

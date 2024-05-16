@@ -11,7 +11,12 @@ const MatchesPage = () => {
     dispatch( setDeleteMatch(index)); 
   };
   return (
+    <>
+     <div className="title">
+    <h4>Matches</h4>
+    </div>
     <div className="matches">
+      
       {matches.map((match, index) => (
   <MatchCard
     key={index} 
@@ -22,6 +27,7 @@ const MatchesPage = () => {
 ))}
 
     </div>
+    </>
   );
 };
 

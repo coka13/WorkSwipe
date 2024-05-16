@@ -9,8 +9,8 @@
 .supportPage>h4{
     text-align: center;
 }
-.Header{
-    color: #1976D2;
-    font-weight: bold;
-    
+
+.title{
+    display: flex;
+    justify-content: center;
 }
