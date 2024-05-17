@@ -11,13 +11,16 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemIcon } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import "./CustomDrawer.css";
 import CustomLinkNavigate from "../CustomLinkNavigate/CustomLinkNavigate";
+import "./CustomDrawer.css";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/slices/userSlice";
 
 const drawerWidth = 240;
 
 export function CustomDrawer(props) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { window, items, icons, hrefs } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -37,6 +40,11 @@ export function CustomDrawer(props) {
     }
   };
 
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch the logout action when the user clicks on "Logout"
+    navigate("/");
+  };
+
   const drawer = (
     <div>
       <img
@@ -50,14 +58,19 @@ export function CustomDrawer(props) {
           const Icon = icons[index];
           const href = hrefs[index];
           return (
-            <CustomLinkNavigate to={href} key={text} color="black" >
+            <CustomLinkNavigate to={href} key={text} color="black">
               <ListItem>
-                <ListItemButton >
+                <ListItemButton
+                  onClick={text === "Logout" ? handleLogout : undefined}
+                >
                   <ListItemIcon>
                     <Icon sx={{ color: "#1976D2" }} />
                   </ListItemIcon>
                   <ListItemText
-                    primaryTypographyProps={{ fontWeight: "bolder", fontFamily:"cursive" }}
+                    primaryTypographyProps={{
+                      fontWeight: "bolder",
+                      fontFamily: "cursive",
+                    }}
                     primary={text}
                   />
                 </ListItemButton>

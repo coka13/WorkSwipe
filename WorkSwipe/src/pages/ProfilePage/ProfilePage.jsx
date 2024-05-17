@@ -8,6 +8,7 @@ import {
 import ScienceIcon from '@mui/icons-material/Science';
 
 import "./ProfilePage.css";
+import { getUserRole } from "../../utils/getUserRole";
 
 const ProfilePage = () => {
   const person = useSelector((state) => state.users);
@@ -61,6 +62,7 @@ const ProfilePage = () => {
         type={"check"}
         dispatchFunc={dispatchFunc}
         form={person}
+        role={getUserRole(person)}
       />
     </div>
     </>

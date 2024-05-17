@@ -7,10 +7,11 @@ const initialState = {
   isEmployer: false,
   isAdmin: false,
   linkedIn: "",
-  experience: 0,
+  experience: "",
   residence: "",
   url: "",
-  email:""
+  email:"",
+  isAuthenticated: false
 };
 
 const userSlice = createSlice({
@@ -18,6 +19,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setGeneralDetail: (state, action) => {
+      state.isAuthenticated = true;
       for(const key in action.payload){
         state[key]=action.payload[key]
       }
@@ -39,9 +41,12 @@ const userSlice = createSlice({
       const techToDel = action.payload; 
       state.technologies = state.technologies.filter((tech) => tech !== techToDel);
     },
+    logout: (state) => {
+      Object.assign(state, initialState); // Reset state to initial state
+    },
   },
 });
 
-export const { deleteTech,setTechnologies, setGeneralDetail,updateUserField } = userSlice.actions;
+export const { deleteTech,setTechnologies, setGeneralDetail,updateUserField,logout } = userSlice.actions;
 
 export default userSlice.reducer;
