@@ -26,7 +26,6 @@ export default function DisplayCard({
   description,
   type,
   dispatchFunc,
-  role
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEdit, setCurrentEdit] = useState("");

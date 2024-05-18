@@ -17,23 +17,22 @@ import EmployerPage from "./pages/EmployerPage/EmployerPage";
 import { setSystemTechnologies } from "./store/slices/techSlice";
 import "./App.css";
 import CustomRoute from "./components/CustomRoute/CustomRoute";
+import { getUserRole } from "./utils/getUserRole";
 
 function App() {
-  const { showDrawer, icons, hrefs, items } = useDrawerLogic();
+  
   const dispatch = useDispatch();
-
-  const isEmployer = useSelector((state) => state.users.isEmployer);
-  const userTechnologies = useSelector((state) => state.users.technologies);
+  const user = useSelector((state) => state.users);
+  const userTechnologies = user.technologies;
   const systemTechnologies = useSelector(
     (state) => state.technologies.technologies
   );
-  const personTechnologies = useSelector((state) => state.users.technologies);
 
-
+  const { showDrawer, icons, hrefs, items } = useDrawerLogic(getUserRole(user));
   useEffect(() => {
     dispatch(
       setOpportunities({
-        technologies: personTechnologies,
+        technologies: userTechnologies,
         opportunities: [
           {
             _id: 0,
@@ -82,28 +81,82 @@ function App() {
 
   return (
     <>
-      {showDrawer && (
-        <CustomDrawer
-          items={items}
-          icons={icons}
-          hrefs={hrefs}
-          isEmployer={isEmployer}
+      {showDrawer && <CustomDrawer items={items} icons={icons} hrefs={hrefs} />}
+      <Routes>
+        <Route path="/" element={<LoginPage />} index={true} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/profile"
+          element={
+            <CustomRoute
+              nav={"/home"}
+              role={["JobSeeker", "Employer", "Admin"]}
+              element={<ProfilePage />}
+            />
+          }
         />
-      )}
- <Routes>
-  <Route path="/" element={<LoginPage />} index={true} />
-  <Route path="/register" element={<RegisterPage />} />
-  <Route path="/profile" element={<CustomRoute nav={"/home"}  role={["JobSeeker", "Employer", "Admin"]} element={<ProfilePage />} />} />
-  <Route path="/home" element={<CustomRoute nav={"/"}  role={["JobSeeker", "Employer", "Admin"]} element={<Homepage />} />} />
-  <Route path="/matches" element={<CustomRoute nav={"/home"}  role={["JobSeeker", "Employer"]} element={<MatchesPage />} />} />
-  <Route path="/employer" element={<CustomRoute nav={"/home"}  role={["Employer"]} element={<EmployerPage />} />} />
-  <Route path="/about" element={<CustomRoute nav={"/home"}  role={["JobSeeker", "Employer", "Admin"]} element={<AboutPage />} />} />
-  <Route path="/contact" element={<CustomRoute nav={"/home"} role={["JobSeeker", "Employer"]} element={<ContactPage />} />} />
-  <Route path="/support" element={<CustomRoute nav={"/home"}  role={["JobSeeker", "Employer"]} element={<SupportPage />} />} />
-  <Route path="*" element={<ErrorPage />} />
-</Routes>
-
-
+        <Route
+          path="/home"
+          element={
+            <CustomRoute
+              nav={"/"}
+              role={["JobSeeker", "Employer", "Admin"]}
+              element={<Homepage />}
+            />
+          }
+        />
+        <Route
+          path="/matches"
+          element={
+            <CustomRoute
+              nav={"/home"}
+              role={["JobSeeker", "Employer"]}
+              element={<MatchesPage />}
+            />
+          }
+        />
+        <Route
+          path="/employer"
+          element={
+            <CustomRoute
+              nav={"/home"}
+              role={["Employer"]}
+              element={<EmployerPage />}
+            />
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <CustomRoute
+              nav={"/home"}
+              role={["JobSeeker", "Employer", "Admin"]}
+              element={<AboutPage />}
+            />
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <CustomRoute
+              nav={"/home"}
+              role={["JobSeeker", "Employer"]}
+              element={<ContactPage />}
+            />
+          }
+        />
+        <Route
+          path="/support"
+          element={
+            <CustomRoute
+              nav={"/home"}
+              role={["JobSeeker", "Employer"]}
+              element={<SupportPage />}
+            />
+          }
+        />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
     </>
   );
 }
