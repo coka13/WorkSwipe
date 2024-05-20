@@ -10,10 +10,31 @@ import {
   setTechnologies,
 } from "../../store/slices/userSlice";
 import ScienceIcon from "@mui/icons-material/Science";
+import { baseUrl, technologyRoute } from "../../utils/routes";
+const [data, setData] = useState([]);
+const [loading, setLoading] = useState(false);
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
+
+  async function fetchData() {
+    setLoading(true);
+    try {
+      const response = await fetch(baseUrl+technologyRoute+"/allTechnologies");
+      const jsonData = await response.json();
+      setData(jsonData);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+
   const dispatch = useDispatch();
+
+
+
   const registerForm = useSelector((state) => state.register.registerForm);
   const userTechnologies = useSelector((state) => state.users.technologies);
 
@@ -106,7 +127,7 @@ const RegisterPage = () => {
                 "Select the technologies you are competent in and press Submit",
               type: "check",
               label: "Technologies",
-              options: ["js", "node", "c", "cpp", "HTML", "css", "Python"],
+              options: data,
               required: true,
               checkedList: [],
               Icon: <ScienceIcon />,
