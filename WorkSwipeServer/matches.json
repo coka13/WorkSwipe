@@ -1,0 +1,38 @@
+[
+  {
+    "jobSeeker": 0,
+    "jobOpportunity": 0
+  },
+  {
+    "jobSeeker": 1,
+    "jobOpportunity": 2
+  },
+  {
+    "jobSeeker": 2,
+    "jobOpportunity": 6
+  },
+  {
+    "jobSeeker": 4,
+    "jobOpportunity": 1
+  },
+  {
+    "jobSeeker": 3,
+    "jobOpportunity": 5
+  },
+  {
+    "jobSeeker": 5,
+    "jobOpportunity": 6
+  },
+  {
+    "jobSeeker": 0,
+    "jobOpportunity": 3
+  },
+  {
+    "jobSeeker": 1,
+    "jobOpportunity": 3
+  },
+  {
+    "jobSeeker": 2,
+    "jobOpportunity": 0
+  }
+]
