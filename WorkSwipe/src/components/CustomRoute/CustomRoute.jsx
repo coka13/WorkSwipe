@@ -11,8 +11,6 @@ const CustomRoute = ({ nav, role, element }) => {
       if (!isAuthenticated) {
         return <Navigate to={"/"} />;
       }
-
-  
     return (
       <div>
         {isAuthenticated && role.includes(userRole) ? (

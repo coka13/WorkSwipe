@@ -7,9 +7,8 @@
     border-radius: 8%;
     margin: 15px;
     padding: 10px;
-    width: 420px;
+    width: 30%;
     font-size: 22px;
-    height:600px;
     overflow-y: scroll ; /* Enable vertical scrolling if content overflows */
 
 }
