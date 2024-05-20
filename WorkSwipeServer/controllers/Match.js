@@ -1,6 +1,7 @@
 import { getSingleEmployerService } from "../services/Employer.js"
 import { getSingleJobSeekerService } from "../services/JobSeeker.js"
 import { getAllMatchesByEmployerIdService, getAllMatchesByJobSeekerIdService, getAllMatchesByJobOpportunityIdService,  createMatchService, deleteMatchService, getSingleMatchService } from "../services/Match.js"
+import { serverResponse } from "../utils/serverResponse.js"
 
 export const getAllMatchesByEmployerIdController = async (req, res) => {
     try {

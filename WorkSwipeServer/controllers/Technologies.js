@@ -1,8 +1,10 @@
 
 import {
     createTechnologyService, getAllTechnologiesService,
-    deleteTechnologyService
+    deleteTechnologyService,
+    getTechnologiesByListOfIDsService
 } from "../services/Technologies.js"
+import {serverResponse} from "../utils/serverResponse.js"
 
 export const getAllTechnologiesController = async (req, res) => {
     try {
@@ -16,7 +18,6 @@ export const getAllTechnologiesController = async (req, res) => {
         return serverResponse(res, 500, { message: e.message })
 
     }
-
 }
 
 
@@ -50,4 +51,20 @@ export const deleteTechnologyController = async (req, res) => {
     } catch (e) {
         return serverResponse(res, 500, { message: e.message })
     }
+}
+
+export const getTechnologiesByListOfIDsController = async (req, res) => {
+    try {
+        const idsList = {...req.body}
+        const technologiesByListOfIDs = await getTechnologiesByListOfIDsService(idsList.idsList)
+        if (technologiesByListOfIDs.length === 0 || !technologiesByListOfIDs) {
+            return serverResponse(res, 204, { message: "technology not found" })
+
+        }
+        return serverResponse(res, 200, technologiesByListOfIDs)
+    } catch (e) {
+        return serverResponse(res, 500, { message: e.message })
+
+    }
+
 }
