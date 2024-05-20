@@ -1,5 +1,6 @@
 
 import { createJobSeekerService, deleteJobSeekerService, getAllJobSeekersService, getSingleJobSeekerByNameService, getSingleJobSeekerService } from "../services/JobSeeker.js"
+import { serverResponse } from "../utils/serverResponse.js"
 
 export const getAllJobSeekersController = async (req, res) => {
     try {
