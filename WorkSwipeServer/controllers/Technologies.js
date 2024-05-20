@@ -18,7 +18,6 @@ export const getAllTechnologiesController = async (req, res) => {
         return serverResponse(res, 500, { message: e.message })
 
     }
-
 }
 
 
