@@ -1,5 +1,6 @@
 
 import { deleteJobOpportunitiesByEmployerIDService, createJobOpportunityService, deleteJobOpportunityService, getAllJobOpportunitiesService, getSingleJobOpportunityService } from "../services/JobOpportunity.js"
+import { serverResponse } from "../utils/serverResponse.js"
 
 export const getAllJobOpportunitiesController = async (req, res) => {
     try {

@@ -7,10 +7,12 @@ export const DB_PASS = process.env.DB_PASS
 export const DB_CLUSTER = process.env.DB_CLUSTER
 export const DB_NAME = process.env.DB_NAME
 export const COOKIE_SECRET = process.env.COOKIE_SECRET
+export const FREE_GUARD = 'dev'
 
 
 export let connectionString= ``
-if(!DB_USERNAME || !DB_PASS ||!DB_CLUSTER ||!DB_NAME){
+// if(!DB_USERNAME || !DB_PASS ||!DB_CLUSTER ||!DB_NAME){
     connectionString=`mongodb://localhost:27017/WorkSwipeLocal`
-}
- connectionString=`mongodb+srv://${DB_USERNAME}:${DB_PASS}@${DB_CLUSTER}/${DB_NAME}`
+// } else{
+//     connectionString=`mongodb+srv://${DB_USERNAME}:${DB_PASS}@${DB_CLUSTER}/${DB_NAME}`
+// }

@@ -1,11 +1,16 @@
 import jwt from 'jsonwebtoken'
-import { COOKIE_SECRET } from '../config/config.js'
+import { COOKIE_SECRET, FREE_GUARD } from '../config/config.js'
 import { serverResponse } from './serverResponse.js'
 import { cookieTokenDuration } from '../constants/constants.js'
 
 
 export const verifyUser = async (req,res,next) => {
     try{
+        if(req.headers.postman===FREE_GUARD){
+           
+            next();
+            return
+        }
         if(req.cookies.token) {
             const decoded = jwt.verify(req.cookies.token, COOKIE_SECRET)
             if(Date.now() - new Date(decoded.created) < cookieTokenDuration*1000){

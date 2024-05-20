@@ -15,4 +15,4 @@ export const createAdminService = (form) => {
 
 export const deleteAdminService = (id) => Admin.findOneAndDelete({ _id: id })
 
-export const getSingleAdminByNameService = (name) => Admin.findOne({ name: name })
+export const getSingleAdminByNameService = (name) => Admin.findOne({ username: name })

@@ -1,4 +1,5 @@
 
+import { cookieTokenDuration } from "../constants/constants.js"
 import { createAdminService, deleteAdminService, getAllAdminsService, getSingleAdminByNameService, getSingleAdminService } from "../services/Admin.js"
 import { setAuthCookie } from "../services/Auth.js"
 import { compareHashedPassword } from "../utils/compareHashedPassword.js"
@@ -6,8 +7,10 @@ import { hashPassword } from "../utils/passwordHashing.js"
 import { serverResponse } from "../utils/serverResponse.js"
 
 export const getAllAdminsController = async (req, res) => {
+    console.log(req.headers.postman)
     try {
         const allAdmins = await getAllAdminsService()
+        console.log(allAdmins)
         if (allAdmins.length === 0 || !allAdmins) {
             return serverResponse(res, 204, { message: "no admin found" })
 
@@ -94,17 +97,21 @@ export const deleteAdminController = async (req, res) => {
 export const adminLoginController = async (req, res) => {
     try {
         const loginForm = { ...req.body }
-        const admin = await getSingleAdminByNameService(loginForm.name)
+        console.log(loginForm)
+        const admin = await getSingleAdminByNameService(loginForm.username)
+        console.log(admin)
         if (!admin) { return serverResponse(res, 404, { message: "userName or password incorrect" }) }
         const isValidPassword = compareHashedPassword(loginForm.password, admin.password)
+        
         if (!isValidPassword) {
             return serverResponse(res, 404, { message: "userName or password incorrect" })
         }
-        const cookieToken = setAuthCookie(`${loginForm.name} Admin`)
+        const cookieToken = setAuthCookie(`${loginForm.username}_Admin`)
         res.cookie("authorization", cookieToken, {
             httpOnly:true,
-            maxAge: 60*60*5
+            maxAge: cookieTokenDuration
         })
+        console.log(cookieToken)
         return serverResponse(res, 200, admin)
     } catch (e) {
         return serverResponse(res, 500, { message: e.message })
