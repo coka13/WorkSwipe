@@ -11,7 +11,8 @@ const initialState = {
   residence: "",
   url: "",
   email:"",
-  isAuthenticated: false
+  isAuthenticated: false,
+  _id:""
 };
 
 const userSlice = createSlice({

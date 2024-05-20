@@ -15,12 +15,13 @@ import { setOpportunities } from "./store/slices/jobOffersSlice";
 import MatchesPage from "./pages/MatchesPage/MatchesPage";
 import EmployerPage from "./pages/EmployerPage/EmployerPage";
 import { setSystemTechnologies } from "./store/slices/techSlice";
-import "./App.css";
 import CustomRoute from "./components/CustomRoute/CustomRoute";
 import { getUserRole } from "./utils/getUserRole";
+import "./App.css";
+import AdminPage from "./pages/AdminPage/AdminPage";
+import AdminSupportPage from "./pages/AdminSupportPage/AdminSupportPage";
 
 function App() {
-  
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users);
   const userTechnologies = user.technologies;
@@ -64,7 +65,7 @@ function App() {
   }, [userTechnologies]);
 
   useEffect(() => {
-    if (systemTechnologies.length === 0) {
+    if (systemTechnologies.length === 0) { // if there are no techlogies left it will automatically dispatch these
       dispatch(
         setSystemTechnologies([
           "JS",
@@ -86,16 +87,6 @@ function App() {
         <Route path="/" element={<LoginPage />} index={true} />
         <Route path="/register" element={<RegisterPage />} />
         <Route
-          path="/profile"
-          element={
-            <CustomRoute
-              nav={"/home"}
-              role={["JobSeeker", "Employer", "Admin"]}
-              element={<ProfilePage />}
-            />
-          }
-        />
-        <Route
           path="/home"
           element={
             <CustomRoute
@@ -105,6 +96,17 @@ function App() {
             />
           }
         />
+        <Route
+          path="/profile"
+          element={
+            <CustomRoute
+              nav={"/home"}
+              role={["JobSeeker", "Employer", "Admin"]}
+              element={<ProfilePage />}
+            />
+          }
+        />
+
         <Route
           path="/matches"
           element={
@@ -152,6 +154,26 @@ function App() {
               nav={"/home"}
               role={["JobSeeker", "Employer"]}
               element={<SupportPage />}
+            />
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <CustomRoute
+              nav={"/"}
+              role={["Admin"]}
+              element={<AdminPage />}
+            />
+          }
+        />
+        <Route
+          path="/adminsupport"
+          element={
+            <CustomRoute
+              nav={"/"}
+              role={["Admin"]}
+              element={<AdminSupportPage />}
             />
           }
         />

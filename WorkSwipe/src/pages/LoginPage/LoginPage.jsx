@@ -16,6 +16,7 @@ const LoginPage = () => {
 
   const dummyUsers = [
     {
+      _id:0,
       username: "adminUser",
       name: "Admin User",
       isEmployer: false,
@@ -23,9 +24,10 @@ const LoginPage = () => {
       email: "adminuser@example.com",
     },
     {
+      _id:1,
       username: "jobSeeker1",
       name: "Job Seeker One",
-      technologies: ["JavaScript", "React", "Node.js"],
+      technologies: ["c", "cpp"],
       isEmployer: false,
       isAdmin: false,
       linkedIn: "https://linkedin.com/in/jobseeker1",
@@ -35,6 +37,7 @@ const LoginPage = () => {
       email: "jobseeker1@example.com",
     },
     {
+      _id:2,
       username: "employer1",
       name: "Employer One",
       isEmployer: true,
@@ -74,7 +77,7 @@ const LoginPage = () => {
             props={[
               {
                 name: "username",
-                type: "login",
+                type: "other",
                 label: "Username",
                 required: true,
                 onChange: handleInputChange,
@@ -82,7 +85,7 @@ const LoginPage = () => {
               },
               {
                 name: "password",
-                type: "login",
+                type: "other",
                 label: "Password",
                 required: true,
                 onChange: handleInputChange,

@@ -18,8 +18,6 @@ const RegisterPage = () => {
   const userTechnologies = useSelector((state) => state.users.technologies);
 
   const handleSubmit = () => {
-    console.log(registerForm);
-    console.log(userTechnologies);
     if (
       registerForm.username &&
       registerForm.password &&

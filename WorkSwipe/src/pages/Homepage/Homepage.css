@@ -4,3 +4,8 @@
     justify-content: center;
 }
 
+.admin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

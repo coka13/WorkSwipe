@@ -109,7 +109,7 @@ export default function DisplayCard({
         open={isModalOpen}
         setOpen={setIsModalOpen}
         onSubmit={(newValue) => handleEdit(currentEdit, newValue)} // Pass the field and value to handleEdit
-        type={"profile"}
+        type={"other"}
       />
 
       <FormComponent

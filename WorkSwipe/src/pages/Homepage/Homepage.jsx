@@ -1,15 +1,17 @@
-import React from "react";
-import "./Homepage.css";
 import SimpleCard from "../../components/TinderCard/TinderCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setAddMatch } from "../../store/slices/matchesSlice";
-import { CardMedia } from "@mui/material";
+import "./Homepage.css";
+import { getUserRole } from "../../utils/getUserRole";
+
 
 
 const Homepage = () => {
   
-  const userRole = useSelector((state) => state.users.role);
+  const userRole = getUserRole( useSelector((state) => state.users));
   const swipeProps = useSelector((state) => state.opportunities.offers);
+  console.log(swipeProps)
+  console.log(userRole)
   const currentOfferTechnologies = useSelector(
     (state) => state.opportunities.currentOffer?.technologies
   );
@@ -31,7 +33,10 @@ const Homepage = () => {
           <SimpleCard db={swipeProps} handleRightSwipe={handleRightSwipe} />
         )}
    {userRole === "Admin" && (
-  <img src="../../assets/admin.jpg"  style={{width:"100px",height:"100px"}}/>
+    <div className="admin">
+  <img src="src/assets/admin.png"  style={{width:"500px",height:"500px"}}/>
+  <h3>Admin mode</h3>
+  </div>
 )}
    
       </div>

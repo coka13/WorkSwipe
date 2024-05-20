@@ -69,7 +69,7 @@ export default function FormComponent({ props }) {
                 onChange={(event) => handleInputChange(event, prop)}
               />
             );
-          } else if (prop.type === "profile" ||prop.type ==="login" ) {
+          } else if (prop.type === "other" ) {
             return (
               <TextField
                 id={prop.id}

@@ -11,10 +11,16 @@ const techSlice = createSlice({
     setSystemTechnologies: (state, action) => {
         state.technologies=action.payload
     },
+    deleteSystemTechnology: (state, action) => {
+      state.technologies = state.technologies.filter(tech => tech !== action.payload);
+    },
+   addSystemTechnology: (state, action) => {
+      state.technologies.push(action.payload);
+    }
 
   }
 });
 
-export const {setSystemTechnologies} = techSlice.actions
+export const {setSystemTechnologies,deleteSystemTechnology,addSystemTechnology} = techSlice.actions
 
 export default techSlice.reducer
