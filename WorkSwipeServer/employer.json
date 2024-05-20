@@ -1,0 +1,20 @@
+[
+    {
+      "username": "AviKaraso",
+      "password": "AviKar",
+      "email": "avi.karaso35@gmail.com",
+      "companyName" : "IBM"
+    },
+    {
+      "username": "SteveJobs",
+      "password": "macintosh",
+      "email": "macprom3@gmail.com",
+      "companyName" : "Apple"
+    },
+    {
+      "username": "BillGTS",
+      "password": "BillTheRich",
+      "email": "billGates@gmail.com",
+      "companyName" : "Google"
+    }
+  ]
