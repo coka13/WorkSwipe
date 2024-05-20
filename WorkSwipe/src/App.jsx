@@ -177,6 +177,16 @@ function App() {
             />
           }
         />
+            <Route
+          path="/recruit"
+          element={
+            <CustomRoute
+              nav={"/"}
+              role={["Admin","Employer"]}
+              element={<EmployerPage />}
+            />
+          }
+        />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

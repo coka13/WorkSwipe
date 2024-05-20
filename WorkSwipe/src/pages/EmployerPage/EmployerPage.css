@@ -1,0 +1,27 @@
+.adBox{
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #cfedff;
+    border-radius: 8%;
+    margin: 15px;
+    padding: 10px;
+    width: 300px;
+    font-size: 22px;
+
+}
+
+.employerPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.published-ads{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+} 
