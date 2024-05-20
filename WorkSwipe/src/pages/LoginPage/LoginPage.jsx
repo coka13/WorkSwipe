@@ -47,6 +47,7 @@ const LoginPage = () => {
       residence: "Austin, USA",
       url: "https://employer1.com",
       email: "employer1@example.com",
+      experience: 2,
     },
   ];
 
