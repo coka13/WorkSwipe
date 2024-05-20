@@ -3,6 +3,7 @@ import {
     createTechnologyService, getAllTechnologiesService,
     deleteTechnologyService
 } from "../services/Technologies.js"
+import { serverResponse } from "../utils/serverResponse.js"
 
 export const getAllTechnologiesController = async (req, res) => {
     try {
@@ -34,8 +35,6 @@ export const createTechnologyController = async (req, res) => {
     }
 
 }
-
-
 
 
 
