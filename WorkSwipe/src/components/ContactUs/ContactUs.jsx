@@ -1,8 +1,6 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import "./ContactUs.css"
-import BasicButtons from '../BasicButtons/BasicButtons';
-import CustomLinkNavigate from '../CustomLinkNavigate/CustomLinkNavigate';
 
 export const ContactUs = () => {
   const form = useRef();
