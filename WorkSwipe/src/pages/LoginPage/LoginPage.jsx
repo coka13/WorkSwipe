@@ -9,46 +9,16 @@ import { setGeneralDetail } from "../../store/slices/userSlice";
 import { getUserRole } from "../../utils/getUserRole";
 import "./LoginPage.css";
 import { setEmployerOffers } from "../../store/slices/employerOffersSlice";
+import CustomRadioButton from "../../components/CustomRadioButton/CustomRadioButton";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const dummyUsers = [
-    {
-      _id:0,
-      username: "adminUser",
-      name: "Admin User",
-      isEmployer: false,
-      isAdmin: true,
-      email: "adminuser@example.com",
-    },
-    {
-      _id:1,
-      username: "jobSeeker1",
-      name: "Job Seeker One",
-      technologies: ["c", "cpp"],
-      isEmployer: false,
-      isAdmin: false,
-      linkedIn: "https://linkedin.com/in/jobseeker1",
-      experience: 2,
-      residence: "San Francisco, USA",
-      url: "",
-      email: "jobseeker1@example.com",
-    },
-    {
-      _id:2,
-      username: "employer1",
-      name: "Employer One",
-      isEmployer: true,
-      isAdmin: false,
-      linkedIn: "https://linkedin.com/in/employer1",
-      residence: "Austin, USA",
-      url: "https://employer1.com",
-      email: "employer1@example.com",
-    },
-  ];
+  
+  
+   
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -99,10 +69,12 @@ const LoginPage = () => {
   };
 
   return (
+
     <>
       <div className="loginPage">
         <h4>Login</h4>
         <div className="loginBox">
+          <CustomRadioButton title={"Choose role"} list={["Job seeker" , "Employer" , "Admin"]}/>
           <FormComponent
             props={[
               {
