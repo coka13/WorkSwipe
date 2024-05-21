@@ -34,7 +34,7 @@ const LoginPage = () => {
       linkedIn: "https://linkedin.com/in/jobseeker1",
       experience: 2,
       residence: "San Francisco, USA",
-      url: "https://jobseeker1.com",
+      url: "",
       email: "jobseeker1@example.com",
     },
     {

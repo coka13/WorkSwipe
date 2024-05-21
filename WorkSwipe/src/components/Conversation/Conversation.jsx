@@ -3,7 +3,6 @@ import "./Conversation.css";
 import { getUserRole } from "../../utils/getUserRole";
 
 const Conversation = (user1, user2) => {
-  console.log(`user1 ${user1.name} user2 ${user2.name}`);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef(null);

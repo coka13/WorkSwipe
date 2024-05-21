@@ -10,8 +10,6 @@ const Homepage = () => {
   
   const userRole = getUserRole( useSelector((state) => state.users));
   const swipeProps = useSelector((state) => state.opportunities.offers);
-  console.log(swipeProps)
-  console.log(userRole)
   const currentOfferTechnologies = useSelector(
     (state) => state.opportunities.currentOffer?.technologies
   );
