@@ -4,19 +4,15 @@ const initialState = {
   username: "",
   name: "",
   technologies: [],
-  isEmployer: false,
-  isAdmin: false,
   linkedIn: "",
   experience: "",
   residence: "",
   url: "",
-  email:"",
-  isAuthenticated: false,
-  _id:""
+  email:""
 };
 
-const userSlice = createSlice({
-  name: "users",
+const jobSeekerSlice = createSlice({
+  name: "jobSeekers",
   initialState,
   reducers: {
     setGeneralDetail: (state, action) => {
@@ -47,6 +43,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { deleteTech,setTechnologies, setGeneralDetail,updateUserField,logout } = userSlice.actions;
+export const { deleteTech,setTechnologies, setGeneralDetail,updateUserField,logout } = jobSeekerSlice.actions;
 
-export default userSlice.reducer;
+export default jobSeekerSlice.reducer;
