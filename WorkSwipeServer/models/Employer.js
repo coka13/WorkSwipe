@@ -2,9 +2,12 @@ import mongoose from "mongoose";
 
 const employerSchema = new mongoose.Schema({
   username: { type: String, required: true },
+  name: { type: String, required: true },
   password: { type: String, required: true },
+  image: { type: String },
   email: { type: String, required: true },
-  companyName: {type:String , required: true},
+  linkedInUrl: { type: String },
+  companyName: { type: String, required: true },
   dateCreated: { type: Date, default: Date.now() }
 });
 

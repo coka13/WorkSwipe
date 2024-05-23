@@ -1,16 +1,19 @@
 [
   {
     "username": "AsafKaraso",
+    "name":"Asaf",
     "password": "Ka2909so",
     "email": "asaf.karaso35@gmail.com"
   },
   {
     "username": "DanielUralsky",
+    "name":"Daniel",
     "password": "DanielUral",
     "email": "danielUralsky@gmail.com"
   },
   {
     "username": "AlmogRam",
+    "name":"Almog",
     "password": "AlmogRem",
     "email": "almogram@gmail.com"
   }

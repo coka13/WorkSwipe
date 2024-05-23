@@ -1,18 +1,21 @@
 [
     {
       "username": "AviKaraso",
+      "name":"Avi",
       "password": "AviKar",
       "email": "avi.karaso35@gmail.com",
       "companyName" : "IBM"
     },
     {
       "username": "SteveJobs",
+      "name":"Steve",
       "password": "macintosh",
       "email": "macprom3@gmail.com",
       "companyName" : "Apple"
     },
     {
       "username": "BillGTS",
+      "name":"Bill",
       "password": "BillTheRich",
       "email": "billGates@gmail.com",
       "companyName" : "Google"
