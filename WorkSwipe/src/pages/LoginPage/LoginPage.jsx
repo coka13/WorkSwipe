@@ -8,6 +8,7 @@ import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNa
 import { useDispatch } from "react-redux";
 import "./LoginPage.css";
 import { setEmployerOffers } from "../../store/slices/employerOffersSlice";
+import CustomRadioButton from "../../components/CustomRadioButton/CustomRadioButton";
 
 
 const LoginPage = () => {

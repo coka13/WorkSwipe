@@ -61,9 +61,6 @@ export default function DisplayCard({
         />
         {Object.keys(db).map((key, index) => {
           const value = db[key];
-          {
-            console.log(value, value.length);
-          }
           if (Array.isArray(value)) {
             return (
               <div key={index}>

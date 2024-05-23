@@ -64,21 +64,7 @@ function App() {
     );
   }, [userTechnologies]);
 
-  useEffect(() => {
-    if (systemTechnologies.length === 0) { // if there are no techlogies left it will automatically dispatch these
-      dispatch(
-        setSystemTechnologies([
-          "JS",
-          "nodeJS",
-          "c",
-          "cpp",
-          "HTML",
-          "CSS",
-          "Python",
-        ])
-      );
-    }
-  }, [systemTechnologies]);
+
 
   return (
     <>

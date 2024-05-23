@@ -38,8 +38,6 @@ export const createTechnologyController = async (req, res) => {
 
 
 
-
-
 export const deleteTechnologyController = async (req, res) => {
     try {
         const id = req.params.id;

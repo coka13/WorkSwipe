@@ -26,7 +26,6 @@ const jobSeekerSlice = createSlice({
     },
     updateJobSeekerField: (state, action) => {
       const { field, value } = action.payload;
-      console.log(field, value)
       if(field==="experience"){
         if(isNaN(value) || (+value<0)){
           return

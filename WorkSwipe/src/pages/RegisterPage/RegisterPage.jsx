@@ -1,4 +1,3 @@
-import React from "react";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import Waves from "../../components/Waves/Waves";
@@ -12,12 +11,38 @@ import {
 import { setGeneralDetail } from "../../store/slices/employerSlice";
 import { setGeneralDetail } from "../../store/slices/adminSlice";
 import ScienceIcon from "@mui/icons-material/Science";
+import { baseUrl, technologyRoute } from "../../utils/routes";
+import { useQuery } from "@tanstack/react-query";
 import "./RegisterPage.css";
+import { setSystemTechnologies } from "../../store/slices/techSlice";
 
 const RegisterPage = () => {
+
   const dispatch = useDispatch();
+  
   const registerForm = useSelector((state) => state.register.registerForm);
   const userTechnologies = useSelector((state) => state.users.technologies);
+
+  const { data, error, isLoading } = useQuery({
+    queryKey:['get-all-technologies'], // key
+    queryFn: async () => {
+      const response = await fetch(baseUrl + technologyRoute + "/allTechnologies");
+      const jsonData = await response.json();
+      dispatch(setSystemTechnologies(jsonData))
+      return jsonData;
+    }
+});
+  
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+  
+
 
   const handleSubmit = () => {
     if (
@@ -25,7 +50,7 @@ const RegisterPage = () => {
       registerForm.password &&
       registerForm.name &&
       registerForm.email &&
-      userTechnologies.length>0
+      userTechnologies.length > 0
     ) {
       dispatch(setGeneralDetail(registerForm));
     }
@@ -108,7 +133,7 @@ const RegisterPage = () => {
                 "Select the technologies you are competent in and press Submit",
               type: "check",
               label: "Technologies",
-              options: ["js", "node", "c", "cpp", "HTML", "css", "Python"],
+              options: data,
               required: true,
               checkedList: [],
               Icon: <ScienceIcon />,
