@@ -1,0 +1,6 @@
+export const baseUrl ="http://localhost:3000"
+export const jobSeekerRoute="/api/jobSeeker"
+export const adminRoute="/api/admin"
+export const employerRoute="/api/employer"
+export const matchRoute="/api/match"
+export const technologyRoute="/api/technology"

@@ -15,16 +15,16 @@ const jobSeekerSlice = createSlice({
   name: "jobSeekers",
   initialState,
   reducers: {
-    setGeneralDetail: (state, action) => {
+    setJobSeekerGeneralDetail: (state, action) => {
       state.isAuthenticated = true;
       for(const key in action.payload){
         state[key]=action.payload[key]
       }
     },
-    setTechnologies: (state, action) => {
+    setJobSeekerTechnologies: (state, action) => {
       state.technologies=action.payload
     },
-    updateUserField: (state, action) => {
+    updateJobSeekerField: (state, action) => {
       const { field, value } = action.payload;
       console.log(field, value)
       if(field==="experience"){
@@ -34,16 +34,16 @@ const jobSeekerSlice = createSlice({
       }
       state[field] = value;
     },
-    deleteTech: (state, action) => {
+    deleteJobSeekerTech: (state, action) => {
       const techToDel = action.payload; 
       state.technologies = state.technologies.filter((tech) => tech !== techToDel);
     },
-    logout: (state) => {
+    jobSeekerLogout: (state) => {
       Object.assign(state, initialState); // Reset state to initial state
     },
   },
 });
 
-export const { deleteTech,setTechnologies, setGeneralDetail,updateUserField,logout } = jobSeekerSlice.actions;
+export const { deleteJobSeekerTech ,jobSeekerLogout,setJobSeekerGeneralDetail,setJobSeekerTechnologies,updateJobSeekerField} = jobSeekerSlice.actions;
 
 export default jobSeekerSlice.reducer;

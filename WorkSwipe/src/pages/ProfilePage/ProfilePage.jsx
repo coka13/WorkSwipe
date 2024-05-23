@@ -1,10 +1,6 @@
 import DisplayCard from "../../components/DisplayCard/DisplayCard";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteTech,
-  setTechnologies,
-  updateUserField,
-} from "../../store/slices/userSlice";
+
 import ScienceIcon from '@mui/icons-material/Science';
 
 import "./ProfilePage.css";

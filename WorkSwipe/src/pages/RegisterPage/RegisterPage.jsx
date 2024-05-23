@@ -8,7 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   setGeneralDetail,
   setTechnologies,
-} from "../../store/slices/userSlice";
+} from "../../store/slices/jobSeekerSlice";
+import { setGeneralDetail } from "../../store/slices/employerSlice";
+import { setGeneralDetail } from "../../store/slices/adminSlice";
 import ScienceIcon from "@mui/icons-material/Science";
 import "./RegisterPage.css";
 

@@ -5,7 +5,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
-export default function CustomRadioButton({ title, list }) {
+export default function CustomRadioButton({ title, list, onClick }) {
   console.log(list);
   return (
     <FormControl>
@@ -17,7 +17,7 @@ export default function CustomRadioButton({ title, list }) {
       >
         {list.map((item) => {
           return (
-            <FormControlLabel value={item} control={<Radio />} label={item} />
+            <FormControlLabel onClick={onClick} value={item} control={<Radio />} label={item} />
           );
         })}
       </RadioGroup>
