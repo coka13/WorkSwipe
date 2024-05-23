@@ -5,61 +5,138 @@ import BasicButtons from "../../components/BasicButtons/BasicButtons";
 import { setRegisterForm } from "../../store/slices/registerSlice";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  setGeneralDetail,
-  setTechnologies,
+  setJobSeekerGeneralDetail,
+  setJobSeekerTechnologies,
 } from "../../store/slices/jobSeekerSlice";
-import { setGeneralDetail } from "../../store/slices/employerSlice";
-import { setGeneralDetail } from "../../store/slices/adminSlice";
+import { setEmployerGeneralDetail } from "../../store/slices/employerSlice";
+import { setAdminGeneralDetail } from "../../store/slices/adminSlice";
 import ScienceIcon from "@mui/icons-material/Science";
 import { baseUrl, technologyRoute } from "../../utils/routes";
 import { useQuery } from "@tanstack/react-query";
 import "./RegisterPage.css";
 import { setSystemTechnologies } from "../../store/slices/techSlice";
+import { useState } from "react";
 
 const RegisterPage = () => {
-
+  const [role, setRole] = useState("Job Seeker");
   const dispatch = useDispatch();
-  
+  const onClick = (e) => {
+    setRole(e.target.value);
+  };
+
   const registerForm = useSelector((state) => state.register.registerForm);
   const userTechnologies = useSelector((state) => state.users.technologies);
 
-  const { data, error, isLoading } = useQuery({
-    queryKey:['get-all-technologies'], // key
+  const { techData, techError, techIsLoading } = useQuery({
+    queryKey: ["get-all-technologies"], // key
     queryFn: async () => {
-      const response = await fetch(baseUrl + technologyRoute + "/allTechnologies");
+      const response = await fetch(
+        baseUrl + technologyRoute + "/allTechnologies"
+      );
       const jsonData = await response.json();
-      dispatch(setSystemTechnologies(jsonData))
+      dispatch(setSystemTechnologies(jsonData));
       return jsonData;
-    }
-});
-  
+    },
+  });
 
-  if (isLoading) {
+  if (techIsLoading) {
     return <div>Loading...</div>;
   }
-  
-  if (error) {
+
+  if (techError) {
     return <div>Error: {error.message}</div>;
   }
-  
+  const { registerData, registerError, registerIsLoading } = useQuery({
+    queryKey: ["register"], // key
+    queryFn: async () => {
+      const response = await fetch(
+        setUrlByRole(),
 
-
-  const handleSubmit = () => {
-    if (
-      registerForm.username &&
-      registerForm.password &&
-      registerForm.name &&
-      registerForm.email &&
-      userTechnologies.length > 0
-    ) {
-      dispatch(setGeneralDetail(registerForm));
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            password: formData.password,
+          }),
+        }
+      );
+      const jsonData = await response.json();
+      console.log(jsonData);
+      return jsonData;
+    },
+  });
+  const setUrlByRole = () => {
+    if (role === "Job Seeker") {
+      return baseUrl + jobSeekerRoute + "/createJobSeeker";
+    } else if (role === "Employer") {
+      return baseUrl + employerRoute + "/createEmployer";
+    } else {
+      return baseUrl + adminRoute + "/createAdmin";
     }
   };
+  const setFormDataByRole = () => {
+    if (role === "Job Seeker") {
+      return {
+        username: formData.username,
+        password: formData.password,
+        name: formData.name,
+        image: formData.image,
+        experience: formData.experience,
+        location: formData.location,
+        email: formData.email,
+        technologies: formData.technologies,
+        linkedInUrl: formData.linkedInUrl,
+        gitHubUrl: formData.gitHubUrl,
+      };
+    } else if (role === "Employer") {
+      return {
+        username: formData.username,
+        password: formData.password,
+        name: formData.name,
+        image: formData.image,
+        email: formData.email,
+        linkedInUrl: formData.linkedInUrl,
+      };
+    } else {
+      return {
+        username: formData.username,
+        password: formData.password,
+        name: formData.name,
+        image: formData.image,
+        email: formData.email,
+      };
+    }
+  };
+};
+
+const handleSubmit = () => {
+
+  
+    if (role === "Job Seeker"&&  registerForm.username &&
+    registerForm.password &&
+    registerForm.name &&
+    registerForm.email &&
+    userTechnologies.length > 0) {
+      dispatch(setJobSeekerGeneralDetail(registerForm));
+    } else if (role === "Employer") {
+      dispatch(setEmployerGeneralDetail(registerForm));
+    } else {
+      dispatch(setAdminGeneralDetail(registerForm));
+    }
+  }
 
   return (
     <div className="registerPage">
       <h4>Register</h4>
       <div className="registerBox">
+        <CustomRadioButton
+          onClick={onClick}
+          title={"Choose role"}
+          list={["Job seeker", "Employer"]}
+        />
         <FormComponent
           props={[
             {
@@ -95,24 +172,32 @@ const RegisterPage = () => {
               dispatchFunc: setRegisterForm,
             },
             {
-              name: "url",
-              type: "url",
+              name: "image",
+              type: "image",
               label: "Image link",
               required: false,
               form: registerForm,
               dispatchFunc: setRegisterForm,
             },
             {
-              name: "linkedIn",
-              type: "linkedIn",
+              name: "linkedInUrl",
+              type: "linkedInUrl",
               label: "LinkedIn link",
               required: false,
               form: registerForm,
               dispatchFunc: setRegisterForm,
             },
             {
-              name: "residence",
-              type: "residence",
+              name: "gitHubUrl",
+              type: "gitHubUrl",
+              label: "GitHub link",
+              required: false,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
+            },
+            {
+              name: "location",
+              type: "location",
               label: "residence",
               required: false,
               form: registerForm,
@@ -133,7 +218,7 @@ const RegisterPage = () => {
                 "Select the technologies you are competent in and press Submit",
               type: "check",
               label: "Technologies",
-              options: data,
+              options: techData,
               required: true,
               checkedList: [],
               Icon: <ScienceIcon />,

@@ -7,57 +7,79 @@ import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNa
 
 import { useDispatch } from "react-redux";
 import "./LoginPage.css";
-import { setEmployerOffers } from "../../store/slices/employerOffersSlice";
-import CustomRadioButton from "../../components/CustomRadioButton/CustomRadioButton";
 
+import CustomRadioButton from "../../components/CustomRadioButton/CustomRadioButton";
+import { useQuery } from "@tanstack/react-query";
+import {
+  adminRoute,
+  baseUrl,
+  employerRoute,
+  jobSeekerRoute,
+} from "../../utils/routes";
 
 const LoginPage = () => {
-  const [role, setRole]= useState("Job Seeker")
+ 
+  const [role, setRole] = useState("Job Seeker");
   const [formData, setFormData] = useState({ username: "", password: "" });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onClick= (e)=>{setRole(e.target.value)}
+  const onClick = (e) => {
+    setRole(e.target.value);
+  };
 
-  
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["login"], // key
+    queryFn: async () => {
+      const response = await fetch(
+        setUrlByRole(),
 
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            password: formData.password,
+          }),
+        }
+      );
+      const jsonData = await response.json();
+      console.log(jsonData);
+      return jsonData;
+    },
+  });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = () => {
-    if(role==="Job Seeker"){
-      const { data, error, isLoading } = useQuery({
-        queryKey: ["get-technlogies-by-ids"], // key
-        queryFn: async () => {
-          const response = await fetch(
-            baseUrl + technologyRoute + "/technologiesByIDs",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ idsList: userTechnologies }),
-            }
-          );
-          const jsonData = await response.json();
-          console.log(jsonData)
-          return jsonData;
-        },
-  
-      navigate("/home");
+  const setUrlByRole = () => {
+    if (role === "Job Seeker") {
+      return baseUrl + jobSeekerRoute + "/jobSeekerLogin";
+    } else if (role === "Employer") {
+      return baseUrl + employerRoute + "/employerLogin";
     } else {
-      alert("Invalid username or password");
+      return baseUrl + adminRoute + "/adminLogin";
     }
+  };
+  const handleSubmit = () => {
+    const { route, url } = setUrlByRole();
+
+    navigate("/home");
   };
 
   return (
-
     <>
       <div className="loginPage">
         <h4>Login</h4>
         <div className="loginBox">
-          <CustomRadioButton onClick={onClick} title={"Choose role"} list={["Job seeker" , "Employer" , "Admin"]}/>
+          <CustomRadioButton
+            onClick={onClick}
+            title={"Choose role"}
+            list={["Job seeker", "Employer", "Admin"]}
+          />
+
           <FormComponent
             props={[
               {
@@ -89,7 +111,6 @@ const LoginPage = () => {
       </div>
     </>
   );
-
 };
 
 export default LoginPage;
