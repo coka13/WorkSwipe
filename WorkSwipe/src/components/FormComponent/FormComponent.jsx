@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SelectVariants from "../SelectComponent/SelectComponent";
 import TextArea from "../TextArea/TextArea";
-import { generateUuid } from "../../utils/uuidGenerator";
 import CheckBox from "../CheckBox/CheckBox";
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
@@ -24,9 +23,14 @@ export default function FormComponent({ props }) {
   };
 
   return (
-    <Box component="form" noValidate autoComplete="off">
+    <Box
+      component="form"
+      noValidate
+      autoComplete="off"
+     
+    >
       <div className="FieldsWraper">
-        {props.map((prop,index) => {
+        {props.map((prop, index) => {
           if (prop.type === "select") {
             return (
               <SelectVariants
@@ -69,7 +73,7 @@ export default function FormComponent({ props }) {
                 onChange={(event) => handleInputChange(event, prop)}
               />
             );
-          } else if (prop.type === "other" ) {
+          } else if (prop.type === "other") {
             return (
               <TextField
                 id={prop.id}
@@ -80,6 +84,7 @@ export default function FormComponent({ props }) {
                 required={prop.required}
                 value={prop.value}
                 onChange={prop.onChange}
+
               />
             );
           } else {

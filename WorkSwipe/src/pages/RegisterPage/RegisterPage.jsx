@@ -9,47 +9,34 @@ import {
   setTechnologies,
 } from "../../store/slices/userSlice";
 import ScienceIcon from "@mui/icons-material/Science";
-import { baseUrl, technologyRoute } from "../../utils/routes";
-import { useQuery } from "@tanstack/react-query";
+import CustomRadioButton from "../../components/CustomRadioButton/CustomRadioButton";
+import {  useState } from "react";
 import "./RegisterPage.css";
-import { setSystemTechnologies } from "../../store/slices/techSlice";
 
 const RegisterPage = () => {
-
+  const [role, setRole] = useState("Job Seeker"); 
   const dispatch = useDispatch();
-  
   const registerForm = useSelector((state) => state.register.registerForm);
   const userTechnologies = useSelector((state) => state.users.technologies);
+const systemTechnologies=useSelector((state)=>state.technologies.technologies)
 
-  const { data, error, isLoading } = useQuery({
-    queryKey:['get-all-technologies'], // key
-    queryFn: async () => {
-      const response = await fetch(baseUrl + technologyRoute + "/allTechnologies");
-      const jsonData = await response.json();
-      dispatch(setSystemTechnologies(jsonData))
-      return jsonData;
-    }
-});
-  
+  const onClick = (e) => {
+    setRole(e.target.value);
+  };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-  
+
 
 
   const handleSubmit = () => {
     if (
+    
       registerForm.username &&
       registerForm.password &&
       registerForm.name &&
       registerForm.email &&
       userTechnologies.length > 0
     ) {
+      
       dispatch(setGeneralDetail(registerForm));
     }
   };
@@ -58,6 +45,11 @@ const RegisterPage = () => {
     <div className="registerPage">
       <h4>Register</h4>
       <div className="registerBox">
+        <CustomRadioButton
+          title={"Choose role"}
+          list={["Job seeker", "Employer"]}
+          onClick={onClick}
+        />
         <FormComponent
           props={[
             {
@@ -109,6 +101,14 @@ const RegisterPage = () => {
               dispatchFunc: setRegisterForm,
             },
             {
+              name: "GitHub link",
+              type: "GitHub",
+              label: "GitHub link",
+              required: false,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
+            },
+            {
               name: "residence",
               type: "residence",
               label: "residence",
@@ -131,7 +131,7 @@ const RegisterPage = () => {
                 "Select the technologies you are competent in and press Submit",
               type: "check",
               label: "Technologies",
-              options: data,
+              options: systemTechnologies,
               required: true,
               checkedList: [],
               Icon: <ScienceIcon />,

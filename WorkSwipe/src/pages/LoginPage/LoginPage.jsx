@@ -7,9 +7,10 @@ import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNa
 import { useDispatch } from "react-redux";
 import { setGeneralDetail } from "../../store/slices/userSlice";
 import { getUserRole } from "../../utils/getUserRole";
-import "./LoginPage.css";
 import { setEmployerOffers } from "../../store/slices/employerOffersSlice";
 import CustomRadioButton from "../../components/CustomRadioButton/CustomRadioButton";
+
+import "./LoginPage.css";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -17,8 +18,17 @@ const LoginPage = () => {
   const dispatch = useDispatch();
 
   
+
   
-   
+  
+   const dummyUsers=[
+    {username:"almog",
+    password:"password",
+    isEmployer: false,
+  isAdmin: false,
+  technologies:["664b86238d6a2f3335ae51c8"]
+  }
+   ]
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,6 +41,7 @@ const LoginPage = () => {
         user.username === formData.username && formData.password === "password" // Assuming password is always "password" for dummy users
     );
     if (user) {
+      console.log(user)
       dispatch(setGeneralDetail(user))
       if(getUserRole(user)==="Employer"){ // Need to find the user offers in the DB according to the id
 

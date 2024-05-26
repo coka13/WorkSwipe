@@ -69,10 +69,10 @@ export default function DisplayCard({
                   {value.map((tech, techIndex) => (
                     <li key={techIndex}>
                       <Typography className="profileInfo">
-                        {tech}
+                        {tech.name}
 
                         {value.length > 1 && (
-                          <IconButton onClick={() => handleDeleteList(tech)}>
+                          <IconButton onClick={() => handleDeleteList(tech._id)}>
                             <DeleteIcon
                               sx={{ marginRight: 1, color: "#1976D2" }}
                             />

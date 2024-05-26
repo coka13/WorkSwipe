@@ -35,6 +35,7 @@ const userSlice = createSlice({
           return
         }
       }
+
       state[field] = value;
     },
     deleteTech: (state, action) => {

@@ -14,21 +14,36 @@ import { useEffect } from "react";
 import { setOpportunities } from "./store/slices/jobOffersSlice";
 import MatchesPage from "./pages/MatchesPage/MatchesPage";
 import EmployerPage from "./pages/EmployerPage/EmployerPage";
-import { setSystemTechnologies } from "./store/slices/techSlice";
 import CustomRoute from "./components/CustomRoute/CustomRoute";
 import { getUserRole } from "./utils/getUserRole";
 import "./App.css";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import AdminSupportPage from "./pages/AdminSupportPage/AdminSupportPage";
+import { setSystemTechnologies } from "./store/slices/techSlice";
+import { useQuery } from "@tanstack/react-query";
+import { baseUrl, technologyRoute } from "./utils/routes";
 
 function App() {
   const dispatch = useDispatch();
+ 
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["get-all-technologies"], // key
+    queryFn: async () => {
+      const response = await fetch(
+        baseUrl + technologyRoute + "/allTechnologies"
+      );
+      const jsonData = await response.json();
+      return jsonData;
+    },
+  });
+
+  useEffect(()=>{
+    dispatch(setSystemTechnologies(data));
+  },[data])
+
   const user = useSelector((state) => state.users);
   const userTechnologies = user.technologies;
-  const systemTechnologies = useSelector(
-    (state) => state.technologies.technologies
-  );
-
+  
   const { showDrawer, icons, hrefs, items } = useDrawerLogic(getUserRole(user));
   useEffect(() => {
     dispatch(
@@ -61,13 +76,18 @@ function App() {
           },
         ],
       })
-    );
-  }, [userTechnologies]);
+      );
+    }, [userTechnologies]);
+    
 
 
-
-  return (
-    <>
+  
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
+    
+    return (
+      <>
       {showDrawer && <CustomDrawer items={items} icons={icons} hrefs={hrefs} />}
       <Routes>
         <Route path="/" element={<LoginPage />} index={true} />
