@@ -28,7 +28,6 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   const registerForm = useSelector((state) => state.register.registerForm);
 
   const handleRoleChange = (e) => {
@@ -46,7 +45,7 @@ const RegisterPage = () => {
   };
 
   const setFormDataByRole = (formData) => {
-    console.log("formData",formData)
+    console.log("formData", formData);
     if (role === "Job Seeker") {
       return {
         username: formData.username,
@@ -83,13 +82,18 @@ const RegisterPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     mutation.mutate(setFormDataByRole(registerForm));
-
   };
 
-  const { isLoading: techIsLoading, error: techError, data: techData } = useQuery({
+  const {
+    isLoading: techIsLoading,
+    error: techError,
+    data: techData,
+  } = useQuery({
     queryKey: ["get-all-technologies"],
     queryFn: async () => {
-      const response = await fetch(`${baseUrl}${technologyRoute}/allTechnologies`);
+      const response = await fetch(
+        `${baseUrl}${technologyRoute}/allTechnologies`
+      );
       const jsonData = await response.json();
       dispatch(setSystemTechnologies(jsonData));
       return jsonData;
@@ -137,111 +141,111 @@ const RegisterPage = () => {
     <div className="registerPage">
       <h4>Register</h4>
       <div className="registerBox">
-  <CustomRadioButton
-    onClick={handleRoleChange}
-    title={"Choose role"}
-    list={["Job Seeker", "Employer", "Admin"]}
-  />
-  <FormComponent
-    props={[
-      {
-        name: "username",
-        type: "text",
-        formType: "username",
-        label: "Username",
-        required: true,
-        form: registerForm,
-        dispatchFunc: setRegisterForm,
-      },
-      {
-        name: "password",
-        formType:"password",
-        type: "password",
-        label: "Password",
-        required: true,
-        form: registerForm,
-        dispatchFunc: setRegisterForm,
-      },
-      {
-        name: "email",
-        formType:"email",
-        type: "email",
-        label: "Email",
-        required: true,
-        form: registerForm,
-        dispatchFunc: setRegisterForm,
-      },
-      {
-        name: "name",
-        type: "text",
-        label: "Name",
-        required: true,
-        form: registerForm,
-        dispatchFunc: setRegisterForm,
-      },
-    ]}
-  />
-  {role === "Job Seeker" && (
-    <FormComponent
-      props={[
-        {
-          name: "image",
-          type: "text",
-          label: "Image link",
-          required: false,
-          form: registerForm,
-          dispatchFunc: setRegisterForm,
-        },
-        {
-          name: "linkedInUrl",
-          type: "text",
-          label: "LinkedIn link",
-          required: false,
-          form: registerForm,
-          dispatchFunc: setRegisterForm,
-        },
-        {
-          name: "gitHubUrl",
-          type: "text",
-          label: "GitHub link",
-          required: false,
-          form: registerForm,
-          dispatchFunc: setRegisterForm,
-        },
-        {
-          name: "location",
-          type: "text",
-          label: "Residence",
-          required: false,
-          form: registerForm,
-          dispatchFunc: setRegisterForm,
-        },
-        {
-          name: "experience",
-          type: "select",
-          label: "Experience in years",
-          options: Array.from({ length: 21 }, (_, i) => i),
-          required: true,
-          form: registerForm,
-          dispatchFunc: setRegisterForm,
-        },
-        {
-          title: "Choose technologies",
-          description:
-            "Select the technologies you are competent in and press Submit",
-          type: "check",
-          label: "Technologies",
-          name: "technologies",
-          options: techData,
-          required: true,
-          checkedList:[],
-          Icon:<ScienceIcon/> ,
-          dispatchFunc:setRegisterForm
-        }
-      ]}
-    />
-  )}
-</div>
+        <CustomRadioButton
+          onClick={handleRoleChange}
+          title={"Choose role"}
+          list={["Job Seeker", "Employer", "Admin"]}
+        />
+        <FormComponent
+          props={[
+            {
+              name: "username",
+              type: "text",
+              formType: "username",
+              label: "Username",
+              required: true,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
+            },
+            {
+              name: "password",
+              formType: "password",
+              type: "password",
+              label: "Password",
+              required: true,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
+            },
+            {
+              name: "email",
+              formType: "email",
+              type: "email",
+              label: "Email",
+              required: true,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
+            },
+            {
+              name: "name",
+              type: "text",
+              label: "Name",
+              required: true,
+              form: registerForm,
+              dispatchFunc: setRegisterForm,
+            },
+          ]}
+        />
+        {role === "Job Seeker" && (
+          <FormComponent
+            props={[
+              {
+                name: "image",
+                type: "text",
+                label: "Image link",
+                required: false,
+                form: registerForm,
+                dispatchFunc: setRegisterForm,
+              },
+              {
+                name: "linkedInUrl",
+                type: "text",
+                label: "LinkedIn link",
+                required: false,
+                form: registerForm,
+                dispatchFunc: setRegisterForm,
+              },
+              {
+                name: "gitHubUrl",
+                type: "text",
+                label: "GitHub link",
+                required: false,
+                form: registerForm,
+                dispatchFunc: setRegisterForm,
+              },
+              {
+                name: "location",
+                type: "text",
+                label: "Residence",
+                required: false,
+                form: registerForm,
+                dispatchFunc: setRegisterForm,
+              },
+              {
+                name: "experience",
+                type: "select",
+                label: "Experience in years",
+                options: Array.from({ length: 21 }, (_, i) => i),
+                required: true,
+                form: registerForm,
+                dispatchFunc: setRegisterForm,
+              },
+              {
+                title: "Choose technologies",
+                description:
+                  "Select the technologies you are competent in and press Submit",
+                type: "check",
+                label: "Technologies",
+                name: "technologies",
+                options: techData,
+                required: true,
+                checkedList: registerForm.technologies,
+                Icon: <ScienceIcon />,
+                dispatchFunc: setRegisterForm,
+              },
+            ]}
+          />
+        )}
+      </div>
       <BasicButtons text={"Submit"} onClick={handleSubmit} />
       <CustomLinkNavigate
         text={"Already have an account?"}
