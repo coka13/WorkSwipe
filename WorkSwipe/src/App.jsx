@@ -15,7 +15,7 @@ import { setOpportunities } from "./store/slices/jobOffersSlice";
 import MatchesPage from "./pages/MatchesPage/MatchesPage";
 import EmployerPage from "./pages/EmployerPage/EmployerPage";
 import CustomRoute from "./components/CustomRoute/CustomRoute";
-import { getUserRole } from "./utils/getUserRole";
+
 import "./App.css";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import AdminSupportPage from "./pages/AdminSupportPage/AdminSupportPage";
@@ -43,8 +43,11 @@ function App() {
 
   const user = useSelector((state) => state.users);
   const userTechnologies = user.technologies;
-  
-  const { showDrawer, icons, hrefs, items } = useDrawerLogic(getUserRole(user));
+  const systemTechnologies = useSelector(
+    (state) => state.technologies.technologies
+  );
+
+  const { showDrawer, icons, hrefs, items } = useDrawerLogic(auth.role);
   useEffect(() => {
     dispatch(
       setOpportunities({

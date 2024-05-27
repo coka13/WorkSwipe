@@ -6,7 +6,7 @@ import Conversation from "../../components/Conversation/Conversation";
 import "./SupportPage.css";
 
 const SupportPage = () => {
-  const user = useSelector((state)=>state.users)
+  const user = useSelector((state)=>state.auth.role)
 
   const admin = {
       _id:0,
