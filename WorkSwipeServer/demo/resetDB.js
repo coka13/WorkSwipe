@@ -37,10 +37,10 @@ const resetDB = async () => {
 
         const jobSeekersFromJSON = JSON.parse(fs.readFileSync('jobSeeker.json', 'utf8'))
         jobSeekersFromJSON.forEach(jobSeeker => {
+            jobSeeker['password'] = hashPassword(jobSeeker['password'])
             jobSeeker.technologies.forEach((tech, index) => {
                 const foundTech = technologiesInDB.find(techDB => techDB.name === tech)
                 jobSeeker['technologies'][index] = foundTech._id
-                jobSeeker['password'] = hashPassword(jobSeeker['password'])
             })
         })
         const jobSeekersInDB = await JobSeeker.insertMany(jobSeekersFromJSON)

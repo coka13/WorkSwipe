@@ -1,20 +1,21 @@
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 import './CheckBox.css';
 
-const CheckBox = ({ options,dispatchFunc }) => {
-  const dispatch = useDispatch()
-  const checkList = useSelector(state => state.users.technologies)
-  // Initialize a state variable to manage checked items
+const CheckBox = ({ options, dispatchFunc, checkedList,name }) => {
+  const dispatch = useDispatch();
+
+  const [checkedOptions, setCheckedOptions] = useState(checkedList);
 
   const handleCheckboxChange = (option) => {
-    if (checkList.includes(option._id)) {
-      // If the option is already in the list, remove it
-      dispatch(dispatchFunc(checkList.filter((item) => item !== option._id)));
-    } else {
-      // If the option is not in the list, add it
-      dispatch(dispatchFunc([...checkList, option._id]));
-    }
+    const newCheckedOptions = checkedOptions.includes(option._id)
+      ? checkedOptions.filter((item) => item !== option._id)
+      : [...checkedOptions, option._id];
+
+    setCheckedOptions(newCheckedOptions);
+
+    dispatch(dispatchFunc({value:newCheckedOptions,name:name}));
   };
 
   return (
@@ -26,7 +27,7 @@ const CheckBox = ({ options,dispatchFunc }) => {
             label={option.name}
             control={
               <Checkbox
-                checked={checkList.includes(option._id)}
+                checked={checkedOptions.includes(option._id)}
                 onChange={() => handleCheckboxChange(option)}
               />
             }

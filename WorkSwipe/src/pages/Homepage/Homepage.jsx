@@ -2,13 +2,12 @@ import SimpleCard from "../../components/TinderCard/TinderCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setAddMatch } from "../../store/slices/matchesSlice";
 import "./Homepage.css";
-import { getUserRole } from "../../utils/getUserRole";
 
 
 
 const Homepage = () => {
   
-  const userRole = getUserRole( useSelector((state) => state.users));
+  const userRole = ( useSelector((state) => state.auth.role));
   const swipeProps = useSelector((state) => state.opportunities.offers);
   const currentOfferTechnologies = useSelector(
     (state) => state.opportunities.currentOffer?.technologies

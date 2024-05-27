@@ -6,7 +6,7 @@ const jobSeekerSchema = new mongoose.Schema({
     password: { type: String, required: true },
     image: { type: String },
     experience: { type: Number, required: true },
-    location: { type: String, required: true },
+    location: { type: String},
     email: { type: String, required: true },
     technologies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Technologies", required: true }],
     linkedInUrl: { type: String },

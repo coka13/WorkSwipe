@@ -9,11 +9,12 @@ export default function CustomRadioButton({ title, list ,onClick}) {
  
   return (
     <FormControl>
-      <FormLabel  id="demo-row-radio-buttons-group-label">  {title}</FormLabel>
+      <FormLabel  id="demo-row-radio-buttons-group-label" sx={{color:"#1976D2",fontWeight:"bold"}}>  {title}</FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
+        defaultValue={list[0]}
       >
         {list.map((item) => {
           return (
