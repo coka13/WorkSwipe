@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SelectVariants from "../SelectComponent/SelectComponent";
 import TextArea from "../TextArea/TextArea";
-import { generateUuid } from "../../utils/uuidGenerator";
 import CheckBox from "../CheckBox/CheckBox";
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
@@ -26,13 +25,13 @@ export default function FormComponent({ props }) {
   return (
     <Box component="form" noValidate autoComplete="off">
       <div className="FieldsWraper">
-        {props.map((prop,index) => {
+        {props.map((prop, index) => {
           if (prop.type === "select") {
             return (
               <SelectVariants
                 key={index}
                 prop={prop}
-                value={prop.form[prop.name]}
+                value={prop.value}
                 onChange={(event) => handleInputChange(event, prop)}
               />
             );
@@ -65,21 +64,8 @@ export default function FormComponent({ props }) {
                 label={prop.label}
                 name={prop.name}
                 required={prop.required}
-                value={prop.form[prop.name]}
-                onChange={(event) => handleInputChange(event, prop)}
-              />
-            );
-          } else if (prop.type === "other" ) {
-            return (
-              <TextField
-                id={prop.id}
-                variant={prop.variant || "outlined"}
-                key={index}
-                label={prop.label}
-                name={prop.name}
-                required={prop.required}
                 value={prop.value}
-                onChange={prop.onChange}
+                onChange={(event) => handleInputChange(event, prop)}
               />
             );
           } else {
@@ -92,8 +78,8 @@ export default function FormComponent({ props }) {
                 label={prop.label}
                 name={prop.name}
                 type={prop.type}
-                value={prop.form[prop.name]}
-                onChange={(event) => handleInputChange(event, prop)}
+                value={prop.value}
+                onChange={prop.onChange}
               />
             );
           }

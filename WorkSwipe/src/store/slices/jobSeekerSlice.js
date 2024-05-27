@@ -31,6 +31,7 @@ const jobSeekerSlice = createSlice({
           return
         }
       }
+
       state[field] = value;
     },
     deleteJobSeekerTech: (state, action) => {
@@ -43,10 +44,6 @@ const jobSeekerSlice = createSlice({
   },
 });
 
-<<<<<<< HEAD
 export const { deleteJobSeekerTech ,jobSeekerLogout,setJobSeekerGeneralDetail,setJobSeekerTechnologies,updateJobSeekerField} = jobSeekerSlice.actions;
-=======
-export const { deleteTech,setTechnologies, setGeneralDetail,updateUserField,logout } = jobSeekerSlice.actions;
->>>>>>> d395581 (admin,jobSeeker,employer,auth slices)
 
 export default jobSeekerSlice.reducer;

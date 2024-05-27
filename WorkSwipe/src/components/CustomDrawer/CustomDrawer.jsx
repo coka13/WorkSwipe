@@ -12,9 +12,12 @@ import ListItemText from "@mui/material/ListItemText";
 import { ListItemIcon } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CustomLinkNavigate from "../CustomLinkNavigate/CustomLinkNavigate";
+import { useDispatch, useSelector } from "react-redux";
+import { jobSeekerLogout } from "../../store/slices/jobSeekerSlice";
+import { adminLogout } from "../../store/slices/adminSlice";
+import { employerLogout } from "../../store/slices/employerSlice";
+import { setAuthentication, setRole } from "../../store/slices/authSlice";
 import "./CustomDrawer.css";
-import { useDispatch } from "react-redux";
-import { logout } from "../../store/slices/userSlice";
 
 const drawerWidth = 240;
 
@@ -41,7 +44,16 @@ export function CustomDrawer(props) {
   };
 
   const handleLogout = () => {
-    dispatch(logout()); // Dispatch the logout action when the user clicks on "Logout"
+    const role = useSelector((state) => state.auth.role);
+    dispatch(setAuthentication(false));
+    dispatch(setRole(""));
+    if (role === "Admin") {
+      dispatch(adminLogout());
+    } else if (role === "Employer") {
+      dispatch(employerLogout());
+    } else {
+      dispatch(jobSeekerLogout());
+    }
     navigate("/");
   };
 

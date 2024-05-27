@@ -12,7 +12,7 @@ export default function SelectVariants({ prop,onChange}) {
 
   return (
     <>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 190 }}>
+      <FormControl variant="standard" sx={{  minWidth: "50%" }}>
         <InputLabel id={prop.name}>{prop.label}</InputLabel>
         <Select 
         defaultValue={0}

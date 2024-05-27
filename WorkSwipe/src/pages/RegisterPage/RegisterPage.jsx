@@ -1,83 +1,51 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
 import FormComponent from "../../components/FormComponent/FormComponent";
 import Waves from "../../components/Waves/Waves";
 import BasicButtons from "../../components/BasicButtons/BasicButtons";
-import { setRegisterForm } from "../../store/slices/registerSlice";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setJobSeekerGeneralDetail,
-  setJobSeekerTechnologies,
-} from "../../store/slices/jobSeekerSlice";
-import { setEmployerGeneralDetail } from "../../store/slices/employerSlice";
-import { setAdminGeneralDetail } from "../../store/slices/adminSlice";
 import ScienceIcon from "@mui/icons-material/Science";
-import { baseUrl, technologyRoute } from "../../utils/routes";
-import { useQuery } from "@tanstack/react-query";
-import "./RegisterPage.css";
+import CustomRadioButton from "../../components/CustomRadioButton/CustomRadioButton";
+import { setRegisterForm } from "../../store/slices/registerSlice";
+import { setAdminGeneralDetail } from "../../store/slices/adminSlice";
+import { setJobSeekerGeneralDetail } from "../../store/slices/jobSeekerSlice";
+import { setEmployerGeneralDetail } from "../../store/slices/employerSlice";
+import { setAuthentication } from "../../store/slices/authSlice";
 import { setSystemTechnologies } from "../../store/slices/techSlice";
-import { useState } from "react";
+import {
+  adminRoute,
+  baseUrl,
+  employerRoute,
+  jobSeekerRoute,
+  technologyRoute,
+} from "../../utils/routes";
+import "./RegisterPage.css";
 
 const RegisterPage = () => {
   const [role, setRole] = useState("Job Seeker");
   const dispatch = useDispatch();
-  const onClick = (e) => {
+  const navigate = useNavigate();
+
+
+  const registerForm = useSelector((state) => state.register.registerForm);
+
+  const handleRoleChange = (e) => {
     setRole(e.target.value);
   };
 
-  const registerForm = useSelector((state) => state.register.registerForm);
-  const userTechnologies = useSelector((state) => state.users.technologies);
-
-  const { techData, techError, techIsLoading } = useQuery({
-    queryKey: ["get-all-technologies"], // key
-    queryFn: async () => {
-      const response = await fetch(
-        baseUrl + technologyRoute + "/allTechnologies"
-      );
-      const jsonData = await response.json();
-      dispatch(setSystemTechnologies(jsonData));
-      return jsonData;
-    },
-  });
-
-  if (techIsLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (techError) {
-    return <div>Error: {error.message}</div>;
-  }
-  const { registerData, registerError, registerIsLoading } = useQuery({
-    queryKey: ["register"], // key
-    queryFn: async () => {
-      const response = await fetch(
-        setUrlByRole(),
-
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: formData.username,
-            password: formData.password,
-          }),
-        }
-      );
-      const jsonData = await response.json();
-      console.log(jsonData);
-      return jsonData;
-    },
-  });
   const setUrlByRole = () => {
     if (role === "Job Seeker") {
-      return baseUrl + jobSeekerRoute + "/createJobSeeker";
+      return `${baseUrl}${jobSeekerRoute}/createJobSeeker`;
     } else if (role === "Employer") {
-      return baseUrl + employerRoute + "/createEmployer";
+      return `${baseUrl}${employerRoute}/createEmployer`;
     } else {
-      return baseUrl + adminRoute + "/createAdmin";
+      return `${baseUrl}${adminRoute}/createAdmin`;
     }
   };
-  const setFormDataByRole = () => {
+
+  const setFormDataByRole = (formData) => {
     if (role === "Job Seeker") {
       return {
         username: formData.username,
@@ -110,22 +78,58 @@ const RegisterPage = () => {
       };
     }
   };
-};
 
-const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutation.mutate(setFormDataByRole(registerForm));
 
-  
-    if (role === "Job Seeker"&&  registerForm.username &&
-    registerForm.password &&
-    registerForm.name &&
-    registerForm.email &&
-    userTechnologies.length > 0) {
-      dispatch(setJobSeekerGeneralDetail(registerForm));
-    } else if (role === "Employer") {
-      dispatch(setEmployerGeneralDetail(registerForm));
-    } else {
-      dispatch(setAdminGeneralDetail(registerForm));
-    }
+  };
+
+  const { isLoading: techIsLoading, error: techError, data: techData } = useQuery({
+    queryKey: ["get-all-technologies"],
+    queryFn: async () => {
+      const response = await fetch(`${baseUrl}${technologyRoute}/allTechnologies`);
+      const jsonData = await response.json();
+      dispatch(setSystemTechnologies(jsonData));
+      return jsonData;
+    },
+  });
+
+  const mutation = useMutation({
+    mutationFn: async (formData) => {
+      const response = await fetch(setUrlByRole(), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const jsonData = await response.json();
+      return jsonData;
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      if (role === "Job Seeker") {
+        dispatch(setJobSeekerGeneralDetail(data));
+      } else if (role === "Employer") {
+        dispatch(setEmployerGeneralDetail(data));
+      } else if (role === "Admin") {
+        dispatch(setAdminGeneralDetail(data));
+      }
+      dispatch(setAuthentication(true));
+      navigate("/home");
+    },
+    onError: (error) => {
+      console.error("Registration failed:", error);
+    },
+  });
+
+  if (techIsLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (techError) {
+    return <div>Error: {techError.message}</div>;
   }
 
   return (
@@ -133,9 +137,9 @@ const handleSubmit = () => {
       <h4>Register</h4>
       <div className="registerBox">
         <CustomRadioButton
-          onClick={onClick}
+          onClick={handleRoleChange}
           title={"Choose role"}
-          list={["Job seeker", "Employer"]}
+          list={["Job Seeker", "Employer", "Admin"]}
         />
         <FormComponent
           props={[
@@ -165,7 +169,7 @@ const handleSubmit = () => {
             },
             {
               name: "name",
-              type: "name",
+              type: "text",
               label: "Name",
               required: true,
               form: registerForm,
@@ -173,7 +177,7 @@ const handleSubmit = () => {
             },
             {
               name: "image",
-              type: "image",
+              type: "text",
               label: "Image link",
               required: false,
               form: registerForm,
@@ -181,7 +185,7 @@ const handleSubmit = () => {
             },
             {
               name: "linkedInUrl",
-              type: "linkedInUrl",
+              type: "text",
               label: "LinkedIn link",
               required: false,
               form: registerForm,
@@ -189,7 +193,7 @@ const handleSubmit = () => {
             },
             {
               name: "gitHubUrl",
-              type: "gitHubUrl",
+              type: "text",
               label: "GitHub link",
               required: false,
               form: registerForm,
@@ -197,8 +201,8 @@ const handleSubmit = () => {
             },
             {
               name: "location",
-              type: "location",
-              label: "residence",
+              type: "text",
+              label: "Residence",
               required: false,
               form: registerForm,
               dispatchFunc: setRegisterForm,
@@ -222,7 +226,7 @@ const handleSubmit = () => {
               required: true,
               checkedList: [],
               Icon: <ScienceIcon />,
-              dispatchFunc: setTechnologies,
+              dispatchFunc: setRegisterForm,
             },
           ]}
         />

@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { getUserRole } from "../../utils/getUserRole";
+
 
 const CustomRoute = ({ nav, role, element }) => {
-    const user = useSelector((state) => state.users);
+    const user = useSelector((state) => state.auth);
     const isAuthenticated = user.isAuthenticated;
-    const userRole = getUserRole(user);
+
   
    
       if (!isAuthenticated) {
@@ -13,7 +13,7 @@ const CustomRoute = ({ nav, role, element }) => {
       }
     return (
       <div>
-        {isAuthenticated && role.includes(userRole) ? (
+        {isAuthenticated && role.includes(auth.role) ? (
           element
         ) : (
           <Navigate to={nav} />

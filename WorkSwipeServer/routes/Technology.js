@@ -6,7 +6,7 @@ import { verifyUser } from "../utils/verifyUser.js"
 
 router.get('/allTechnologies', getAllTechnologiesController)
 router.post('/createTechnology', verifyUser,createTechnologyController)
-router.post('/technologiesByIDs', verifyUser,getTechnologiesByListOfIDsController)
+router.post('/technologiesByIDs',getTechnologiesByListOfIDsController)
 router.delete('/deleteTechnology/:id',verifyUser, deleteTechnologyController)
 
 

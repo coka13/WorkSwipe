@@ -14,22 +14,37 @@ import { useEffect } from "react";
 import { setOpportunities } from "./store/slices/jobOffersSlice";
 import MatchesPage from "./pages/MatchesPage/MatchesPage";
 import EmployerPage from "./pages/EmployerPage/EmployerPage";
-import { setSystemTechnologies } from "./store/slices/techSlice";
 import CustomRoute from "./components/CustomRoute/CustomRoute";
-import { getUserRole } from "./utils/getUserRole";
-import "./App.css";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import AdminSupportPage from "./pages/AdminSupportPage/AdminSupportPage";
+import { setSystemTechnologies } from "./store/slices/techSlice";
+import { useQuery } from "@tanstack/react-query";
+import { baseUrl, technologyRoute } from "./utils/routes";
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.users);
-  const userTechnologies = user.technologies;
-  const systemTechnologies = useSelector(
-    (state) => state.technologies.technologies
-  );
+ 
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["get-all-technologies"], // key
+    queryFn: async () => {
+      const response = await fetch(
+        baseUrl + technologyRoute + "/allTechnologies"
+      );
+      const jsonData = await response.json();
+      return jsonData;
+    },
+  });
 
-  const { showDrawer, icons, hrefs, items } = useDrawerLogic(getUserRole(user));
+  useEffect(()=>{
+    dispatch(setSystemTechnologies(data));
+  },[data])
+
+  const user = useSelector((state) => state.auth);
+  console.log(user)
+  const userTechnologies = user.technologies;
+  
+  const { showDrawer, icons, hrefs, items } = useDrawerLogic(user.role);
   useEffect(() => {
     dispatch(
       setOpportunities({
@@ -61,13 +76,18 @@ function App() {
           },
         ],
       })
-    );
-  }, [userTechnologies]);
+      );
+    }, [userTechnologies]);
+    
 
 
-
-  return (
-    <>
+  
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
+    
+    return (
+      <>
       {showDrawer && <CustomDrawer items={items} icons={icons} hrefs={hrefs} />}
       <Routes>
         <Route path="/" element={<LoginPage />} index={true} />
@@ -77,7 +97,7 @@ function App() {
           element={
             <CustomRoute
               nav={"/"}
-              role={["JobSeeker", "Employer", "Admin"]}
+              role={["Job Seeker", "Employer", "Admin"]}
               element={<Homepage />}
             />
           }
@@ -87,7 +107,7 @@ function App() {
           element={
             <CustomRoute
               nav={"/home"}
-              role={["JobSeeker", "Employer", "Admin"]}
+              role={["Job Seeker", "Employer", "Admin"]}
               element={<ProfilePage />}
             />
           }
@@ -98,7 +118,7 @@ function App() {
           element={
             <CustomRoute
               nav={"/home"}
-              role={["JobSeeker", "Employer"]}
+              role={["Job Seeker", "Employer"]}
               element={<MatchesPage />}
             />
           }
@@ -118,7 +138,7 @@ function App() {
           element={
             <CustomRoute
               nav={"/home"}
-              role={["JobSeeker", "Employer", "Admin"]}
+              role={["Job Seeker", "Employer", "Admin"]}
               element={<AboutPage />}
             />
           }
@@ -128,7 +148,7 @@ function App() {
           element={
             <CustomRoute
               nav={"/home"}
-              role={["JobSeeker", "Employer"]}
+              role={["Job Seeker", "Employer"]}
               element={<ContactPage />}
             />
           }
@@ -138,7 +158,7 @@ function App() {
           element={
             <CustomRoute
               nav={"/home"}
-              role={["JobSeeker", "Employer"]}
+              role={["Job Seeker", "Employer"]}
               element={<SupportPage />}
             />
           }

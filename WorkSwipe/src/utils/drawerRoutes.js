@@ -28,7 +28,7 @@ export function useDrawerLogic(userRole) {
     );
   }, [location.pathname]);
 
-  if (userRole === "JobSeeker") {
+  if (userRole === "Job Seeker") {
     const icons = [
       AccountBoxIcon,
       JoinInnerIcon,
