@@ -41,7 +41,8 @@ export const createAdminController = async (req, res) => {
 
         const adminForm = { ...req.body }
         adminForm["password"] = hashPassword(req.body.password)
-        const {admin, cookieToken} = createAdminService(adminForm)
+        const admin = createAdminService(adminForm)
+        const cookieToken = setAuthCookie(`${adminForm.username} Admin`)
         res.cookie("authorization", cookieToken, {
             httpOnly:true,
             maxAge: 60*60*5
