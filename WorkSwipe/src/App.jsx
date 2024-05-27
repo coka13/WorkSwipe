@@ -43,8 +43,11 @@ function App() {
   const user = useSelector((state) => state.auth);
   console.log(user)
   const userTechnologies = user.technologies;
-  
-  const { showDrawer, icons, hrefs, items } = useDrawerLogic(user.role);
+  const systemTechnologies = useSelector(
+    (state) => state.technologies.technologies
+  );
+
+  const { showDrawer, icons, hrefs, items } = useDrawerLogic(auth.role);
   useEffect(() => {
     dispatch(
       setOpportunities({
