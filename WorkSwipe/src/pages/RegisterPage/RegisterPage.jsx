@@ -29,7 +29,7 @@ const RegisterPage = () => {
   const navigate = useNavigate();
 
 
-  const registerForm = useSelector((state) => state.register.registerForm);
+  const registerForm = useSelector((state) => state.register.registerForm);//extract registerForm from 
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
@@ -110,7 +110,7 @@ const RegisterPage = () => {
     onSuccess: (data) => {
       console.log(data);
       if (role === "Job Seeker") {
-        dispatch(setJobSeekerGeneralDetail(data));
+        dispatch(setJobSeekerGeneralDetail(data));//getting users details from store
       } else if (role === "Employer") {
         dispatch(setEmployerGeneralDetail(data));
       } else if (role === "Admin") {

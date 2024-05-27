@@ -8,11 +8,11 @@ import "./EmployerPage.css"
 
 const EmployerPage = () => {
   const dispatch = useDispatch();
-  const employerAds = useSelector((state) => state.employerOffers.employerOffers);
+  const employerAds = useSelector((state) => state.employerOffers.employerOffers);//brings from store offers the employer created
   const handleDelete = (index) => {
-    dispatch(setDeleteEmployerOffer(index));
+    dispatch(setDeleteEmployerOffer(index));//deletes from employer to store
   };
-  const systemTechs = useSelector((state) => state.technologies.technologies);
+  const systemTechs = useSelector((state) => state.technologies.technologies);//setting the requierment techs for the application-store to front
 
   const handleSubmit = (event) => {
     // You can put your logic here to handle the form submission

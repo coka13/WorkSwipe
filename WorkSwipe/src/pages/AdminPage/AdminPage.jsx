@@ -8,7 +8,7 @@ import "./AdminPage.css"
 
 const AdminPage = () => {
   const dispatch = useDispatch();
-  const systemTechs = useSelector((state) => state.technologies.technologies);
+  const systemTechs = useSelector((state) => state.technologies.technologies); //brings tech data from store for editing techlist
   const [newTech, setNewTech] = useState("");
   const handleInputChange = (e) => {
     setNewTech( e.target.value);
@@ -17,12 +17,12 @@ const AdminPage = () => {
 
   const handleSubmit = () => {
     if(newTech!=="" && (!systemTechs.includes(newTech))){
-    dispatch(addSystemTechnology(newTech))
+    dispatch(addSystemTechnology(newTech))//send new tech to techlist
     }
   };
 
   const dispatchFunc = (tech) => {
-    dispatch(deleteSystemTechnology(tech))
+    dispatch(deleteSystemTechnology(tech))//del....
   }
   return (
       <>

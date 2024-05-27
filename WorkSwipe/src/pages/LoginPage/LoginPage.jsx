@@ -19,7 +19,7 @@ const LoginPage = () => {
   const [role, setRole] = useState("Job Seeker");
   const [formData, setFormData] = useState({ username: "", password: "" });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();//not used
 
   const setUrlByRole = () => {
     if (role === "Job Seeker") {

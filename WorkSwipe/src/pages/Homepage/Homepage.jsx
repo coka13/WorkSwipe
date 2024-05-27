@@ -8,16 +8,16 @@ import { getUserRole } from "../../utils/getUserRole";
 
 const Homepage = () => {
   
-  const userRole = getUserRole( useSelector((state) => state.users));
-  const swipeProps = useSelector((state) => state.opportunities.offers);
+  const userRole = getUserRole( useSelector((state) => state.users));//brings the role from store
+  const swipeProps = useSelector((state) => state.opportunities.offers);//brings the relevant offers from store
   const currentOfferTechnologies = useSelector(
     (state) => state.opportunities.currentOffer?.technologies
   );
-  const currentOffer = useSelector((state) => state.opportunities.currentOffer);
+  const currentOffer = useSelector((state) => state.opportunities.currentOffer);//displays 1 offer
   const dispatch = useDispatch();
   const handleRightSwipe = (direction) => {
     if (direction === "right" && currentOfferTechnologies) {
-      dispatch(setAddMatch(currentOffer));
+      dispatch(setAddMatch(currentOffer));//creating a match if swiped truly
       return true;
     } else {
       return false;

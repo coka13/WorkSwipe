@@ -9,15 +9,15 @@ import { setJobSeekerTechnologies } from "../../store/slices/jobSeekerSlice";
 
 const ProfilePage = () => {
   const queryClient = useQueryClient();
-  const userTechnologies = useSelector((state) => state.users.technologies);
+  const userTechnologies = useSelector((state) => state.users.technologies);//extract the techData of the user
   const dispatch = useDispatch();
 
-  const role = useSelector((state) => state.auth.role);
+  const role = useSelector((state) => state.auth.role);//using auth to get the role from db
   let dispatchFunc;
   if (role === "Admin" || role === "Employer") {
     dispatchFunc = () => {};
   } else {
-    dispatchFunc = setJobSeekerTechnologies;
+    dispatchFunc = setJobSeekerTechnologies;//creating func to save users tech to store
   }
 
   const { data, error, isLoading } = useQuery({
@@ -76,11 +76,11 @@ const ProfilePage = () => {
     if (field === "technologies") {
       updateUserTechnologiesMutation.mutate();
     }
-    dispatch(updateUserField({ field, value }));
+    dispatch(updateUserField({ field, value }));//updating data to users slice
   };
 
   const handleDeleteTech = (tech) => {
-    dispatch(deleteTech(tech));
+    dispatch(deleteTech(tech));//deleting from store
   };
 
   return (

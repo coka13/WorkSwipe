@@ -3,7 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const AdminSupportPage = () => {
-    const user = useSelector((state)=>state.auth.role)
+    const user = useSelector((state)=>state.auth.role)//verify role from store
     const admin = {
         id:0,
         username: "adminUser",

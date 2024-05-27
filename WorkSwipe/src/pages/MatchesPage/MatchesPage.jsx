@@ -6,9 +6,9 @@ import "./MatchesPage.css"
 
 const MatchesPage = () => {
   const dispatch=useDispatch()
-  const matches = useSelector((state) => state.matches.matches);
+  const matches = useSelector((state) => state.matches.matches);//extract matches from the matchesSlice
   const handleDelete = (index) => {
-    dispatch( setDeleteMatch(index)); 
+    dispatch( setDeleteMatch(index)); //delete from slice
   };
   return (
     <>

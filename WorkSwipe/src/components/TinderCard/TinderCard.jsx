@@ -24,7 +24,7 @@ import Handshake from "../Handshake/Handshake";
 import "./TinderCard.css";
 
 const SimpleCard = ({ db, handleRightSwipe }) => {
-  const offersLength = useSelector(
+  const offersLength = useSelector(//ask offers from store for swipes
     (state) => state.opportunities.offers.length
   );
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ const SimpleCard = ({ db, handleRightSwipe }) => {
 
   const swiped = (direction) => {
     setLastDirection(direction);
-    dispatch(setDeleteOffer({ id: db[currentIndex]._id }));
+    dispatch(setDeleteOffer({ id: db[currentIndex]._id }));  //removing offer from db
   };
 
   const outOfFrame = (name, idx) => {
