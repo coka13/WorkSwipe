@@ -13,7 +13,7 @@ const CustomRoute = ({ nav, role, element }) => {
       }
     return (
       <div>
-        {isAuthenticated && role.includes(auth.role) ? (
+        {isAuthenticated && role.includes(user.role) ? (
           element
         ) : (
           <Navigate to={nav} />

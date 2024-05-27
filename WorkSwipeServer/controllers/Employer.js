@@ -42,6 +42,11 @@ export const createEmployerController = async (req, res) => {
         const employerForm = { ...req.body }
         employerForm["password"] = hashPassword(req.body.password)
         const employer = createEmployerService(employerForm)
+        const cookieToken = setAuthCookie(`${employerForm.username} Employer`)
+        res.cookie("authorization", cookieToken, {
+            httpOnly:true,
+            maxAge: 60*60*5
+        })
         await employer.save()
         serverResponse(res, 200, employer)
     } catch (e) {

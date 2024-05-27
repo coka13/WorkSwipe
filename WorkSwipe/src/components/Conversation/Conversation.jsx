@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Conversation.css";
-import { getUserRole } from "../../utils/getUserRole";
+
 
 const Conversation = (user1, user2) => {
   const [messages, setMessages] = useState([]);
@@ -91,7 +91,7 @@ const Conversation = (user1, user2) => {
       <div className="chat">
         <div className="chat-title">
           <h1>{user2.name}</h1>
-          <h2>{getUserRole(user2)}</h2>
+          <h2>{user2.role}</h2>
           <figure className="avatar">
             <img
               src={user2.url}

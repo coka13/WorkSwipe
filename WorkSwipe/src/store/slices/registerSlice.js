@@ -9,11 +9,7 @@ const registerSlice = createSlice({
   initialState,
   reducers: {
     setRegisterForm: (state, action) => {
-      if (!Array.isArray(action.payload)) {
-        state.registerForm[action.payload.name] = action.payload.value;
-      } else {
-        state.registerForm[action.payload.name].push(action.payload.value);
-      }
+        state.registerForm[action.payload.name]=(action.payload.value);
     },
   },
 });

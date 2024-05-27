@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { jobSeekerLogout } from "../../store/slices/jobSeekerSlice";
 import { adminLogout } from "../../store/slices/adminSlice";
 import { employerLogout } from "../../store/slices/employerSlice";
-import { setAuthentication, setRole } from "../../store/slices/authSlice";
+import { setAuthentication, setUserRole } from "../../store/slices/authSlice";
 import "./CustomDrawer.css";
 
 const drawerWidth = 240;
@@ -46,7 +46,7 @@ export function CustomDrawer(props) {
   const handleLogout = () => {
     const role = useSelector((state) => state.auth.role);
     dispatch(setAuthentication(false));
-    dispatch(setRole(""));
+    dispatch(setUserRole(""));
     if (role === "Admin") {
       dispatch(adminLogout());
     } else if (role === "Employer") {

@@ -1,6 +1,7 @@
 [
     {
         "username": "AsafJobSeeker",
+        "name":"asaf",
         "password": "Aa123456!",
         "experience": 3 , 
         "location": "Jerusalem",
@@ -12,6 +13,7 @@
     },
     {
         "username": "DanielJobSeeker",
+        "name":"daniel",
         "password": "Aa123456!",
         "experience": 12 , 
         "location": "Haifa",
@@ -23,6 +25,7 @@
     },
     {
         "username": "OriJobSeeker",
+        "name":"ori",
         "password": "Aa123456!",
         "experience": 5 , 
         "location": "TelAviv",
@@ -34,6 +37,7 @@
     },
     {
         "username": "ShaiJobSeeker",
+        "name":"shai",
         "password": "Aa123456!",
         "experience": 7 , 
         "location": "Rishon",
@@ -44,6 +48,7 @@
     },
     {
         "username": "AlmogJobSeeker",
+        "name":"almog",
         "password": "Aa123456!",
         "experience": 30 , 
         "location": "Harish",
@@ -54,6 +59,7 @@
     },
     {
         "username": "AnotherJobSeeker",
+        "name":"another",
         "password": "Aa123456!",
         "experience": 6 , 
         "location": "Eilat",

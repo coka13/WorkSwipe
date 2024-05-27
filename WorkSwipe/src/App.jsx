@@ -47,7 +47,7 @@ function App() {
     (state) => state.technologies.technologies
   );
 
-  const { showDrawer, icons, hrefs, items } = useDrawerLogic(auth.role);
+  const { showDrawer, icons, hrefs, items } = useDrawerLogic(user.role);
   useEffect(() => {
     dispatch(
       setOpportunities({

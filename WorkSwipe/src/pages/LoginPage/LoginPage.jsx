@@ -14,6 +14,7 @@ import {
   jobSeekerRoute,
 } from "../../utils/routes";
 import "./LoginPage.css";
+import { setAuthentication, setUserRole } from "../../store/slices/authSlice";
 
 const LoginPage = () => {
   const [role, setRole] = useState("Job Seeker");
@@ -48,6 +49,8 @@ const LoginPage = () => {
     },
     onSuccess: (data) => {
       console.log(data);
+      dispatch((setUserRole(role)))
+      dispatch(setAuthentication(true))
       navigate("/home");
     },
     onError: (error) => {
@@ -83,7 +86,7 @@ const LoginPage = () => {
           props={[
             {
               name: "username",
-              type: "text",
+              type: "textarea",
               label: "Username",
               required: true,
               onChange: handleInputChange,
@@ -91,7 +94,8 @@ const LoginPage = () => {
             },
             {
               name: "password",
-              type: "password",
+              formType:"password",
+              type: "textarea",
               label: "Password",
               required: true,
               onChange: handleInputChange,

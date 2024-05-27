@@ -13,8 +13,9 @@ export default function SelectVariants({ prop,onChange}) {
   return (
     <>
       <FormControl variant="standard" sx={{  minWidth: "50%" }}>
-        <InputLabel id={prop.name}>{prop.label}</InputLabel>
+        <InputLabel id={prop.name} required={prop.required} sx={{fontSize:"20px"}}>{prop.label} </InputLabel>
         <Select 
+      
         defaultValue={0}
         name={prop.name}
           labelId={prop.name}

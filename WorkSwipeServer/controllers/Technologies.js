@@ -7,6 +7,7 @@ import {
 import {serverResponse} from "../utils/serverResponse.js"
 
 export const getAllTechnologiesController = async (req, res) => {
+
     try {
         const allTechnologies = await getAllTechnologiesService()
         if (allTechnologies.length === 0 || !allTechnologies) {

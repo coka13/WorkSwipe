@@ -1,18 +1,19 @@
 import DisplayCard from "../../components/DisplayCard/DisplayCard";
 import { useDispatch, useSelector } from "react-redux";
 import ScienceIcon from "@mui/icons-material/Science";
-import { getUserRole } from "../../utils/getUserRole";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { baseUrl, jobSeekerRoute, technologyRoute } from "../../utils/routes";
-import "./ProfilePage.css";
 import { setJobSeekerTechnologies } from "../../store/slices/jobSeekerSlice";
+import "./ProfilePage.css";
 
 const ProfilePage = () => {
   const queryClient = useQueryClient();
-  const userTechnologies = useSelector((state) => state.users.technologies);//extract the techData of the user
-  const dispatch = useDispatch();
+  const role = useSelector((state)=>state.auth.role)
+  const userTechnologies = useSelector((state) => state.jobSeekers.technologies);
 
-  const role = useSelector((state) => state.auth.role);//using auth to get the role from db
+  
+
+
   let dispatchFunc;
   if (role === "Admin" || role === "Employer") {
     dispatchFunc = () => {};
@@ -104,7 +105,7 @@ const ProfilePage = () => {
           type={"check"}
           dispatchFunc={dispatchFunc}
           form={person}
-          role={getUserRole(person)}
+          role={role}
         />
       </div>
     </>
