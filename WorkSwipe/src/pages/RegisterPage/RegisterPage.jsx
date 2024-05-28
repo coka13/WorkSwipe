@@ -118,8 +118,6 @@ const RegisterPage = () => {
         dispatch(setJobSeekerGeneralDetail(data));
       } else if (role === "Employer") {
         dispatch(setEmployerGeneralDetail(data));
-      } else if (role === "Admin") {
-        dispatch(setAdminGeneralDetail(data));
       }
       dispatch(setAuthentication(true));
       navigate("/home");
@@ -144,7 +142,7 @@ const RegisterPage = () => {
         <CustomRadioButton
           onClick={handleRoleChange}
           title={"Choose role"}
-          list={["Job Seeker", "Employer", "Admin"]}
+          list={["Job Seeker", "Employer"]}
         />
         <FormComponent
           props={[
