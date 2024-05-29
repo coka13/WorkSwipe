@@ -9,7 +9,7 @@ import "./ProfilePage.css";
 const ProfilePage = () => {
   const queryClient = useQueryClient();
   const role = useSelector((state)=>state.auth.role)
-  const userTechnologies = useSelector((state) => state.jobSeekers.technologies);
+  const userTechnologies = useSelector((state) => state.jobSeeker.technologies);
 
   
 
