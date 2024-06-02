@@ -10,4 +10,4 @@ export const createEmployerService = (form) => new Employer(form)
 
 export const deleteEmployerService=(id)=>Employer.findOneAndDelete({ _id: id})
 
-export const getSingleEmployerByNameService = (name) => Employer.findOne({ name: name })
+export const getSingleEmployerByNameService = (username) => Employer.findOne({ username: username })
