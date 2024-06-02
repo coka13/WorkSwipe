@@ -48,10 +48,11 @@ const LoginPage = () => {
       return jsonData;
     },
     onSuccess: (data) => {
-      console.log(data);
+      if(data.message===undefined){
       dispatch((setUserRole(role)))
       dispatch(setAuthentication(true))
       navigate("/home");
+      }
     },
     onError: (error) => {
       console.error("Login failed:", error);

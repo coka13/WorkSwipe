@@ -41,7 +41,6 @@ function App() {
   },[data])
 
   const user = useSelector((state) => state.auth);
-  console.log(user)
   const userTechnologies = user.technologies;
   const systemTechnologies = useSelector(
     (state) => state.technologies.technologies

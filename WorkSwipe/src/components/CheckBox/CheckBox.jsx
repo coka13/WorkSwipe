@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import './CheckBox.css';
 
-const CheckBox = ({ options, dispatchFunc, checkedList,name }) => {
+const CheckBox = ({ options, dispatchFunc, checkedList=[],name }) => {
+  console.log(options)
+  
   const dispatch = useDispatch();
 
   const [checkedOptions, setCheckedOptions] = useState(checkedList);
@@ -16,6 +18,7 @@ const CheckBox = ({ options, dispatchFunc, checkedList,name }) => {
     setCheckedOptions(newCheckedOptions);
 
     dispatch(dispatchFunc({value:newCheckedOptions,name:name}));
+    console.log(checkedOptions)
   };
 
   return (

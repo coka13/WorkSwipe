@@ -19,7 +19,6 @@ const employerSlice = createSlice({
         },
         updateEmployerField: (state, action) => {
             const { field, value } = action.payload;
-            console.log(field, value)
             state[field] = value;
         },
         employerLogout: (state) => {

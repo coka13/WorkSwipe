@@ -45,7 +45,7 @@ const RegisterPage = () => {
   };
 
   const setFormDataByRole = (formData) => {
-    console.log("formData", formData);
+
     if (role === "Job Seeker") {
       return {
         username: formData.username,
@@ -113,7 +113,6 @@ const RegisterPage = () => {
       return jsonData;
     },
     onSuccess: (data) => {
-      console.log(data);
       if (role === "Job Seeker") {
         dispatch(setJobSeekerGeneralDetail(data));
       } else if (role === "Employer") {

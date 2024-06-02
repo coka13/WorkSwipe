@@ -19,8 +19,7 @@ const adminSlice = createSlice({
     },
 
     updateAdminField: (state, action) => {
-      const { field, value } = action.payload;
-      console.log(field, value)
+      const { field, value } = action.payload;S
       
     state[field] = value;
   },
