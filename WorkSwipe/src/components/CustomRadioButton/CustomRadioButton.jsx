@@ -18,7 +18,7 @@ export default function CustomRadioButton({ title, list ,onClick}) {
       >
         {list.map((item) => {
           return (
-            <FormControlLabel value={item} control={<Radio />}   label={item}         onClick={onClick} />
+            <FormControlLabel value={item} control={<Radio />}   label={item}   onClick={onClick} />
           );
         })}
       </RadioGroup>
