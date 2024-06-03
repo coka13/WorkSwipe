@@ -98,9 +98,12 @@ export const deleteEmployerController = async (req, res) => {
 
 export const employerLoginController = async (req, res) => {
     try {
+        console.log(req.body)
         const loginForm = { ...req.body }
-        const employer = await getSingleEmployerByNameService(loginForm.usernamename)
-        if (!employer) { return serverResponse(res, 404, { message: "userName or password incorrect" }) }
+        console.log(loginForm.username) ;
+        const employer = await getSingleEmployerByNameService(loginForm.username)
+        console.log(employer)
+        if (!employer) {  return serverResponse(res, 404, { message: "userName or password incorrect" }) }
         const isValidPassword = compareHashedPassword(loginForm.password, employer.password)
         if (!isValidPassword) {
             return serverResponse(res, 404, { message: "userName or password incorrect" })

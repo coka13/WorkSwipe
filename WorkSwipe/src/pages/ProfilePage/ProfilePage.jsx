@@ -39,8 +39,7 @@ const ProfilePage = () => {
 
   const updateUserTechnologiesMutation = useMutation({
     mutationFn: async () => {
-      console.log(person)
-      await fetch(`${baseUrl}${jobSeekerRoute}updateJobSeeker/${person._id}`, {
+      await fetch(`${baseUrl}${jobSeekerRoute}updateJobSeeker/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +62,6 @@ const ProfilePage = () => {
 
   let personProfile;
   let img;
-  console.log("userTechs",userTechnologies)
 
   if (role === "Job Seeker") {
     personProfile = {
@@ -71,10 +69,10 @@ const ProfilePage = () => {
       Name: jobSeeker.name,
       Email: jobSeeker.email,
       Experience: jobSeeker.experience,
-      LinkedIn: jobSeeker.linkedInUrl,
+      LinkedIn: jobSeeker.linkedIn,
       GitHub: jobSeeker.gitHubUrl,
-      Residence: jobSeeker.location,
-      Technologies: data,
+      Residence: jobSeeker.residence,
+      Technologies: userTechnologies,
     };
     img = jobSeeker.url;
   } else if (role === "Admin") {
