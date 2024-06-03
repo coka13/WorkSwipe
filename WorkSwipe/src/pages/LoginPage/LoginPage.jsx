@@ -14,7 +14,8 @@ import {
   jobSeekerRoute,
 } from "../../utils/routes";
 import "./LoginPage.css";
-import { setAuthentication, setUserRole } from "../../store/slices/authSlice";
+import { setAuthentication, setUserId, setUserRole } from "../../store/slices/authSlice";
+import { setJobSeekerGeneralDetail } from "../../store/slices/jobSeekerSlice";
 
 const LoginPage = () => {
   const [role, setRole] = useState("Job Seeker");
@@ -49,8 +50,11 @@ const LoginPage = () => {
     },
     onSuccess: (data) => {
       if(data.message===undefined){
+        console.log(data)
       dispatch((setUserRole(role)))
       dispatch(setAuthentication(true))
+      dispatch(setUserId(data._id))
+      dispatch(setJobSeekerGeneralDetail(data))
       navigate("/home");
       }
     },

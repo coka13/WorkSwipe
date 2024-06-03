@@ -8,7 +8,8 @@ const initialState = {
   experience: "",
   residence: "",
   url: "",
-  email:""
+  email:"",
+  gitHubUrl:""
 };
 
 const jobSeekerSlice = createSlice({

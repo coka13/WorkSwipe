@@ -54,6 +54,7 @@ export const deleteTechnologyController = async (req, res) => {
 
 export const getTechnologiesByListOfIDsController = async (req, res) => {
     try {
+
         const idsList = {...req.body}
         console.log(req.body)
         const technologiesByListOfIDs = await getTechnologiesByListOfIDsService(idsList.idsList)
