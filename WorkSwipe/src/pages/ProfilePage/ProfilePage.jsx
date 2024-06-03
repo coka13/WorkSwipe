@@ -40,6 +40,7 @@ const ProfilePage = () => {
 
   const updateUserTechnologiesMutation = useMutation({
     mutationFn: async () => {
+      console.log(person)
       await fetch(`${baseUrl}${jobSeekerRoute}updateJobSeeker/${person._id}`, {
         method: "PUT",
         headers: {
