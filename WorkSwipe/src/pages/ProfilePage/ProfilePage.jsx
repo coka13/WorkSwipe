@@ -62,6 +62,7 @@ const ProfilePage = () => {
 
   let personProfile;
   let img;
+  console.log("userTechs",userTechnologies)
 
   if (role === "Job Seeker") {
     personProfile = {
@@ -69,10 +70,10 @@ const ProfilePage = () => {
       Name: jobSeeker.name,
       Email: jobSeeker.email,
       Experience: jobSeeker.experience,
-      LinkedIn: jobSeeker.linkedIn,
+      LinkedIn: jobSeeker.linkedInUrl,
       GitHub: jobSeeker.gitHubUrl,
-      Residence: jobSeeker.residence,
-      Technologies: userTechnologies,
+      Residence: jobSeeker.location,
+      Technologies: data,
     };
     img = jobSeeker.url;
   } else if (role === "Admin") {
