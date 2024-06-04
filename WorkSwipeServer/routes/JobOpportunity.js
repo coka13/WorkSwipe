@@ -5,7 +5,7 @@ import { createJobOpportunityController, deleteJobOpportunityByEmployerIDControl
 import { verifyUser } from "../utils/verifyUser.js"
 
 router.get('/singleJobOpportunity/:id',verifyUser ,getSingleJobOpportunityController)
-router.get('/allJobOpportunities', verifyUser,getAllJobOpportunitiesController)
+router.get('/allJobOpportunities',getAllJobOpportunitiesController)
 router.post('/createJobOpportunity',verifyUser, createJobOpportunityController)
 router.put('/updateJobOpportunity/:id',verifyUser, updateJobOpportunityController)
 router.delete('/deleteJobOpportunity/:id',verifyUser, deleteJobOpportunityController)

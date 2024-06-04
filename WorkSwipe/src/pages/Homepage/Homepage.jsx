@@ -23,10 +23,13 @@ const Homepage = () => {
     }
   };
 
+
+  console.log(userRole)
+
   return (
     <div className="homePage">
       <div className="swipeArea">
-        {userRole === "JobSeeker" && (
+        {userRole === "Job Seeker" && ( 
           <SimpleCard db={swipeProps} handleRightSwipe={handleRightSwipe} />
         )}
    {userRole === "Admin" && (

@@ -8,6 +8,8 @@ const jobOpportunitySchema = new mongoose.Schema({
   emailHR: {type:String , required:true},
   website:{type:String },
   employer:{type:mongoose.Schema.Types.ObjectId , ref:"Employer" , required:true},
+  name:{type:String,required:true},
+  niceToHave:[{type:mongoose.Schema.Types.ObjectId , ref:"Technologies" }],
   isActive:{type:Boolean, default:true},
   dateCreated: { type: Date, default: Date.now() },
 });

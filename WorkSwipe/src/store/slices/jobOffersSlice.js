@@ -11,9 +11,17 @@ const jobOffersSlice = createSlice({
   initialState,
   reducers: {
     setOpportunities: (state, action) => {
-      state.offers = action.payload.opportunities.filter((op)=>{
+      console.log("jobOffers",action.payload)
+      console.log("offers",state.offers)
+      if(state.offers.length===0){
+state.offers=action.payload
+      }
+      else{
+      state.offers = action.payload.filter((op)=>{
         return arraysAreEqual(op.technologies,action.payload.technologies)
       });
+    }
+      console.log("offers",state.offers)
     },
     setNewOffer: (state, action) => {
       const NewOffer = action.payload;

@@ -2,10 +2,11 @@
   {
     "position": "developer",
     "experience": 3,
-    "technologies": ["JavaScript"],
+    "technologies": ["JavaScript","CSS","HTML"],
     "location": "TelAviv",
     "emailHR": "2HR@gmail.com",
     "website": "www.2TelAviv.com",
+    "name":"cadence",
     "employer": 2
   },
   {
@@ -15,6 +16,7 @@
     "location": "Herzellia",
     "emailHR": "0HR@gmail.com",
     "website": "www.0Herzellia.com",
+    "name":"ness",
     "employer": 0
   },
   {
@@ -24,6 +26,7 @@
     "location": "Jerusalem",
     "emailHR": "1HR@gmail.com",
     "website": "www.1Jerusalem.com",
+    "name":"nvidia",
     "employer": 1
   },
   {
@@ -33,6 +36,7 @@
     "location": "TelAviv",
     "emailHR": "2HR@gmail.com",
     "website": "www.2TelAviv.com",
+    "name":"shimshon",
     "employer": 2
   },
   {
@@ -42,6 +46,7 @@
     "location": "Herzellia",
     "emailHR": "0HR@gmail.com",
     "website": "www.0Herzellia.com",
+    "name":"haha",
     "employer": 0
   },
   {
@@ -51,6 +56,7 @@
     "location": "Jerusalem",
     "emailHR": "1HR@gmail.com",
     "website": "www.1Jerusalem.com",
+    "name":"asdasd",
     "employer": 1
   },
   {
@@ -60,6 +66,7 @@
     "location": "TelAviv",
     "emailHR": "2HR@gmail.com",
     "website": "www.2TelAviv.com",
+    "name":"sdf",
     "employer": 2
   }
 ]
