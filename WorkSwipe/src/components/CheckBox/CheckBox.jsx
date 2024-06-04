@@ -4,7 +4,7 @@ import { useState } from 'react';
 import './CheckBox.css';
 
 const CheckBox = ({ options, dispatchFunc, checkedList=[],name }) => {
-  console.log(options)
+  console.log("checkedList",checkedList)
   
   const dispatch = useDispatch();
 

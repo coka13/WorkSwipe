@@ -49,6 +49,7 @@ const LoginPage = () => {
       return jsonData;
     },
     onSuccess: (data) => {
+      console.log(data)
       if(data.message===undefined){
         console.log(data)
       dispatch((setUserRole(role)))

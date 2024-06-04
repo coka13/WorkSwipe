@@ -4,9 +4,9 @@ const initialState = {
   username: "",
   name: "",
   technologies: [],
-  linkedIn: "",
+  linkedInUrl: "",
   experience: "",
-  residence: "",
+  location: "",
   url: "",
   email:"",
   gitHubUrl:""

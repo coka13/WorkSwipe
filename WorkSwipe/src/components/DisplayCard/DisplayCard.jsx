@@ -69,6 +69,7 @@ export default function DisplayCard({
                   {value.map((tech, techIndex) => (
                     <li key={techIndex}>
                       <Typography className="profileInfo">
+                     
                         {tech.name}
 
                         {value.length > 1 && (
