@@ -27,6 +27,7 @@ const SimpleCard = ({ db, handleRightSwipe }) => {
   const offersLength = useSelector(
     (state) => state.opportunities.offers.length
   );
+  console.log("db",db)
   const dispatch = useDispatch();
   const [lastDirection, setLastDirection] = useState(null);
   const [expanded, setExpanded] = useState(false);
