@@ -102,8 +102,9 @@ const ProfilePage = () => {
     }
   };
 
-  const handleDeleteTech = (tech) => {
-    dispatch(setJobSeekerTechnologies({ technologies: userTechnologies.filter((tech) => tech !== tech) }));
+  const handleDeleteTech = (techId) => {
+    console.log(userTechnologies)
+    dispatch(setJobSeekerTechnologies(userTechnologies.filter((id) => id!== techId) ));
   };
 
   return (
