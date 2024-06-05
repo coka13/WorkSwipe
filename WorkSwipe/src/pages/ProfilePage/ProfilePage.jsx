@@ -1,12 +1,14 @@
 import DisplayCard from "../../components/DisplayCard/DisplayCard";
-import { useSelector } from "react-redux";
+import { useSelector ,useDispatch } from "react-redux";
 import ScienceIcon from "@mui/icons-material/Science";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { baseUrl, jobSeekerRoute, technologyRoute } from "../../utils/routes";
 import { setJobSeekerTechnologies } from "../../store/slices/jobSeekerSlice";
 import "./ProfilePage.css";
 
+
 const ProfilePage = () => {
+  const dispatch = useDispatch()
   const queryClient = useQueryClient();
   const role = useSelector((state) => state.auth.role);
   const id = useSelector((state) => state.auth._id);
