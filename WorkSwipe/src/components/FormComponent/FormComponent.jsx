@@ -17,6 +17,7 @@ export default function FormComponent({ props }) {
   };
 
   const handleInputChange = (event, prop) => {
+    console.log(prop)
     const { name, value } = event.target;
     dispatch(prop.dispatchFunc({ name, value }));
   };
