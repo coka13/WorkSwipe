@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import BasicButtons from "../BasicButtons/BasicButtons";
 import FormComponent from "../FormComponent/FormComponent";
 import "./CustomModal.css";
+import { useDispatch } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -18,10 +19,16 @@ const style = {
   p: 4,
 };
 
-export default function CustomModal({ title, description, open, setOpen, onSubmit,type }) {
-
-
-  const [inputValue, setInputValue] = React.useState("");
+export default function CustomModal({
+  title,
+  dispatchFunc,
+  description,
+  open,
+  setOpen,
+  type,
+}) {
+  const [inputValue, setInputValue] = useState("");
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     setInputValue("");
@@ -33,10 +40,8 @@ export default function CustomModal({ title, description, open, setOpen, onSubmi
   };
 
   const handleSubmit = () => {
-    if (onSubmit) {
-      if(inputValue!==""){
-      onSubmit(inputValue);
-      }
+    if (inputValue !== "") {
+      dispatch(dispatchFunc({ field: title, value: inputValue }));
     }
     handleClose();
   };
@@ -60,7 +65,16 @@ export default function CustomModal({ title, description, open, setOpen, onSubmi
           {title}
         </Typography>
 
-        <FormComponent props={[{ name: title, type: type, value: inputValue, onChange: handleInputChange }]} />
+        <FormComponent
+          props={[
+            {
+              name: title,
+              type: type,
+              value: inputValue,
+              onChange: handleInputChange,
+            },
+          ]}
+        />
         <BasicButtons text={"Submit"} onClick={handleSubmit} />
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           {description}

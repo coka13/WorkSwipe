@@ -5,11 +5,9 @@ import CheckBox from "../CheckBox/CheckBox";
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CustomChildrenModal from "../CustomChildrenModal/CustomChildrenModal";
-import { useDispatch } from "react-redux";
 import "./FormComponent.css";
 
 export default function FormComponent({ props }) {
-  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -17,11 +15,8 @@ export default function FormComponent({ props }) {
   };
 
   const handleInputChange = (event, prop) => {
-    const { name, value } = event.target;
-    dispatch(prop.dispatchFunc({ name, value }));
+    prop.onChange(event);
   };
-
-
 
   return (
     <Box component="form" noValidate autoComplete="off">
@@ -38,6 +33,7 @@ export default function FormComponent({ props }) {
               />
             );
           } else if (prop.type === "check") {
+          
             return (
               <div key={index}>
                 <IconButton onClick={handleOpenModal}>
@@ -55,7 +51,7 @@ export default function FormComponent({ props }) {
                     options={prop.options}
                     name={prop.name}
                     checkedList={prop.checkedList}
-                    dispatchFunc={prop.dispatchFunc}
+                    dispatchFunc={prop.selectDispatchFunc}
                   />
                 </CustomChildrenModal>
               </div>

@@ -54,6 +54,7 @@ export const createJobSeekerController = async (req, res) => {
 }
 
 export const updateJobSeekerController = async (req, res) => {
+    console.log("hi")
     const jobSeekerAllowedUpdates = ["technologies", "location", "linkedInUrl", "gitHubUrl"]
     const updates = Object.keys(req.body)
     const isValidOperation = jobSeeker.every((update) =>
@@ -79,7 +80,6 @@ export const updateJobSeekerController = async (req, res) => {
 }
 
 export const updateJobSeekerPasswordController = async (req, res) => {
-
     const jobSeekerPasswordUpdate = ["password"]
     const updates = Object.keys(req.body)
     const isValidOperation = updates.every((update) =>

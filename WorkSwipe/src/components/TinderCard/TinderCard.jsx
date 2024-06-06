@@ -24,6 +24,7 @@ import Handshake from "../Handshake/Handshake";
 import "./TinderCard.css";
 
 const SimpleCard = ({ db, handleRightSwipe }) => {
+  console.log(db[0])
   const offersLength = useSelector(
     (state) => state.opportunities.offers.length
   );
@@ -141,10 +142,10 @@ if(db.length===0 && !match){
                 <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
                   <MailIcon sx={{ marginRight: 1, color: "#1976D2" }} />
                   <a
-                    href={`mailto:${db[currentIndex].email}`}
+                    href={`mailto:${db[currentIndex].emailHR}`}
                     style={{ color: "#1976D2" }}
                   >
-                    {db[currentIndex].email}
+                    {db[currentIndex].emailHR}
                   </a>
                 </Typography>
               </CardContent>

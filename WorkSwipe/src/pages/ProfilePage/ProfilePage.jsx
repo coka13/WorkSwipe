@@ -1,27 +1,31 @@
+import React, { useEffect } from 'react';
 import DisplayCard from "../../components/DisplayCard/DisplayCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ScienceIcon from "@mui/icons-material/Science";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { baseUrl, jobSeekerRoute, technologyRoute } from "../../utils/routes";
-import { setJobSeekerTechnologies } from "../../store/slices/jobSeekerSlice";
+import { setJobSeekerTechnologies, updateJobSeekerField } from "../../store/slices/jobSeekerSlice";
 import "./ProfilePage.css";
 
 const ProfilePage = () => {
+  const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const role = useSelector((state) => state.auth.role);
   const id = useSelector((state) => state.auth._id);
   const userTechnologies = useSelector((state) => state.jobSeeker.technologies);
+  const systemTechnologies=useSelector((state)=>state.technologies.technologies)
+
+  useEffect(() => {
+    console.log('userTechnologies:', userTechnologies);
+  }, [userTechnologies]);
 
   const jobSeeker = useSelector((state) => state.jobSeeker);
   const admin = useSelector((state) => state.admin);
   const employer = useSelector((state) => state.employer);
 
-  let dispatchFunc;
-  if (role === "Admin" || role === "Employer") {
-    dispatchFunc = () => {};
-  } else {
-    dispatchFunc = setJobSeekerTechnologies;
-  }
+  const dispatchFunc = updateJobSeekerField
+  const selectDispatchFunc = setJobSeekerTechnologies
+
   const { data, error, isLoading } = useQuery({
     queryKey: ["get-technologies-by-ids"],
     queryFn: async () => {
@@ -38,13 +42,13 @@ const ProfilePage = () => {
   });
 
   const updateUserTechnologiesMutation = useMutation({
-    mutationFn: async () => {
-      await fetch(`${baseUrl}${jobSeekerRoute}updateJobSeeker/${id}`, {
+    mutationFn: async (newTechnologies) => {
+      await fetch(`${baseUrl}${jobSeekerRoute}/updateJobSeeker/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ technologies: userTechnologies }),
+        body: JSON.stringify({ technologies: newTechnologies }),
       });
     },
     onSuccess: () => {
@@ -62,7 +66,6 @@ const ProfilePage = () => {
 
   let personProfile;
   let img;
-  console.log("userTechs",userTechnologies)
 
   if (role === "Job Seeker") {
     personProfile = {
@@ -70,9 +73,9 @@ const ProfilePage = () => {
       Name: jobSeeker.name,
       Email: jobSeeker.email,
       Experience: jobSeeker.experience,
-      LinkedIn: jobSeeker.linkedInUrl,
-      GitHub: jobSeeker.gitHubUrl,
-      Residence: jobSeeker.location,
+      linkedInUrl: jobSeeker.linkedInUrl,
+      gitHubUrl: jobSeeker.gitHubUrl,
+      Location: jobSeeker.location,
       Technologies: data,
     };
     img = jobSeeker.url;
@@ -96,12 +99,14 @@ const ProfilePage = () => {
 
   const handleEdit = (field, value) => {
     if (field === "technologies") {
-      updateUserTechnologiesMutation.mutate();
+      updateUserTechnologiesMutation.mutate(value);
     }
   };
 
   const handleDeleteTech = (tech) => {
-    dispatch(setJobSeekerTechnologies({ technologies: userTechnologies.filter((tech) => tech !== tech) }));
+    const updatedTechnologies = userTechnologies.filter(_id => _id !== tech);
+    dispatch(setJobSeekerTechnologies(updatedTechnologies));
+    handleEdit("technologies", updatedTechnologies); // Make sure this triggers the mutation
   };
 
   return (
@@ -109,26 +114,26 @@ const ProfilePage = () => {
       <div className="title">
         <h4>Profile</h4>
       </div>
-      {(role === "Job Seeker") && (
+      {role === "Job Seeker" && (
         <div className="card">
           <DisplayCard
             db={personProfile}
             img={img}
             handleEdit={handleEdit}
             handleDeleteList={handleDeleteTech}
-            checkedList={data}
+            checkedList={data.map(tech => tech._id)}
             formIcon={<ScienceIcon />}
             title={"Choose your technologies"}
-            description={
-              "Choose the technologies you are competent in and press Submit"
-            }
+            description={"Choose the technologies you are competent in and press Submit"}
             type={"check"}
             dispatchFunc={dispatchFunc}
+            selectDispatchFunc={selectDispatchFunc}
             role={role}
+            list={systemTechnologies}
           />
         </div>
       )}
-      {(role === "Admin") && (
+      {role === "Admin" && (
         <div className="card">
           <DisplayCard
             db={personProfile}
@@ -139,7 +144,7 @@ const ProfilePage = () => {
           />
         </div>
       )}
-      {(role === "Employer") && (
+      {role === "Employer" && (
         <div className="card">
           <DisplayCard
             db={personProfile}

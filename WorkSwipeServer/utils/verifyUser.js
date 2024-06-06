@@ -5,7 +5,9 @@ import { cookieTokenDuration } from '../constants/constants.js'
 
 
 export const verifyUser = async (req,res,next) => {
+
     try{
+
         if(req.headers.postman===FREE_GUARD){
            
             next();

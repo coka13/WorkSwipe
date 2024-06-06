@@ -4,7 +4,8 @@ const initialState = {
     username: "",
     name: "",
     url: "",
-    email: ""
+    email: "",
+    CompanyName: ""
 };
 
 const employerSlice = createSlice({

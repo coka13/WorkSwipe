@@ -1,14 +1,16 @@
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './CheckBox.css';
 
-const CheckBox = ({ options, dispatchFunc, checkedList=[],name }) => {
-  console.log("checkedList",checkedList)
-  
+const CheckBox = ({ options, dispatchFunc, checkedList = [], name }) => {
   const dispatch = useDispatch();
+  const [checkedOptions, setCheckedOptions] = useState(checkedList);
 
-  const [checkedOptions, setCheckedOptions] = useState(checkedList); 
+  useEffect(() => {
+    console.log('Updated checkedList:', checkedList);
+    setCheckedOptions(checkedList);
+  }, [checkedList]);
 
   const handleCheckboxChange = (option) => {
     const newCheckedOptions = checkedOptions.includes(option._id)
@@ -16,9 +18,8 @@ const CheckBox = ({ options, dispatchFunc, checkedList=[],name }) => {
       : [...checkedOptions, option._id];
 
     setCheckedOptions(newCheckedOptions);
-
-    dispatch(dispatchFunc({value:newCheckedOptions,name:name}));
-    console.log(checkedOptions)
+    console.log('Dispatching:', { value: newCheckedOptions, name: name });
+    dispatch(dispatchFunc({ value: newCheckedOptions, name: name }));
   };
 
   return (
@@ -36,9 +37,9 @@ const CheckBox = ({ options, dispatchFunc, checkedList=[],name }) => {
             }
           />
         ))}
-      </FormGroup> 
+      </FormGroup>
     </div>
   );
 };
 
-export default CheckBox; 
+export default CheckBox;

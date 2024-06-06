@@ -56,9 +56,7 @@ export const getTechnologiesByListOfIDsController = async (req, res) => {
     try {
 
         const idsList = {...req.body}
-        console.log(req.body)
         const technologiesByListOfIDs = await getTechnologiesByListOfIDsService(idsList.idsList)
-        console.log(technologiesByListOfIDs)
         if (technologiesByListOfIDs.length === 0 || !technologiesByListOfIDs) {
             return serverResponse(res, 204, { message: "technology not found" })
 

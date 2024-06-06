@@ -12,7 +12,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CustomModal from "../CustomModal/CustomModal";
 import { useState } from "react";
 import FormComponent from "../FormComponent/FormComponent";
-import { useSelector } from "react-redux";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import "./DisplayCard.css";
 
 export default function DisplayCard({
@@ -26,6 +27,8 @@ export default function DisplayCard({
   description,
   type,
   dispatchFunc,
+  selectDispatchFunc,
+  list
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEdit, setCurrentEdit] = useState("");
@@ -34,8 +37,6 @@ export default function DisplayCard({
     setCurrentEdit(key.charAt(0).toLowerCase() + key.slice(1));
     setIsModalOpen(true);
   };
-
-  const techList = useSelector((state) => state.technologies.technologies);
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -52,28 +53,30 @@ export default function DisplayCard({
           </Typography>
         }
       />
-      <CardContent sx={{padding:"16px 16px 0px 16px",margin:"0"}} >
+      <CardContent sx={{ padding: "16px 16px 0px 16px", margin: "0" }}>
         <CardMedia
           component="img"
           image={img}
           alt={db.name}
-          sx={{ pointerEvents: "none"}}
+          sx={{ pointerEvents: "none" }}
         />
         {Object.keys(db).map((key, index) => {
           const value = db[key];
           if (Array.isArray(value)) {
             return (
+              <div className="list">
               <div key={index}>
                 <div className="header">{key}:</div>
-                <ul className="list" >
+                <ul className="list">
                   {value.map((tech, techIndex) => (
                     <li key={techIndex}>
                       <Typography className="profileInfo">
-                     
                         {tech.name}
 
                         {value.length > 1 && (
-                          <IconButton onClick={() => handleDeleteList(tech._id)}>
+                          <IconButton
+                            onClick={() => handleDeleteList(tech._id)}
+                          >
                             <DeleteIcon
                               sx={{ marginRight: 1, color: "#1976D2" }}
                             />
@@ -84,6 +87,30 @@ export default function DisplayCard({
                   ))}
                 </ul>
               </div>
+              </div>);
+          } else if (key === 'gitHubUrl' || key === 'linkedInUrl') {
+            // Render icon button with link instead of displaying URL
+            return (
+              <>
+                <Typography className="profileInfo" key={index}>
+                  {key === 'gitHubUrl' ? (
+                    <a href={value} target="_blank" rel="noopener noreferrer">
+                      <IconButton>
+                        <GitHubIcon sx={{  color: "#1976D2" }} />
+                      </IconButton>
+                    </a>
+                  ) : (
+                    <a href={value} target="_blank" rel="noopener noreferrer">
+                      <IconButton>
+                        <LinkedInIcon sx={{ color: "#1976D2" }} />
+                      </IconButton>
+                    </a>
+                  )}
+                  <IconButton onClick={() => handleEditDetails(key)}>
+                    <EditIcon sx={{  color: "#1976D2" }} />
+                  </IconButton>
+                </Typography>
+              </>
             );
           } else {
             return (
@@ -91,7 +118,7 @@ export default function DisplayCard({
                 <Typography className="profileInfo" key={index}>
                   <span style={{ fontWeight: "bold" }}>{key}</span>: {value}
                   <IconButton onClick={() => handleEditDetails(key)}>
-                    <EditIcon sx={{ marginRight: 1, color: "#1976D2" }} />
+                    <EditIcon sx={{  color: "#1976D2" }} />
                   </IconButton>
                 </Typography>
               </>
@@ -99,8 +126,9 @@ export default function DisplayCard({
           }
         })}
       </CardContent>
-      <CardActions disableSpacing sx={{padding:"0",margin:"0"}} />
+      <CardActions disableSpacing sx={{ padding: "0", margin: "0" }} />
       <CustomModal
+        dispatchFunc={dispatchFunc}
         title={currentEdit}
         placeholder={`Edit ${currentEdit}`}
         description={`Enter your new ${currentEdit} and press the submit button`}
@@ -116,13 +144,14 @@ export default function DisplayCard({
             title: title,
             description: description,
             type: type,
-            options: techList,
+            options: list,
             Icon: formIcon,
-            checkedList : checkedList,
-            dispatchFunc : dispatchFunc,
+            checkedList: checkedList,
+            dispatchFunc: dispatchFunc,
+            selectDispatchFunc: selectDispatchFunc
+            
           },
         ]}
-
       />
     </Card>
   );
