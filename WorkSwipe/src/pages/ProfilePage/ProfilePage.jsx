@@ -101,12 +101,14 @@ const ProfilePage = () => {
   }
 
   const handleEdit = (field, value) => {
+    console.log("hi")
     if (field === "technologies") {
       updateUserTechnologiesMutation.mutate(value);
     }
   };
 
   const handleDeleteTech = (tech) => {
+    
     const updatedTechnologies = userTechnologies.filter(_id => _id !== tech);
     dispatch(setJobSeekerTechnologies(updatedTechnologies));
     handleEdit("technologies", updatedTechnologies); // Make sure this triggers the mutation
