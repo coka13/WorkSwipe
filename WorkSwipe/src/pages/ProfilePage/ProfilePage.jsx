@@ -7,6 +7,7 @@ import { baseUrl, jobSeekerRoute, technologyRoute } from "../../utils/routes";
 import { setJobSeekerTechnologies, updateJobSeekerField } from "../../store/slices/jobSeekerSlice";
 import "./ProfilePage.css";
 
+
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
