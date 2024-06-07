@@ -120,6 +120,11 @@ export const jobSeekerLoginController = async (req, res) => {
     try {
         const loginForm = { ...req.body }
         const jobSeeker = await getSingleJobSeekerByNameService(loginForm.username)
+        const cookieToken = setAuthCookie(`${loginForm.username} JobSeeker`)
+        res.cookie("authorization", cookieToken, {
+            httpOnly:true,
+            maxAge: 60*60*5
+        })
         if (!jobSeeker) { return serverResponse(res, 404, { message: "userName or password incorrect" }) }
         const isValidPassword = compareHashedPassword(loginForm.password, jobSeeker.password)
         if (!isValidPassword) {
