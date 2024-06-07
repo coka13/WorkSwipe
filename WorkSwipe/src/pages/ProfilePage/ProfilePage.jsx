@@ -126,7 +126,7 @@ const ProfilePage = () => {
   }
 
   const handleEdit = (field, value) => {
-    console.log("hi");
+
     if (field === "technologies") {
       updateUserTechnologiesMutation.mutate(value);
     }
