@@ -3,6 +3,7 @@ import { createJobSeekerService, deleteJobSeekerService, getAllJobSeekersService
 import { serverResponse } from "../utils/serverResponse.js"
 import { hashPassword } from "../utils/passwordHashing.js"
 import { compareHashedPassword } from "../utils/compareHashedPassword.js"
+import { setAuthCookie } from "../services/Auth.js"
 
 export const getAllJobSeekersController = async (req, res) => {
     try {
@@ -54,10 +55,9 @@ export const createJobSeekerController = async (req, res) => {
 }
 
 export const updateJobSeekerController = async (req, res) => {
-    console.log("hi")
     const jobSeekerAllowedUpdates = ["technologies", "location", "linkedInUrl", "gitHubUrl"]
     const updates = Object.keys(req.body)
-    const isValidOperation = jobSeeker.every((update) =>
+    const isValidOperation = updates.every((update) =>
         jobSeekerAllowedUpdates.includes(update))
     if (!isValidOperation) {
         return serverResponse(res, 404, { message: "no job seeker found" })
@@ -118,21 +118,26 @@ export const deleteJobSeekerController = async (req, res) => {
 
 export const jobSeekerLoginController = async (req, res) => {
     try {
-        const loginForm = { ...req.body }
-        const jobSeeker = await getSingleJobSeekerByNameService(loginForm.username)
-        const cookieToken = setAuthCookie(`${loginForm.username} JobSeeker`)
-        res.cookie("authorization", cookieToken, {
-            httpOnly:true,
-            maxAge: 60*60*5
-        })
-        if (!jobSeeker) { return serverResponse(res, 404, { message: "userName or password incorrect" }) }
-        const isValidPassword = compareHashedPassword(loginForm.password, jobSeeker.password)
-        if (!isValidPassword) {
-            return serverResponse(res, 404, { message: "userName or password incorrect" })
+        const loginForm = { ...req.body };
+        const jobSeeker = await getSingleJobSeekerByNameService(loginForm.username);
+        if (!jobSeeker) {
+            return serverResponse(res, 404, { message: "Username or password incorrect" });
         }
-        return serverResponse(res, 200, jobSeeker)
+        const isValidPassword = compareHashedPassword(loginForm.password, jobSeeker.password);
+        if (!isValidPassword) {
+            return serverResponse(res, 404, { message: "Username or password incorrect" });
+        }
+        const cookieToken = setAuthCookie(`${loginForm.username}_JobSeeker`);
+        res.cookie("authorization", cookieToken, {
+            httpOnly: true,
+            maxAge: 60*60*5
+        });
+
+        return serverResponse(res, 200, jobSeeker);
     } catch (e) {
-        console.log(e)
-        return serverResponse(res, 500, { message: e.message })
+        console.log(e);
+        return serverResponse(res, 500, { message: e.message });
     }
-}
+};
+
+
