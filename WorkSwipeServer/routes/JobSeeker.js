@@ -8,7 +8,7 @@ router.get('/singleJobSeeker/:id',verifyUser, getSingleJobSeekerController)
 router.get('/allJobSeekers', verifyUser,getAllJobSeekersController)
 router.post('/createJobSeeker', createJobSeekerController)
 router.post('/jobSeekerLogin', jobSeekerLoginController)
-router.put('/updateJobSeeker/:id',verifyUser, updateJobSeekerController)
+router.put('/updateJobSeeker/:id', updateJobSeekerController)
 router.delete('/deleteJobSeeker/:id', verifyUser, deleteJobSeekerController)
 
 

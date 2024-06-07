@@ -20,7 +20,10 @@ import { connectionString } from "./config/config.js";
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5173', // Replace with your frontend URL
+  credentials: true // Enable credentials
+}));
 //app.use(express.static("Client/dist")) 
 
 app.use('/api/admin', adminRoutes)
