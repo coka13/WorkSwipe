@@ -16,9 +16,7 @@ const ProfilePage = () => {
   const userTechnologies = useSelector((state) => state.jobSeeker.technologies);
   const systemTechnologies=useSelector((state)=>state.technologies.technologies)
 
-  useEffect(() => {
-    console.log('userTechnologies:', userTechnologies);
-  }, [userTechnologies]);
+  useEffect(() => {}, [userTechnologies]);
 
   const jobSeeker = useSelector((state) => state.jobSeeker);
   const admin = useSelector((state) => state.admin);
