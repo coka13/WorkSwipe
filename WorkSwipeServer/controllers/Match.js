@@ -1,6 +1,6 @@
 import { getSingleEmployerService } from "../services/Employer.js"
 import { getSingleJobSeekerService } from "../services/JobSeeker.js"
-import { getAllMatchesByEmployerIdService, getAllMatchesByJobSeekerIdService, getAllMatchesByJobOpportunityIdService,  createMatchService, deleteMatchService, getSingleMatchService } from "../services/Match.js"
+import { getAllMatchesByEmployerIdService, getAllMatchesByJobSeekerIdService, getAllMatchesByJobOpportunityIdService, createMatchService, deleteMatchService, getSingleMatchService } from "../services/Match.js"
 import { serverResponse } from "../utils/serverResponse.js"
 
 export const getAllMatchesByEmployerIdController = async (req, res) => {
@@ -100,13 +100,13 @@ export const createMatchController = async (req, res) => {
             return serverResponse(res, 404, { message: "jobSeeker not found" })
         }
         const jobOpportunityId = req.params.jobOpportunityId
-        const jobOpportunity = await getSingleJobOpportunityByEmployerIDService(jobOpportunityId , employerId)
+        const jobOpportunity = await getSingleJobOpportunityByEmployerIDService(jobOpportunityId, employerId)
         if (!jobOpportunity) {
             return serverResponse(res, 404, { message: "job Opportunity not found" })
         }
-        
-        const matchObject= { jobSeeker , jobOpportunity}
-        const match =  createMatchService(matchObject)
+
+        const matchObject = { jobSeeker, jobOpportunity }
+        const match = createMatchService(matchObject)
         await match.save()
         if (match.length === 0 || !match) {
             return serverResponse(res, 204, { message: "no match created" })
