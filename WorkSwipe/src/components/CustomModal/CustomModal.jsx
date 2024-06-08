@@ -5,7 +5,8 @@ import Modal from "@mui/material/Modal";
 import BasicButtons from "../BasicButtons/BasicButtons";
 import FormComponent from "../FormComponent/FormComponent";
 import "./CustomModal.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { baseUrl, jobSeekerRoute, employerRoute,adminRoute } from "../../utils/routes";
 
 const style = {
   position: "absolute",
@@ -26,9 +27,12 @@ export default function CustomModal({
   open,
   setOpen,
   type,
+  allowedUpdates,
 }) {
   const [inputValue, setInputValue] = useState("");
+  const id = useSelector((state) => state.auth._id);
   const dispatch = useDispatch();
+  const role= useSelector((state)=>state.auth.role)
 
   const handleClose = () => {
     setInputValue("");
@@ -39,12 +43,50 @@ export default function CustomModal({
     setInputValue(event.target.value);
   };
 
+  const setUrlByRole = (role) => {
+    if (role === "Job Seeker") {
+      return `${baseUrl}${jobSeekerRoute}/updateJobSeeker/${id}`;
+    } else if (role === "Employer") {
+      return `${baseUrl}${employerRoute}/updateEmployer/${id}`;
+    } else {
+      return `${baseUrl}${adminRoute}/adminUpdate/${id}`;
+    }
+  };
   const handleSubmit = () => {
+    // Create the updatedFields object with a dynamic key
+    const updatedFields = { [title.toString()]: inputValue };
     if (inputValue !== "") {
+      fetch( setUrlByRole(role),{
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedFields),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Handle successful response here if needed
+          console.log("Response:", data);
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error("Error:", error);
+        });
+    }
+
+  
+
+    if (inputValue !== "" && allowedUpdates[title.charAt(0).toUpperCase() + title.slice(1)]) {
       dispatch(dispatchFunc({ field: title, value: inputValue }));
     }
     handleClose();
   };
+  
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
