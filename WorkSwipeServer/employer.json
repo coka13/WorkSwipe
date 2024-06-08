@@ -4,6 +4,7 @@
       "name":"Avi",
       "password": "AviKar",
       "email": "avi.karaso35@gmail.com",
+      "linkedIn": "linkedIn1",
       "companyName" : "IBM"
     },
     {
@@ -11,6 +12,7 @@
       "name":"Steve",
       "password": "macintosh",
       "email": "macprom3@gmail.com",
+      "linkedIn": "linkedIn2",
       "companyName" : "Apple"
     },
     {
@@ -18,6 +20,7 @@
       "name":"Bill",
       "password": "BillTheRich",
       "email": "billGates@gmail.com",
+      "linkedIn": "linkedIn3",
       "companyName" : "Google"
     }
   ]

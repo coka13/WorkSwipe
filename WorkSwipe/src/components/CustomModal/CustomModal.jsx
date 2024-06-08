@@ -5,7 +5,10 @@ import Modal from "@mui/material/Modal";
 import BasicButtons from "../BasicButtons/BasicButtons";
 import FormComponent from "../FormComponent/FormComponent";
 import "./CustomModal.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { baseUrl, jobSeekerRoute } from "../../utils/routes";
+
+
 
 const style = {
   position: "absolute",
@@ -25,10 +28,12 @@ export default function CustomModal({
   description,
   open,
   setOpen,
-  type,
+  type
+  
 }) {
   const [inputValue, setInputValue] = useState("");
-  const dispatch = useDispatch();
+  const id = useSelector((state)=>state.auth._id)
+  const dispatch= useDispatch()
 
   const handleClose = () => {
     setInputValue("");
@@ -40,11 +45,39 @@ export default function CustomModal({
   };
 
   const handleSubmit = () => {
+    // Create the updatedFields object with a dynamic key
+    const updatedFields = { [title.toString()]: inputValue };
+    
+    if (inputValue !== "") {
+      fetch(`${baseUrl}${jobSeekerRoute}/updateJobSeeker/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedFields),
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Handle successful response here if needed
+          console.log('Response:', data);
+        })
+        .catch(error => {
+          // Handle errors here
+          console.error('Error:', error);
+        });
+    }
     if (inputValue !== "") {
       dispatch(dispatchFunc({ field: title, value: inputValue }));
     }
+    
     handleClose();
   };
+  
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
