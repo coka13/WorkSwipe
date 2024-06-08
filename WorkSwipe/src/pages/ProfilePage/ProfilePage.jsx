@@ -9,25 +9,34 @@ import {
   updateJobSeekerField,
 } from "../../store/slices/jobSeekerSlice";
 import "./ProfilePage.css";
+import { updateEmployerField } from "../../store/slices/employerSlice";
+import { updateAdminField } from "../../store/slices/adminSlice";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
+
   const role = useSelector((state) => state.auth.role);
   const id = useSelector((state) => state.auth._id);
   const userTechnologies = useSelector((state) => state.jobSeeker.technologies);
   const systemTechnologies = useSelector(
     (state) => state.technologies.technologies
   );
-
   useEffect(() => {}, [userTechnologies]);
 
   const jobSeeker = useSelector((state) => state.jobSeeker);
   const admin = useSelector((state) => state.admin);
   const employer = useSelector((state) => state.employer);
+  const jobSeekerDispatchFunc = updateJobSeekerField;
+  const jobSeekerSelectDispatchFunc = setJobSeekerTechnologies;
 
-  const dispatchFunc = updateJobSeekerField;
-  const selectDispatchFunc = setJobSeekerTechnologies;
+  const employerDispatchFunc = updateEmployerField;
+
+  const adminDispatchFunc = updateAdminField;
+
+  useEffect(() => {
+    console.log(employer, "employer");
+  }, [employer]);
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["get-technologies-by-ids"],
@@ -89,10 +98,10 @@ const ProfilePage = () => {
       Name: jobSeeker.name,
       Email: jobSeeker.email,
       Experience: jobSeeker.experience,
-      linkedInUrl: jobSeeker.linkedInUrl,
-      gitHubUrl: jobSeeker.gitHubUrl,
       Location: jobSeeker.location,
       Technologies: data,
+      linkedInUrl: jobSeeker.linkedInUrl,
+      gitHubUrl: jobSeeker.gitHubUrl,
     };
     img = jobSeeker.url;
   } else if (role === "Admin") {
@@ -112,15 +121,15 @@ const ProfilePage = () => {
       Username: false,
       Name: false,
       Email: false,
-      linkedInUrl: true,
       CompanyName: true,
+      linkedInUrl: true,
     };
     personProfile = {
       Username: employer.username,
       Name: employer.name,
       Email: employer.email,
-      LinkedIn: employer.linkedIn,
-      CompanyName: employer.CompanyName,
+      CompanyName: employer.companyName,
+      linkedInUrl: employer.linkedInUrl,
     };
     img = employer.url;
   }
@@ -158,8 +167,8 @@ const ProfilePage = () => {
               "Choose the technologies you are competent in and press Submit"
             }
             type={"check"}
-            dispatchFunc={dispatchFunc}
-            selectDispatchFunc={selectDispatchFunc}
+            dispatchFunc={jobSeekerDispatchFunc}
+            selectDispatchFunc={jobSeekerSelectDispatchFunc}
             role={role}
             list={systemTechnologies}
           />
@@ -171,7 +180,7 @@ const ProfilePage = () => {
             db={personProfile}
             img={img}
             handleEdit={handleEdit}
-            dispatchFunc={dispatchFunc}
+            dispatchFunc={adminDispatchFunc}
             role={role}
           />
         </div>
@@ -179,10 +188,11 @@ const ProfilePage = () => {
       {role === "Employer" && (
         <div className="card">
           <DisplayCard
+            allowedUpdates={allowedUpdates}
             db={personProfile}
             img={img}
             handleEdit={handleEdit}
-            dispatchFunc={dispatchFunc}
+            dispatchFunc={employerDispatchFunc}
             role={role}
           />
         </div>

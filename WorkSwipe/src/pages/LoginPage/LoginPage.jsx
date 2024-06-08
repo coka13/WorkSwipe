@@ -16,6 +16,8 @@ import {
 import "./LoginPage.css";
 import { setAuthentication, setUserId, setUserRole } from "../../store/slices/authSlice";
 import { setJobSeekerGeneralDetail } from "../../store/slices/jobSeekerSlice";
+import { setEmployerGeneralDetail } from "../../store/slices/employerSlice";
+import { setAdminGeneralDetail } from "../../store/slices/adminSlice";
 
 const LoginPage = () => {
   const [role, setRole] = useState("Job Seeker");
@@ -49,13 +51,15 @@ const LoginPage = () => {
       return jsonData;
     },
     onSuccess: (data) => {
-      console.log(data)
+   
       if(data.message===undefined){
-        console.log(data)
+       
       dispatch((setUserRole(role)))
       dispatch(setAuthentication(true))
       dispatch(setUserId(data._id))
       dispatch(setJobSeekerGeneralDetail(data))
+      dispatch(setEmployerGeneralDetail(data))
+      dispatch(setAdminGeneralDetail(data))
       navigate("/home");
       }
     },
