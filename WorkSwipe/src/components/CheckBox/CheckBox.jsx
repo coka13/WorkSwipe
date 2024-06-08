@@ -16,11 +16,15 @@ const CheckBox = ({ options, dispatchFunc, checkedList = [], name }) => {
     const newCheckedOptions = checkedOptions.includes(option._id)
       ? checkedOptions.filter((item) => item !== option._id)
       : [...checkedOptions, option._id];
+      
 
     setCheckedOptions(newCheckedOptions);
     console.log('Dispatching:', { value: newCheckedOptions, name: name });
     dispatch(dispatchFunc({ value: newCheckedOptions, name: name }));
+
   };
+
+
 
   return (
     <div className="scrollable-container">

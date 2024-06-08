@@ -65,18 +65,18 @@ export default function DisplayCard({
           const value = db[key];
           if (Array.isArray(value)) {
             return (
-              <div className="list">
+              <div>
               <div key={index}>
                 <div className="header">{key}:</div>
                 <ul>
-                  {value.map((tech, techIndex) => (
-                    <li key={techIndex}>
+                  {value.map((item, itemIndex) => (
+                    <li key={itemIndex}>
                       <Typography className="profileInfo">
-                        {tech.name}
+                        {item.name}
 
                         {value.length > 1 && (
                           <IconButton
-                            onClick={() => handleDeleteList(tech._id)}
+                            onClick={() => handleDeleteList(item._id)}
                           >
                             <DeleteIcon
                               sx={{ marginRight: 1, color: "#1976D2" }}
