@@ -55,7 +55,7 @@ export const createJobSeekerController = async (req, res) => {
 }
 
 export const updateJobSeekerController = async (req, res) => {
-    const jobSeekerAllowedUpdates = ["technologies", "location", "linkedInUrl", "gitHubUrl","name", "experience"];
+    const jobSeekerAllowedUpdates = ["technologies", "location", "linkedInUrl", "gitHubUrl", "experience"];
     const updates = Object.keys(req.body);
     console.log(updates)
     // We assume there is only one key to update

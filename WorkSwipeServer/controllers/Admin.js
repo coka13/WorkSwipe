@@ -57,7 +57,7 @@ export const createAdminController = async (req, res) => {
 
 export const updateAdminController = async (req, res) => {
 
-    const adminPasswordUpdate = ["password"]
+    const adminPasswordUpdate = ["password" ]
     const updates = Object.keys(req.body)
     const isValidOperation = updates.every((update) =>
         adminPasswordUpdate.includes(update))
