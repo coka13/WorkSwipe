@@ -7,3 +7,7 @@
     align-items: center;
   }
 
+  .buttons {
+    display: flex;
+    justify-content: center; /* Align content horizontally center */
+  }

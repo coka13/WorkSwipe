@@ -4,7 +4,6 @@
   align-items: center;
   flex-wrap: wrap;
   flex-direction: row;
-  gap: 1rem;
   margin: 1rem 0;
 }
 .scrollable-container {

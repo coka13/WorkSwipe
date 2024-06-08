@@ -31,7 +31,6 @@ export default function DisplayCard({
   selectDispatchFunc,
   list,
 }) {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEdit, setCurrentEdit] = useState("");
 
@@ -46,7 +45,7 @@ export default function DisplayCard({
         avatar={<Avatar sx={{ bgcolor: "#1976D2" }}>{db.Name[0]}</Avatar>}
         action={
           <IconButton aria-label="settings">
-            <MoreVertIcon sx={{ color: "#1976D2" }} />
+            <MoreVertIcon sx={{ color: "#1976D2", fontSize: 20 }} />
           </IconButton>
         }
         title={
@@ -66,65 +65,57 @@ export default function DisplayCard({
           const value = db[key];
           if (Array.isArray(value)) {
             return (
-              <div>
-                <div key={index}>
-                  <div className="header">{key}:</div>
-                  <ul>
-                    {value.map((tech, techIndex) => (
-                      <li key={techIndex}>
-                        <Typography className="profileInfo">
-                          {tech.name}
-
-                          {value.length > 1 && (
-                            <IconButton
-                              onClick={() => handleDeleteList(tech._id)}
-                            >
-                              <DeleteIcon
-                                sx={{ marginRight: 1, color: "#1976D2" }}
-                              />
-                            </IconButton>
-                          )}
-                        </Typography>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div key={index}>
+                <div className="header">{key}:</div>
+                <ul>
+                  {value.map((tech, techIndex) => (
+                    <li key={techIndex}>
+                      <Typography className="profileInfo" >
+                        {tech.name}
+                        {value.length > 1 && allowedUpdates[key] && (
+                          <IconButton onClick={() => handleDeleteList(tech._id)}>
+                            <DeleteIcon sx={{ marginRight: 1, color: "#1976D2", fontSize: 20 }} />
+                          </IconButton>
+                        )}
+                      </Typography>
+                    </li>
+                  ))}
+                </ul>
               </div>
             );
           } else if (key === "gitHubUrl" || key === "linkedInUrl") {
-            // Render icon button with link instead of displaying URL
             return (
-              <>
-                <Typography className="profileInfo" key={index}>
-                  {key === "gitHubUrl" ? (
-                    <a href={value} target="_blank" rel="noopener noreferrer">
-                      <IconButton>
-                        <GitHubIcon sx={{ color: "#1976D2" }} />
-                      </IconButton>
-                    </a>
-                  ) : (
-                    <a href={value} target="_blank" rel="noopener noreferrer">
-                      <IconButton>
-                        <LinkedInIcon sx={{ color: "#1976D2" }} />
-                      </IconButton>
-                    </a>
-                  )}
+              <Typography className="profileInfo" key={index} >
+                {key === "gitHubUrl" ? (
+                  <a href={value} target="_blank" rel="noopener noreferrer">
+                    <IconButton>
+                      <GitHubIcon sx={{ color: "#1976D2", fontSize: 20 }} />
+                    </IconButton>
+                  </a>
+                ) : (
+                  <a href={value} target="_blank" rel="noopener noreferrer">
+                    <IconButton>
+                      <LinkedInIcon sx={{ color: "#1976D2", fontSize: 20 }} />
+                    </IconButton>
+                  </a>
+                )}
+                {allowedUpdates[key] && (
                   <IconButton onClick={() => handleEditDetails(key)}>
-                    <EditIcon sx={{ color: "#1976D2" }} />
+                    <EditIcon sx={{margin:"0", color: "#1976D2", fontSize: 20 }} />
                   </IconButton>
-                </Typography>
-              </>
+                )}
+              </Typography>
             );
           } else {
             return (
-              <>
-                <Typography className="profileInfo" key={index}>
-                  <span style={{ fontWeight: "bold" }}>{key}</span>: {value}
+              <Typography className="profileInfo" key={index} sx={{marginBottom:"15px"}}>
+                <span style={{ fontWeight: "bold" }}>{key}</span>: {value}
+                {allowedUpdates[key] && (
                   <IconButton onClick={() => handleEditDetails(key)}>
-                    <EditIcon sx={{ color: "#1976D2" }} />
+                    <EditIcon sx={{margin:"0", color: "#1976D2", fontSize: 20 }} />
                   </IconButton>
-                </Typography>
-              </>
+                )}
+              </Typography>
             );
           }
         })}
@@ -141,7 +132,6 @@ export default function DisplayCard({
         onSubmit={(newValue) => handleEdit(currentEdit, newValue)} // Pass the field and value to handleEdit
         type={"other"}
       />
-
       {list && list.length > 0 && (
         <FormComponent
           props={[

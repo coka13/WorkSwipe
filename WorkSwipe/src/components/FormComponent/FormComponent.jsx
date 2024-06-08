@@ -67,6 +67,7 @@ export default function FormComponent({ props }) {
           } else if (prop.type === "textarea") {
             return (
               <TextField
+          
                 key={index}
                 label={prop.label}
                 name={prop.name}
@@ -79,6 +80,7 @@ export default function FormComponent({ props }) {
           } else {
             return (
               <TextField
+             
                 key={index}
                 required={prop.required}
                 variant={prop.variant || "outlined"}

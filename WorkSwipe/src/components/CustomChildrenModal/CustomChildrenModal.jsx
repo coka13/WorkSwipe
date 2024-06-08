@@ -25,7 +25,7 @@ const CustomChildrenModal = ({ children, open, setOpen, title, description, plac
       aria-describedby="modal-modal-description"
     >
       <Box sx={style} className="modal-box">
-        <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Typography id="modal-modal-title"  variant="h6" component="h2">
           {title}
         </Typography>
         {children}
