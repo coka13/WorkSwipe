@@ -56,16 +56,54 @@ export const createEmployerController = async (req, res) => {
 }
 
 export const updateEmployerController = async (req, res) => {
-    const employerAllowedUpdates = ["password"]
-    const id = req.params.id;
-    const updates = Object.keys(req.body)
-    // const employer = await getSingleEmployerService(id)
-    const isValidOperation = updates.every((update) =>
-    employerAllowedUpdates.includes(update))
-    if (!isValidOperation) {
-        return serverResponse(res, 400, { message: "invalid updates" })
+    console.log(req.body)
+    const employerAllowedUpdates = ["companyName", "linkedInUrl"];
+    const updates = Object.keys(req.body);
+    // We assume there is only one key to update
+    if (updates.length !== 1) {
+        return serverResponse(res, 400, { message: "Only one update at a time is allowed" });
     }
     
+    const update = updates[0];
+    
+    if (!employerAllowedUpdates.includes(update)) {
+        return serverResponse(res, 400, { message: "Invalid update field" });
+    }
+    
+    // Validate 'experience' field
+    if (update === "experience") {
+        if (isNaN(req.body[update]) || (+req.body[update] < 0)) {
+            return serverResponse(res, 400, { message: "Invalid argument" });
+        }
+    }
+    
+    try {
+        const id = req.params.id;
+        const employer = await getSingleEmployerService(id);
+
+        if (!employer) {
+            return serverResponse(res, 404, { message: "No employer found" });
+        }
+
+        employer[update] = req.body[update];
+        await employer.save();
+        return serverResponse(res, 200, employer);
+    } catch (e) {
+        return serverResponse(res, 500, { message: e.message });
+    }
+};
+
+
+export const updateEmployerPasswordController = async (req, res) => {
+
+    const employerPasswordUpdate = ["password"]
+    const updates = Object.keys(req.body)
+    const isValidOperation = updates.every((update) =>
+        employerPasswordUpdate.includes(update))
+    if (!isValidOperation) {
+        return serverResponse(res, 400, { message: "password invalid" })
+    }
+
     try {
         const id = req.params.id;
         const employer = await getSingleEmployerService(id)

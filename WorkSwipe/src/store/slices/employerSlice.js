@@ -5,7 +5,9 @@ const initialState = {
     name: "",
     url: "",
     email: "",
-    CompanyName: ""
+    linkedInUrl: "",
+    companyName: "",
+    
 };
 
 const employerSlice = createSlice({
@@ -19,6 +21,7 @@ const employerSlice = createSlice({
             }
         },
         updateEmployerField: (state, action) => {
+            console.log(action.payload)
             const { field, value } = action.payload;
             state[field] = value;
         },

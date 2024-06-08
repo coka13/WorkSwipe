@@ -12,8 +12,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CustomModal from "../CustomModal/CustomModal";
 import { useState } from "react";
 import FormComponent from "../FormComponent/FormComponent";
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import "./DisplayCard.css";
 
 export default function DisplayCard({
@@ -29,8 +29,9 @@ export default function DisplayCard({
   type,
   dispatchFunc,
   selectDispatchFunc,
-  list
+  list,
 }) {
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEdit, setCurrentEdit] = useState("");
 
@@ -66,38 +67,39 @@ export default function DisplayCard({
           if (Array.isArray(value)) {
             return (
               <div>
-              <div key={index}>
-                <div className="header">{key}:</div>
-                <ul>
-                  {value.map((item, itemIndex) => (
-                    <li key={itemIndex}>
-                      <Typography className="profileInfo">
-                        {item.name}
+                <div key={index}>
+                  <div className="header">{key}:</div>
+                  <ul>
+                    {value.map((tech, techIndex) => (
+                      <li key={techIndex}>
+                        <Typography className="profileInfo">
+                          {tech.name}
 
-                        {value.length > 1 && (
-                          <IconButton
-                            onClick={() => handleDeleteList(item._id)}
-                          >
-                            <DeleteIcon
-                              sx={{ marginRight: 1, color: "#1976D2" }}
-                            />
-                          </IconButton>
-                        )}
-                      </Typography>
-                    </li>
-                  ))}
-                </ul>
+                          {value.length > 1 && (
+                            <IconButton
+                              onClick={() => handleDeleteList(tech._id)}
+                            >
+                              <DeleteIcon
+                                sx={{ marginRight: 1, color: "#1976D2" }}
+                              />
+                            </IconButton>
+                          )}
+                        </Typography>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              </div>);
-          } else if (key === 'gitHubUrl' || key === 'linkedInUrl') {
+            );
+          } else if (key === "gitHubUrl" || key === "linkedInUrl") {
             // Render icon button with link instead of displaying URL
             return (
               <>
                 <Typography className="profileInfo" key={index}>
-                  {key === 'gitHubUrl' ? (
+                  {key === "gitHubUrl" ? (
                     <a href={value} target="_blank" rel="noopener noreferrer">
                       <IconButton>
-                        <GitHubIcon sx={{  color: "#1976D2" }} />
+                        <GitHubIcon sx={{ color: "#1976D2" }} />
                       </IconButton>
                     </a>
                   ) : (
@@ -108,7 +110,7 @@ export default function DisplayCard({
                     </a>
                   )}
                   <IconButton onClick={() => handleEditDetails(key)}>
-                    <EditIcon sx={{  color: "#1976D2" }} />
+                    <EditIcon sx={{ color: "#1976D2" }} />
                   </IconButton>
                 </Typography>
               </>
@@ -119,7 +121,7 @@ export default function DisplayCard({
                 <Typography className="profileInfo" key={index}>
                   <span style={{ fontWeight: "bold" }}>{key}</span>: {value}
                   <IconButton onClick={() => handleEditDetails(key)}>
-                    <EditIcon sx={{  color: "#1976D2" }} />
+                    <EditIcon sx={{ color: "#1976D2" }} />
                   </IconButton>
                 </Typography>
               </>
@@ -140,21 +142,22 @@ export default function DisplayCard({
         type={"other"}
       />
 
-      <FormComponent
-        props={[
-          {
-            title: title,
-            description: description,
-            type: type,
-            options: list,
-            Icon: formIcon,
-            checkedList: checkedList,
-            dispatchFunc: dispatchFunc,
-            selectDispatchFunc: selectDispatchFunc
-            
-          },
-        ]}
-      />
+      {list && list.length > 0 && (
+        <FormComponent
+          props={[
+            {
+              title: title,
+              description: description,
+              type: type,
+              options: list,
+              Icon: formIcon,
+              checkedList: checkedList,
+              dispatchFunc: dispatchFunc,
+              selectDispatchFunc: selectDispatchFunc,
+            },
+          ]}
+        />
+      )}
     </Card>
   );
 }
