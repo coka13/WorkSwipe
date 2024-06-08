@@ -24,11 +24,11 @@ import Handshake from "../Handshake/Handshake";
 import "./TinderCard.css";
 
 const SimpleCard = ({ db, handleRightSwipe }) => {
-  console.log(db[0])
+
   const offersLength = useSelector(
     (state) => state.opportunities.offers.length
   );
-  console.log("db",db)
+
   const dispatch = useDispatch();
   const [lastDirection, setLastDirection] = useState(null);
   const [expanded, setExpanded] = useState(false);

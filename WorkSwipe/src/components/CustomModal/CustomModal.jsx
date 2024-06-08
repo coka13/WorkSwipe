@@ -6,7 +6,7 @@ import BasicButtons from "../BasicButtons/BasicButtons";
 import FormComponent from "../FormComponent/FormComponent";
 import "./CustomModal.css";
 import { useDispatch, useSelector } from "react-redux";
-import { baseUrl, jobSeekerRoute } from "../../utils/routes";
+import { baseUrl, jobSeekerRoute, employerRoute,adminRoute } from "../../utils/routes";
 
 const style = {
   position: "absolute",
@@ -32,6 +32,7 @@ export default function CustomModal({
   const [inputValue, setInputValue] = useState("");
   const id = useSelector((state) => state.auth._id);
   const dispatch = useDispatch();
+  const role= useSelector((state)=>state.auth.role)
 
   const handleClose = () => {
     setInputValue("");
@@ -42,11 +43,20 @@ export default function CustomModal({
     setInputValue(event.target.value);
   };
 
+  const setUrlByRole = (role) => {
+    if (role === "Job Seeker") {
+      return `${baseUrl}${jobSeekerRoute}/updateJobSeeker/${id}`;
+    } else if (role === "Employer") {
+      return `${baseUrl}${employerRoute}/updateEmployer/${id}`;
+    } else {
+      return `${baseUrl}${adminRoute}/adminUpdate/${id}`;
+    }
+  };
   const handleSubmit = () => {
     // Create the updatedFields object with a dynamic key
     const updatedFields = { [title.toString()]: inputValue };
     if (inputValue !== "") {
-      fetch(`${baseUrl}${jobSeekerRoute}/updateJobSeeker/${id}`, {
+      fetch( setUrlByRole(role),{
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +78,9 @@ export default function CustomModal({
           console.error("Error:", error);
         });
     }
+
   
+
     if (inputValue !== "" && allowedUpdates[title.charAt(0).toUpperCase() + title.slice(1)]) {
       dispatch(dispatchFunc({ field: title, value: inputValue }));
     }

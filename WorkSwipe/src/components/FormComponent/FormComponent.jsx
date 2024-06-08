@@ -9,7 +9,7 @@ import "./FormComponent.css";
 
 export default function FormComponent({ props }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -22,6 +22,7 @@ export default function FormComponent({ props }) {
     <Box component="form" noValidate autoComplete="off">
       <div className="FieldsWraper">
         {props.map((prop, index) => {
+        
           if (prop.type === "select") {
             return (
               <SelectVariants
@@ -40,6 +41,11 @@ export default function FormComponent({ props }) {
                   <span style={{ fontWeight: "bold" }}>{prop.title}</span>
                   {prop.Icon}
                 </IconButton>
+
+                {prop.options.length>0
+               
+                
+                && (
                 <CustomChildrenModal
                   open={isModalOpen}
                   setOpen={setIsModalOpen}
@@ -54,6 +60,8 @@ export default function FormComponent({ props }) {
                     dispatchFunc={prop.selectDispatchFunc}
                   />
                 </CustomChildrenModal>
+                )
+                }
               </div>
             );
           } else if (prop.type === "textarea") {
