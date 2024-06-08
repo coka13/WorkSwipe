@@ -8,8 +8,6 @@ import "./CustomModal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { baseUrl, jobSeekerRoute } from "../../utils/routes";
 
-
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -28,12 +26,12 @@ export default function CustomModal({
   description,
   open,
   setOpen,
-  type
-  
+  type,
+  allowedUpdates,
 }) {
   const [inputValue, setInputValue] = useState("");
-  const id = useSelector((state)=>state.auth._id)
-  const dispatch= useDispatch()
+  const id = useSelector((state) => state.auth._id);
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     setInputValue("");
@@ -47,34 +45,33 @@ export default function CustomModal({
   const handleSubmit = () => {
     // Create the updatedFields object with a dynamic key
     const updatedFields = { [title.toString()]: inputValue };
-    
     if (inputValue !== "") {
       fetch(`${baseUrl}${jobSeekerRoute}/updateJobSeeker/${id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedFields),
       })
-        .then(response => {
+        .then((response) => {
           if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error("Network response was not ok");
           }
           return response.json();
         })
-        .then(data => {
+        .then((data) => {
           // Handle successful response here if needed
-          console.log('Response:', data);
+          console.log("Response:", data);
         })
-        .catch(error => {
+        .catch((error) => {
           // Handle errors here
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
     }
-    if (inputValue !== "") {
+  
+    if (inputValue !== "" && allowedUpdates[title.charAt(0).toUpperCase() + title.slice(1)]) {
       dispatch(dispatchFunc({ field: title, value: inputValue }));
     }
-    
     handleClose();
   };
   

@@ -17,6 +17,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import "./DisplayCard.css";
 
 export default function DisplayCard({
+  allowedUpdates,
   db,
   img,
   handleEdit,
@@ -67,7 +68,7 @@ export default function DisplayCard({
               <div className="list">
               <div key={index}>
                 <div className="header">{key}:</div>
-                <ul className="list">
+                <ul>
                   {value.map((tech, techIndex) => (
                     <li key={techIndex}>
                       <Typography className="profileInfo">
@@ -128,6 +129,7 @@ export default function DisplayCard({
       </CardContent>
       <CardActions disableSpacing sx={{ padding: "0", margin: "0" }} />
       <CustomModal
+        allowedUpdates={allowedUpdates}
         dispatchFunc={dispatchFunc}
         title={currentEdit}
         placeholder={`Edit ${currentEdit}`}
