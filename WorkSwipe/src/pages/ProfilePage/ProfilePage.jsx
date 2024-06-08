@@ -48,10 +48,9 @@ const ProfilePage = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          
         },
         body: JSON.stringify({ technologies: newTechnologies }),
-        credentials: "include", // Include cookies
+
       });
     },
     onSuccess: () => {

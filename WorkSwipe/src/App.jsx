@@ -80,6 +80,7 @@ function App() {
         `${baseUrl}${jobOpportunityRoute}/allJobOpportunities`
       );
       const jsonData = await response.json();
+      console.log(jsonData)
       return jsonData;
     },
   });
