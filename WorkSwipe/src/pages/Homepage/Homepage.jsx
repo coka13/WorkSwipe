@@ -1,7 +1,10 @@
 import SimpleCard from "../../components/TinderCard/TinderCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setAddMatch } from "../../store/slices/matchesSlice";
+import { useQuery } from "@tanstack/react-query";
 import "./Homepage.css";
+import { useEffect } from "react";
+import { setOpportunities } from "../../store/slices/jobOffersSlice";
 
 
 
@@ -24,7 +27,24 @@ const Homepage = () => {
   };
 
 
-  console.log(userRole)
+// Fetch job offers
+const { data: jobData, error: jobError, isLoading: jobLoading } = useQuery({
+  queryKey: ["get-all-job-offers"],
+  queryFn: async () => {
+    const response = await fetch(
+      `${baseUrl}${jobOpportunityRoute}/allJobOpportunities`
+    );
+    const jsonData = await response.json();
+    console.log(jsonData)
+    return jsonData;
+  },
+});
+
+useEffect(() => {
+  if (jobData) {
+    dispatch(setOpportunities(jobData));
+  }
+}, [jobData, dispatch]);
 
   return (
     <div className="homePage">
