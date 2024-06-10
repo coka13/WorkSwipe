@@ -2,24 +2,27 @@
   {
     "position": "developer",
     "experience": 3,
-    "technologies": ["JavaScript","CSS","HTML"],
-    "niceToHave":["JavaScript"],
+    "technologies": ["JavaScript"],
+    "niceToHave":["CSS"],
     "location": "TelAviv",
     "emailHR": "2HR@gmail.com",
     "website": "www.2TelAviv.com",
     "name":"cadence",
-    "employer": 2
+    "employer": 2,
+    "linkedInUrl": "https://www.linkedin.com/in/roni-levi-0b0b3b1b4/",
+    "image":"data:image/png;base64,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"
   },
   {
     "position": "IT",
     "experience": 1.5,
-    "technologies":[ "SQL"],
+    "technologies":[ "JavaScript", "HTML"],
     "niceToHave":["CSS"],
     "location": "Herzellia",
     "emailHR": "0HR@gmail.com",
     "website": "www.0Herzellia.com",
     "name":"ness",
-    "employer": 0
+    "employer": 0,
+    "linkedInUrl": "https://www.linkedin.com/in/roni-levi-0b0b3b1b4/"
   },
   {
     "position": "developer",
@@ -29,7 +32,9 @@
     "emailHR": "1HR@gmail.com",
     "website": "www.1Jerusalem.com",
     "name":"nvidia",
-    "employer": 1
+    "employer": 1,
+    "linkedInUrl":"https://www.linkedin.com/in/roni-levi-0b0b3b1b4/"
+    
   },
   {
     "position": "BackEndDev",

@@ -11,7 +11,6 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import { useDrawerLogic } from "./utils/drawerRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setOpportunities } from "./store/slices/jobOffersSlice";
 import MatchesPage from "./pages/MatchesPage/MatchesPage";
 import EmployerPage from "./pages/EmployerPage/EmployerPage";
 import CustomRoute from "./components/CustomRoute/CustomRoute";
@@ -48,10 +47,7 @@ function App() {
   },[data])
 
   const user = useSelector((state) => state.auth);
-  const userTechnologies = useSelector((state)=>state.jobSeeker.technologies)
-  const systemTechnologies = useSelector(
-    (state) => state.technologies.technologies
-  );
+
 
   const { showDrawer, icons, hrefs, items } = useDrawerLogic(user.role);
    // Fetch system technologies

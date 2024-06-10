@@ -22,7 +22,6 @@ const ProfilePage = () => {
   const systemTechnologies = useSelector(
     (state) => state.technologies.technologies
   );
-  useEffect(() => {}, [userTechnologies]);
 
   const jobSeeker = useSelector((state) => state.jobSeeker);
   const admin = useSelector((state) => state.admin);
@@ -31,12 +30,7 @@ const ProfilePage = () => {
   const jobSeekerSelectDispatchFunc = setJobSeekerTechnologies;
 
   const employerDispatchFunc = updateEmployerField;
-
   const adminDispatchFunc = updateAdminField;
-
-  useEffect(() => {
-    console.log(employer, "employer");
-  }, [employer]);
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["get-technologies-by-ids"],
@@ -99,7 +93,7 @@ const ProfilePage = () => {
       Email: jobSeeker.email,
       Experience: jobSeeker.experience,
       Location: jobSeeker.location,
-      Technologies: data,
+      Technologies:  data.idsList,
       linkedInUrl: jobSeeker.linkedInUrl,
       gitHubUrl: jobSeeker.gitHubUrl,
     };
@@ -135,7 +129,6 @@ const ProfilePage = () => {
   }
 
   const handleEdit = (field, value) => {
-    
     if (field === "technologies") {
       updateUserTechnologiesMutation.mutate(value);
     }
@@ -160,7 +153,7 @@ const ProfilePage = () => {
             img={img}
             handleEdit={handleEdit}
             handleDeleteList={handleDeleteTech}
-            checkedList={data.map((tech) => tech._id)}
+            checkedList={Array.isArray(data) ? data.map((tech) => tech._id) : []} // Ensure data is an array
             formIcon={<ScienceIcon />}
             title={"Choose your technologies"}
             description={

@@ -21,10 +21,11 @@ import PlaceIcon from "@mui/icons-material/Place";
 import { useDispatch, useSelector } from "react-redux";
 import { setDeleteOffer } from "../../store/slices/jobOffersSlice";
 import Handshake from "../Handshake/Handshake";
+import { useQuery } from "@tanstack/react-query";
+import { baseUrl, technologyRoute } from "../../utils/routes";
 import "./TinderCard.css";
 
 const SimpleCard = ({ db, handleRightSwipe }) => {
-
   const offersLength = useSelector(
     (state) => state.opportunities.offers.length
   );
@@ -33,8 +34,32 @@ const SimpleCard = ({ db, handleRightSwipe }) => {
   const [lastDirection, setLastDirection] = useState(null);
   const [expanded, setExpanded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [match,setMatch]=useState(false)
+  const [match, setMatch] = useState(false);
   
+  const role = useSelector((state) => state.auth.role);
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["get-offer-technologies-by-ids", currentIndex], // add currentIndex to queryKey
+    queryFn: async () => {
+      const response = await fetch(
+        `${baseUrl}${technologyRoute}/technologiesByIDs`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ 
+            required: db[currentIndex].technologies,
+            niceToHave: db[currentIndex].niceToHave // add niceToHave to the body
+          }),
+        }
+      );
+      return response.json();
+    },
+    enabled: role === "Job Seeker", // only fetch data if role is "Job Seeker"
+  });
+
+
   useEffect(() => {
     setCurrentIndex(0);
     const isMatch = handleRightSwipe(lastDirection);
@@ -47,7 +72,6 @@ const SimpleCard = ({ db, handleRightSwipe }) => {
       return () => clearTimeout(timer);
     }
   }, [offersLength, currentIndex, lastDirection]);
-  
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -61,33 +85,28 @@ const SimpleCard = ({ db, handleRightSwipe }) => {
   const outOfFrame = (name, idx) => {
     console.log(`${name} (${idx}) left the screen!`);
   };
-if(db.length===0 && !match){
-  return (
-  <>
-  <div className="crickets" alt="crickets" />
-  </>
-  
-  )
-}
+
+  if (db.length === 0 && !match) {
+    return (
+      <>
+        <div className="crickets" alt="crickets" />
+      </>
+    );
+  }
+
   return (
     <>
       {match === true && <Handshake />}
-      {!match && 
-      (
+      {!match && db[currentIndex] && (
         <TinderCard
-          className="tinder-card"
+          className={expanded ? 'expanded' : ''}
           key={db[currentIndex]?.name}
           onSwipe={(dir) => swiped(dir, db[currentIndex]?.name, currentIndex)}
-          onCardLeftScreen={() =>
-            outOfFrame(db[currentIndex]?.name, currentIndex)
-          }
+          onCardLeftScreen={() => outOfFrame(db[currentIndex]?.name, currentIndex)}
           preventSwipe={["up", "down"]}
         >
           {db[currentIndex] && (
-            <Card
-              className="tinder-card"
-              sx={{ maxWidth: 345, overflowY: "scroll" }}
-            >
+            <Card sx={{ width: 300, overflowY: "scroll" }}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: "#1976D2" }}>
@@ -114,7 +133,7 @@ if(db.length===0 && !match){
               >
                 <CardMedia
                   component="img"
-                  image={db[currentIndex].url}
+                  image={db[currentIndex].image}
                   alt={db[currentIndex].name}
                   sx={{
                     pointerEvents: "none",
@@ -133,7 +152,7 @@ if(db.length===0 && !match){
                 </Typography>
                 <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
                   <StarIcon sx={{ marginRight: 1, color: "#1976D2" }} />
-                  {db[currentIndex].exp} years of experience
+                  {db[currentIndex].experience + " years of experience"} 
                 </Typography>
                 <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
                   <PlaceIcon sx={{ marginRight: 1, color: "#1976D2" }} />
@@ -152,7 +171,7 @@ if(db.length===0 && !match){
               <div className="buttons">
                 <CardActions>
                   <a
-                    href={db[currentIndex].linkedIn}
+                    href={db[currentIndex].linkedInUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -176,17 +195,17 @@ if(db.length===0 && !match){
                 <CardContent>
                   <h4>Required:</h4>
                   <ul className="list">
-                    {db[currentIndex].technologies.map((tech, index) => (
+                    {data?.required && data.required.map((tech, index) => (
                       <li style={{ fontWeight: "bold" }} key={index}>
-                        {tech}
+                        {tech.name}
                       </li>
                     ))}
                   </ul>
                   <h4>Advantage:</h4>
                   <ul className="list">
-                    {db[currentIndex].niceToHave.map((tech, index) => (
+                    {data?.niceToHave && data.niceToHave.map((tech, index) => (
                       <li style={{ fontWeight: "bold" }} key={index}>
-                        {tech}
+                        {tech.name}
                       </li>
                     ))}
                   </ul>

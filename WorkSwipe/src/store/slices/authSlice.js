@@ -18,11 +18,16 @@ const authSlice = createSlice({
     },
     setUserId:(state,action)=>{
       state._id=action.payload
+    },
+    authLogout:(state)=>{
+      state.isAuthenticated=false
+      state.role="Job Seeker"
+      state._id=""
     }
 
   }
 });
 
-export const { setAuthentication,setUserRole,setUserId} = authSlice.actions
+export const { setAuthentication,setUserRole,setUserId,authLogout} = authSlice.actions
 
 export default authSlice.reducer

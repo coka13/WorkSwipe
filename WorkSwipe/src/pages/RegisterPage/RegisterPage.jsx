@@ -9,7 +9,6 @@ import BasicButtons from "../../components/BasicButtons/BasicButtons";
 import ScienceIcon from "@mui/icons-material/Science";
 import CustomRadioButton from "../../components/CustomRadioButton/CustomRadioButton";
 import { setRegisterForm } from "../../store/slices/registerSlice";
-import { setAdminGeneralDetail } from "../../store/slices/adminSlice";
 import { setJobSeekerGeneralDetail } from "../../store/slices/jobSeekerSlice";
 import { setEmployerGeneralDetail } from "../../store/slices/employerSlice";
 import { setAuthentication } from "../../store/slices/authSlice";

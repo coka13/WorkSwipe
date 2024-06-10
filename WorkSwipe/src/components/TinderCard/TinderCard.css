@@ -27,7 +27,9 @@
   }
 
 
-
+  .expanded {
+    height: 500px; /* or whatever height you want */
+  }
 
 .tinder-card{
   display: flex;

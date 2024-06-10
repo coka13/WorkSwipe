@@ -53,18 +53,22 @@ export const deleteTechnologyController = async (req, res) => {
 }
 
 export const getTechnologiesByListOfIDsController = async (req, res) => {
-    try {
+    console.log("req",req.body)
+  try {
+    const results = {};
 
-        const idsList = {...req.body}
-        const technologiesByListOfIDs = await getTechnologiesByListOfIDsService(idsList.idsList)
-        if (technologiesByListOfIDs.length === 0 || !technologiesByListOfIDs) {
-            return serverResponse(res, 204, { message: "technology not found" })
-
-        }
-        return serverResponse(res, 200, technologiesByListOfIDs)
-    } catch (e) {
-        return serverResponse(res, 500, { message: e.message })
-
+    for (const key in req.body) {
+      const idsList = req.body[key];
+      const technologies = await getTechnologiesByListOfIDsService(idsList);
+      results[key] = technologies;
     }
 
-}
+    if (Object.values(results).every(arr => arr.length === 0)) {
+      return serverResponse(res, 204, { message: "technology not found" });
+    }
+
+    return serverResponse(res, 200, results);
+  } catch (e) {
+    return serverResponse(res, 500, { message: e.message });
+  }
+};

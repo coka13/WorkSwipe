@@ -9,7 +9,7 @@ import "./FormComponent.css";
 
 export default function FormComponent({ props }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -22,7 +22,6 @@ export default function FormComponent({ props }) {
     <Box component="form" noValidate autoComplete="off">
       <div className="FieldsWraper">
         {props.map((prop, index) => {
-        
           if (prop.type === "select") {
             return (
               <SelectVariants
@@ -34,7 +33,6 @@ export default function FormComponent({ props }) {
               />
             );
           } else if (prop.type === "check") {
-          
             return (
               <div key={index}>
                 <IconButton onClick={handleOpenModal}>
@@ -42,32 +40,28 @@ export default function FormComponent({ props }) {
                   {prop.Icon}
                 </IconButton>
 
-                {prop.options.length>0
-               
-                
-                && (
-                <CustomChildrenModal
-                  open={isModalOpen}
-                  setOpen={setIsModalOpen}
-                  title={prop.title}
-                  description={prop.description}
-                  checkedList={prop.checkedList}
-                >
-                  <CheckBox
-                    options={prop.options}
-                    name={prop.name}
+                {prop.options.length > 0 && (
+                  <CustomChildrenModal
+                    open={isModalOpen}
+                    setOpen={setIsModalOpen}
+                    title={prop.title}
+                    description={prop.description}
                     checkedList={prop.checkedList}
-                    dispatchFunc={prop.selectDispatchFunc}
-                  />
-                </CustomChildrenModal>
-                )
-                }
+                  >
+                    <CheckBox
+                      options={prop.options}
+                      name={prop.name}
+                      checkedList={prop.checkedList}
+                      dispatchFunc={prop.selectDispatchFunc}
+                    />
+                  </CustomChildrenModal>
+                )}
               </div>
             );
           } else if (prop.type === "textarea") {
             return (
               <TextField
-          
+                sx={{ marginBottom: "10px" }}
                 key={index}
                 label={prop.label}
                 name={prop.name}
@@ -80,7 +74,7 @@ export default function FormComponent({ props }) {
           } else {
             return (
               <TextField
-             
+                sx={{ marginBottom: "10px" }}
                 key={index}
                 required={prop.required}
                 variant={prop.variant || "outlined"}
