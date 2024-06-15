@@ -7,6 +7,7 @@ import AboutPage from "./pages/AboutPage/AboutPage";
 import ContactPage from "./pages/ContactPage/ContactPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import SupportPage from "./pages/SupportPage/SupportPage";
+
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { useDrawerLogic } from "./utils/drawerRoutes";
 import { useDispatch, useSelector } from "react-redux";

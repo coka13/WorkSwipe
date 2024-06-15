@@ -3,7 +3,7 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-
+import CustomLinkNavigate from "../CustomLinkNavigate/CustomLinkNavigate";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -16,7 +16,6 @@ import FormComponent from "../FormComponent/FormComponent";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import "./DisplayCard.css";
-import CustomLinkNavigate from "../CustomLinkNavigate/CustomLinkNavigate";
 
 export default function DisplayCard({
   allowedUpdates,
@@ -152,7 +151,7 @@ export default function DisplayCard({
       )}
        <CustomLinkNavigate
           text={""}
-          to={"/security"}
+          to={"/securityPage"}
           label={"Security settings"}
         />
     </Card>

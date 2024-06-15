@@ -6,11 +6,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { baseUrl, jobSeekerRoute, technologyRoute } from "../../utils/routes";
 import {
   setJobSeekerTechnologies,
-  updateJobSeekerField,
+  updateJobSeekerField,updateJobSeekerPassword
 } from "../../store/slices/jobSeekerSlice";
 import "./ProfilePage.css";
 import { updateEmployerField } from "../../store/slices/employerSlice";
 import { updateAdminField } from "../../store/slices/adminSlice";
+
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const ProfilePage = () => {
   const admin = useSelector((state) => state.admin);
   const employer = useSelector((state) => state.employer);
   const jobSeekerDispatchFunc = updateJobSeekerField;
+  const jobSeekerPasswordDispatchFunc = updateJobSeekerPassword;
   const jobSeekerSelectDispatchFunc = setJobSeekerTechnologies;
 
   const employerDispatchFunc = updateEmployerField;
@@ -64,6 +66,21 @@ const ProfilePage = () => {
       queryClient.invalidateQueries("get-technologies-by-ids");
     },
   });
+  const updateJobSeekerPasswordMutation = useMutation({
+    mutationFn: async (newPassword) => {
+      await fetch(`${baseUrl}${jobSeekerRoute}/updateJobSeekerPassword/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password: newPassword }),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("update-password-by-id");
+    },
+  });
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -139,6 +156,11 @@ const ProfilePage = () => {
     dispatch(setJobSeekerTechnologies(updatedTechnologies));
     handleEdit("technologies", updatedTechnologies); // Make sure this triggers the mutation
   };
+  const handlePasswordEdit = (field, value) => {
+    if (field === "password") {
+      updateJobSeekerPasswordMutation.mutate(value);
+    }
+  };
 
   return (
     <>
@@ -162,6 +184,7 @@ const ProfilePage = () => {
             type={"check"}
             dispatchFunc={jobSeekerDispatchFunc}
             selectDispatchFunc={jobSeekerSelectDispatchFunc}
+            passwordDispatchFunc={jobSeekerPasswordDispatchFunc}
             role={role}
             list={systemTechnologies}
           />
