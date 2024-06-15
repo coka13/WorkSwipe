@@ -19,10 +19,10 @@ import MailIcon from "@mui/icons-material/Mail";
 import WorkIcon from "@mui/icons-material/Work";
 import PlaceIcon from "@mui/icons-material/Place";
 import { useDispatch, useSelector } from "react-redux";
-import { setDeleteOffer } from "../../store/slices/jobOffersSlice";
+import { setCurrentOffer, setDeleteOffer } from "../../store/slices/jobOffersSlice";
 import Handshake from "../Handshake/Handshake";
 import { useQuery } from "@tanstack/react-query";
-import { baseUrl, technologyRoute } from "../../utils/routes";
+import { baseUrl, jobOpportunityRoute, technologyRoute } from "../../utils/routes";
 import "./TinderCard.css";
 
 const SimpleCard = ({ db, handleRightSwipe }) => {
@@ -30,10 +30,16 @@ const SimpleCard = ({ db, handleRightSwipe }) => {
     (state) => state.opportunities.offers.length
   );
 
+db.forEach(element => {
+  console.log(element.name)
+});
+
   const dispatch = useDispatch();
   const [lastDirection, setLastDirection] = useState(null);
   const [expanded, setExpanded] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const currentIndex=useSelector((state)=>state.opportunities.currentIndex)
+  console.log("Current Index start:", currentIndex);
   const [match, setMatch] = useState(false);
   
   const role = useSelector((state) => state.auth.role);
@@ -60,11 +66,37 @@ const SimpleCard = ({ db, handleRightSwipe }) => {
   });
 
 
+  const { } = useQuery({
+    queryKey: ["delete-jobOffer", currentIndex], // add currentIndex to queryKey
+    queryFn: async () => {
+      const response = await fetch(
+        `${baseUrl}${jobOpportunityRoute}/deleteJobOpportunity/:${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ 
+            id: db[currentIndex].id
+          }),
+        }
+      );
+      return response.json();
+    },
+    enabled: role === "Job Seeker", // only fetch data if role is "Job Seeker"
+  });
+
+
   useEffect(() => {
-    setCurrentIndex(0);
+    console.log("Current Index:", currentIndex);
+    console.log("Offers Length:", offersLength);
+  }, [currentIndex, offersLength]);
+
+
+
+  useEffect(() => {
     const isMatch = handleRightSwipe(lastDirection);
     setMatch(isMatch);
-  
     if (isMatch) {
       const timer = setTimeout(() => {
         setMatch(false); // Reset match to false after the timer expires
@@ -78,8 +110,10 @@ const SimpleCard = ({ db, handleRightSwipe }) => {
   };
 
   const swiped = (direction) => {
+    console.log("You swiped: " + direction);
     setLastDirection(direction);
     dispatch(setDeleteOffer({ id: db[currentIndex]._id }));
+    dispatch(setCurrentOffer(currentIndex+1))
   };
 
   const outOfFrame = (name, idx) => {

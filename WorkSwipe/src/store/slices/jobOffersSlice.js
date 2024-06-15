@@ -4,6 +4,7 @@ import { arraysAreEqual } from "../../utils/arraysEqual";
 const initialState = {
   offers: [],
   currentOffer: {},
+  currentIndex: 0,
 };
 
 const jobOffersSlice = createSlice({
@@ -38,10 +39,16 @@ state.offers=action.payload
       state.currentOffer = deleteOffer;
       state.offers.splice(ind, 1);
     },
+    setCurrentOffer: (state, action) => {
+      state.currentOffer = action.payload;
+    },
+    setCurrentIndex: (state, action) => { 
+      state.currentIndex = action.payload;
+    }
   },
 });
 
-export const { setCurrentOffer,setDeleteOffer, setNewOffer, setOpportunities } =
+export const { setCurrentIndex,setCurrentOffer,setDeleteOffer, setNewOffer, setOpportunities } =
   jobOffersSlice.actions;
 
 export default jobOffersSlice.reducer;

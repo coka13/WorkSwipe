@@ -1,5 +1,5 @@
 
-import { createJobSeekerService, deleteJobSeekerService, getAllJobSeekersService, getSingleJobSeekerByNameService, getSingleJobSeekerService } from "../services/JobSeeker.js"
+import { createJobSeekerService, deleteJobOpportunitiesByJobSeekerIDService, deleteJobSeekerService, getAllJobSeekersService, getSingleJobSeekerByNameService, getSingleJobSeekerService } from "../services/JobSeeker.js"
 import { serverResponse } from "../utils/serverResponse.js"
 import { hashPassword } from "../utils/passwordHashing.js"
 import { compareHashedPassword } from "../utils/compareHashedPassword.js"

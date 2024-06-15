@@ -1,7 +1,7 @@
 import express from "express"
 const router = express.Router()
 
-import { createJobSeekerController, deleteJobSeekerController, getAllJobSeekersController, getSingleJobSeekerController, jobSeekerLoginController, updateJobSeekerController } from "../controllers/JobSeeker.js"
+import { addJobOpportunityToJobSeekerController, createJobSeekerController, deleteJobOpportunitiesByJobSeekerIDController, deleteJobSeekerController, getAllJobSeekersController, getSingleJobSeekerController, jobSeekerLoginController, updateJobSeekerController } from "../controllers/JobSeeker.js"
 import { verifyUser } from "../utils/verifyUser.js"
 
 router.get('/singleJobSeeker/:id',verifyUser, getSingleJobSeekerController)
@@ -10,6 +10,7 @@ router.post('/createJobSeeker', createJobSeekerController)
 router.post('/jobSeekerLogin', jobSeekerLoginController)
 router.put('/updateJobSeeker/:id', updateJobSeekerController)
 router.delete('/deleteJobSeeker/:id', verifyUser, deleteJobSeekerController)
+
 
 
 

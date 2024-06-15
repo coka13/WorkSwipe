@@ -60,19 +60,21 @@ const { data: jobData, error: jobError, isLoading: jobLoading } = useQuery({
     console.log(jsonData)
     return jsonData;
   },
-  enabled: userRole === "Job Seeker", // only fetch data if role is "Job Seeker"
+  enabled: userRole === "Job Seeker" // only fetch data if role is "Job Seeker"
 });
 
 
 
 
 useEffect(() => {
+
   if(userRole === "Job Seeker" && jobData && userTechnologies){
     const matchingOffers = jobData.filter(offer => 
       offer.technologies.every(tech => userTechnologies.includes(tech))
     );
     dispatch(setOpportunities(matchingOffers));
   }
+    console.log("swipeProps",swipeProps)
 }, [userRole, jobData, dispatch, userTechnologies]);
 
   return (

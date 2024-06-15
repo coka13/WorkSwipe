@@ -9,6 +9,10 @@ const jobSeekerSchema = new mongoose.Schema({
     location: { type: String},
     email: { type: String, required: true },
     technologies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Technologies", required: true }],
+    swiped: [{
+        isAccepted: { type: Boolean },
+        jobOpportunity: { type: mongoose.Schema.Types.ObjectId, ref: "JobOpportunity" }
+    }],
     linkedInUrl: { type: String },
     gitHubUrl: { type: String },
     dateCreated: { type: Date, default: Date.now() },

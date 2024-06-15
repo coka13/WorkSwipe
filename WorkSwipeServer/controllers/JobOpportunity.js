@@ -1,5 +1,6 @@
 
 import { deleteJobOpportunitiesByEmployerIDService, createJobOpportunityService, deleteJobOpportunityService, getAllJobOpportunitiesService, getSingleJobOpportunityService } from "../services/JobOpportunity.js"
+import { getSingleJobSeekerService } from "../services/JobSeeker.js"
 import { serverResponse } from "../utils/serverResponse.js"
 
 export const getAllJobOpportunitiesController = async (req, res) => {
@@ -14,6 +15,21 @@ export const getAllJobOpportunitiesController = async (req, res) => {
         return serverResponse(res, 500, {message: e.message})
     }
 
+}
+
+export const getAllJobOpportunitiesForJobSeeker = async (req , res) => {
+    try{
+        const id = req.params.id;
+        const jobSeeker = await getSingleJobSeekerService(id)
+        if(!jobSeeker){
+            return serverResponse(res, 404, {message: "no job seeker found"})
+        }
+        const allSwipedJobsForSpecificJobSeeker = getAllSwipedJobOpportunitiesIds(id)
+        const ids = allSwipedJobsForSpecificJobSeeker.map((swipe)=>swipe.jobOpportunity)
+        const allJobs = await getAllJobOpportunitiesService(ids)
+        return serverResponse(res, 200, allJobs)
+    } catch (e) {
+        return serverResponse(res, 500, {message: e.message})}
 }
 
 
@@ -74,7 +90,7 @@ export const deleteJobOpportunityController = async (req, res) => {
         const id = req.params.id;
         const deletedJobOpportunity = await deleteJobOpportunityService(id);
         if (!deletedJobOpportunity) {
-            return serverResponse(res, 404, { message: "no job Opportunity not found" })
+            return serverResponse(res, 404, { message: "no job Opportunity found" })
         }
         return serverResponse(res, 200, deletedJobOpportunity)
     } catch (e) {
