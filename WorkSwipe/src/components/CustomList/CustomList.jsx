@@ -8,15 +8,25 @@ import "./CustomList.css"
 
 export default function CustomList({ items, dispatchFunc }) {
   const handleOnClick = (item) => {
-    dispatchFunc(item)
-  }
+    dispatchFunc(item);
+  };
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+    <Box 
+      sx={{ 
+        width: '100%', 
+        maxWidth: 360, 
+        bgcolor: 'background.paper', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        flexDirection: 'column' 
+      }}
+    >
       <List>
         {items.map((item, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemText primary={item} />
+          <ListItem key={item._id || index} disablePadding>
+            <ListItemText primary={item.name} />
             <BasicButtons text={"delete"} onClick={() => handleOnClick(item)} />
           </ListItem>
         ))}

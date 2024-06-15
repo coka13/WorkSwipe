@@ -3,7 +3,7 @@ import FormComponent from "../../components/FormComponent/FormComponent";
 import BasicButtons from "../../components/BasicButtons/BasicButtons";
 import { securitySettingsProps } from "../../dummyData/constants";
 
-const SecurityPage = () => {
+export const SecurityPage = () => {
   return (
     <div className="securityPage">
       <h4>Security settings</h4>

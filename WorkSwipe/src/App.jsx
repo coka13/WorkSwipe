@@ -19,8 +19,9 @@ import AdminPage from "./pages/AdminPage/AdminPage";
 import AdminSupportPage from "./pages/AdminSupportPage/AdminSupportPage";
 import { setSystemTechnologies } from "./store/slices/techSlice";
 import { useQuery } from "@tanstack/react-query";
-import { baseUrl, jobOpportunityRoute, technologyRoute } from "./utils/routes";
+import { baseUrl, technologyRoute } from "./utils/routes";
 import "./App.css";
+import SecurityPage from "./pages/SecurityPage/SecurityPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -175,6 +176,16 @@ function App() {
               nav={"/"}
               role={["Admin","Employer"]}
               element={<EmployerPage />}
+            />
+          }
+        />
+        <Route
+          path="/security"
+          element={
+            <CustomRoute
+              nav={"/"}
+              role={["Job Seeker","Employer"]}
+              element={<SecurityPage />}
             />
           }
         />

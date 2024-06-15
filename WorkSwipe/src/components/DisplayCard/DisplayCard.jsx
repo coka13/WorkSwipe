@@ -31,9 +31,12 @@ export default function DisplayCard({
   dispatchFunc,
   selectDispatchFunc,
   list,
+  security
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEdit, setCurrentEdit] = useState("");
+  console.log(db)
+  console.log(allowedUpdates)
 
   const handleEditDetails = (key) => {
     setCurrentEdit(key.charAt(0).toLowerCase() + key.slice(1));
@@ -149,11 +152,15 @@ export default function DisplayCard({
           ]}
         />
       )}
-       <CustomLinkNavigate
-          text={""}
-          to={"/securityPage"}
-          label={"Security settings"}
-        />
+      {security &&(
+
+        <CustomLinkNavigate
+           text={""}
+           to={"/security"}
+           label={"Security settings"}
+         />
+
+      )}
     </Card>
   );
 }

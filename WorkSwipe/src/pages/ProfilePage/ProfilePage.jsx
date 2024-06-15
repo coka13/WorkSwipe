@@ -6,12 +6,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { baseUrl, jobSeekerRoute, technologyRoute } from "../../utils/routes";
 import {
   setJobSeekerTechnologies,
-  updateJobSeekerField,updateJobSeekerPassword
+  updateJobSeekerField,
+  updateJobSeekerPassword,
 } from "../../store/slices/jobSeekerSlice";
 import "./ProfilePage.css";
 import { updateEmployerField } from "../../store/slices/employerSlice";
 import { updateAdminField } from "../../store/slices/adminSlice";
-
+import BasicButtons from "../../components/BasicButtons/BasicButtons";
+import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -81,7 +83,6 @@ const ProfilePage = () => {
     },
   });
 
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -110,7 +111,7 @@ const ProfilePage = () => {
       Email: jobSeeker.email,
       Experience: jobSeeker.experience,
       Location: jobSeeker.location,
-      Technologies:  data.idsList,
+      Technologies: data.idsList,
       linkedInUrl: jobSeeker.linkedInUrl,
       gitHubUrl: jobSeeker.gitHubUrl,
     };
@@ -175,7 +176,9 @@ const ProfilePage = () => {
             img={img}
             handleEdit={handleEdit}
             handleDeleteList={handleDeleteTech}
-            checkedList={Array.isArray(data) ? data.map((tech) => tech._id) : []} // Ensure data is an array
+            checkedList={
+              Array.isArray(data) ? data.map((tech) => tech._id) : []
+            } // Ensure data is an array
             formIcon={<ScienceIcon />}
             title={"Choose your technologies"}
             description={
@@ -187,6 +190,7 @@ const ProfilePage = () => {
             passwordDispatchFunc={jobSeekerPasswordDispatchFunc}
             role={role}
             list={systemTechnologies}
+            security={true}
           />
         </div>
       )}
@@ -198,6 +202,8 @@ const ProfilePage = () => {
             handleEdit={handleEdit}
             dispatchFunc={adminDispatchFunc}
             role={role}
+            security={false}
+            allowedUpdates={allowedUpdates}
           />
         </div>
       )}
@@ -210,6 +216,7 @@ const ProfilePage = () => {
             handleEdit={handleEdit}
             dispatchFunc={employerDispatchFunc}
             role={role}
+            security={true}
           />
         </div>
       )}
