@@ -37,24 +37,6 @@ const jobSeekerSlice = createSlice({
 
       state[field] = value;
     },
-    updateJobSeekerPassword: (state, action) => {
-      switch (action.type) {
-        case 'passwordUpdate':
-          const { newPassword } = action.payload;
-
-          if (typeof newPassword !== 'string' || newPassword.length < 6) {
-            console.log('Password must be at least 6 characters long');
-            return state;
-          }
-
-          return {
-            ...state,
-            password: newPassword,
-          };
-        default:
-          return state;
-      }
-    },
 
     deleteJobSeekerTech: (state, action) => {
       const techToDel = action.payload;
@@ -66,6 +48,6 @@ const jobSeekerSlice = createSlice({
   },
 });
 
-export const { deleteJobSeekerTech, jobSeekerLogout, setJobSeekerGeneralDetail, setJobSeekerTechnologies, updateJobSeekerField,updateJobSeekerPassword } = jobSeekerSlice.actions;
+export const { deleteJobSeekerTech, jobSeekerLogout, setJobSeekerGeneralDetail, setJobSeekerTechnologies, updateJobSeekerField } = jobSeekerSlice.actions;
 
 export default jobSeekerSlice.reducer;

@@ -1,13 +1,25 @@
 .securityPage {
+
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 2.5rem;
+
+
+ 
+}
+
+.securityBox{
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #cfedff;
   border-radius: 8%;
   margin: 15px;
   padding: 10px;
-  border: transparent;
-  background-color: #cfedff;
-  
+  width: 350px;
+  font-size: 22px;
 }

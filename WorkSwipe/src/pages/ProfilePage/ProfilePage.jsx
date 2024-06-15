@@ -7,13 +7,11 @@ import { baseUrl, jobSeekerRoute, technologyRoute } from "../../utils/routes";
 import {
   setJobSeekerTechnologies,
   updateJobSeekerField,
-  updateJobSeekerPassword,
 } from "../../store/slices/jobSeekerSlice";
 import "./ProfilePage.css";
 import { updateEmployerField } from "../../store/slices/employerSlice";
 import { updateAdminField } from "../../store/slices/adminSlice";
-import BasicButtons from "../../components/BasicButtons/BasicButtons";
-import CustomLinkNavigate from "../../components/CustomLinkNavigate/CustomLinkNavigate";
+
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -30,7 +28,6 @@ const ProfilePage = () => {
   const admin = useSelector((state) => state.admin);
   const employer = useSelector((state) => state.employer);
   const jobSeekerDispatchFunc = updateJobSeekerField;
-  const jobSeekerPasswordDispatchFunc = updateJobSeekerPassword;
   const jobSeekerSelectDispatchFunc = setJobSeekerTechnologies;
 
   const employerDispatchFunc = updateEmployerField;
@@ -187,7 +184,6 @@ const ProfilePage = () => {
             type={"check"}
             dispatchFunc={jobSeekerDispatchFunc}
             selectDispatchFunc={jobSeekerSelectDispatchFunc}
-            passwordDispatchFunc={jobSeekerPasswordDispatchFunc}
             role={role}
             list={systemTechnologies}
             security={true}

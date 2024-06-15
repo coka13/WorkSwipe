@@ -155,9 +155,8 @@ export default function DisplayCard({
       {security &&(
 
         <CustomLinkNavigate
-           text={""}
            to={"/security"}
-           label={"Security settings"}
+           label={"Change Password"}
          />
 
       )}
