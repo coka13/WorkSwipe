@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DisplayCard from "../../components/DisplayCard/DisplayCard";
 import { useDispatch, useSelector } from "react-redux";
 import ScienceIcon from "@mui/icons-material/Science";
@@ -23,15 +23,14 @@ const ProfilePage = () => {
   const systemTechnologies = useSelector(
     (state) => state.technologies.technologies
   );
-
   const jobSeeker = useSelector((state) => state.jobSeeker);
   const admin = useSelector((state) => state.admin);
   const employer = useSelector((state) => state.employer);
   const jobSeekerDispatchFunc = updateJobSeekerField;
   const jobSeekerSelectDispatchFunc = setJobSeekerTechnologies;
-
   const employerDispatchFunc = updateEmployerField;
   const adminDispatchFunc = updateAdminField;
+  const [updatedTechs, setUpdatedTechs] = useState(false);
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["get-technologies-by-ids"],
@@ -53,30 +52,53 @@ const ProfilePage = () => {
 
   const updateUserTechnologiesMutation = useMutation({
     mutationFn: async (newTechnologies) => {
-      await fetch(`${baseUrl}${jobSeekerRoute}/updateJobSeeker/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ technologies: newTechnologies }),
-      });
+      console.log("Updating technologies with:", newTechnologies); // Debugging log
+      const response = await fetch(
+        `${baseUrl}${jobSeekerRoute}/updateJobSeeker/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ technologies: newTechnologies }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update technologies");
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries("get-technologies-by-ids");
     },
+    onError: (error) => {
+      console.error("Error updating technologies:", error); // Error logging
+    },
+    enabled: updatedTechs,
   });
+
+
   const updateJobSeekerPasswordMutation = useMutation({
     mutationFn: async (newPassword) => {
-      await fetch(`${baseUrl}${jobSeekerRoute}/updateJobSeekerPassword/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ password: newPassword }),
-      });
+      console.log("Updating password with:", newPassword); // Debugging log
+      const response = await fetch(
+        `${baseUrl}${jobSeekerRoute}/updateJobSeekerPassword/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ password: newPassword }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update password");
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries("update-password-by-id");
+    },
+    onError: (error) => {
+      console.error("Error updating password:", error); // Error logging
     },
   });
 
@@ -87,6 +109,15 @@ const ProfilePage = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+
+useEffect(() => {
+  if (updatedTechs) { // If the technologies have been updated  
+    updateUserTechnologiesMutation.mutate(userTechnologies); // Trigger the mutation
+    setUpdatedTechs(false); // Reset the flag
+  }
+}, [updatedTechs, userTechnologies, updateUserTechnologiesMutation]);
+
+
 
   let personProfile;
   let img;
@@ -108,7 +139,7 @@ const ProfilePage = () => {
       Email: jobSeeker.email,
       Experience: jobSeeker.experience,
       Location: jobSeeker.location,
-      Technologies: data.idsList,
+      Technologies: data?.idsList || [], // Ensure data is present
       linkedInUrl: jobSeeker.linkedInUrl,
       gitHubUrl: jobSeeker.gitHubUrl,
     };
@@ -144,18 +175,22 @@ const ProfilePage = () => {
   }
 
   const handleEdit = (field, value) => {
-    if (field === "technologies") {
-      updateUserTechnologiesMutation.mutate(value);
+    if (field === "Choose your technologies") {
+      console.log("handleEdit called with:", value); // Debugging log
+      setUpdatedTechs(true);
     }
   };
 
   const handleDeleteTech = (tech) => {
+    console.log("handleDeleteTech called with:", tech); // Debugging log
     const updatedTechnologies = userTechnologies.filter((_id) => _id !== tech);
     dispatch(setJobSeekerTechnologies(updatedTechnologies));
-    handleEdit("technologies", updatedTechnologies); // Make sure this triggers the mutation
+    handleEdit("Choose your technologies", updatedTechnologies); // Make sure this triggers the mutation
   };
+
   const handlePasswordEdit = (field, value) => {
     if (field === "password") {
+      console.log("handlePasswordEdit called with:", value); // Debugging log
       updateJobSeekerPasswordMutation.mutate(value);
     }
   };
@@ -173,9 +208,7 @@ const ProfilePage = () => {
             img={img}
             handleEdit={handleEdit}
             handleDeleteList={handleDeleteTech}
-            checkedList={
-              Array.isArray(data) ? data.map((tech) => tech._id) : []
-            } // Ensure data is an array
+            checkedList={userTechnologies} // Use the derived list
             formIcon={<ScienceIcon />}
             title={"Choose your technologies"}
             description={

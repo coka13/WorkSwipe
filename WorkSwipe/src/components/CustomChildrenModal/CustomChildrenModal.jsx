@@ -16,7 +16,6 @@ const CustomChildrenModal = ({ children, open, setOpen, title, description, plac
     p: 4,
   };
   const handleClose = () => setOpen(false);
-
   return (
     <Modal
       open={open}

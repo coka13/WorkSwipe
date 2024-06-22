@@ -31,16 +31,26 @@ export default function DisplayCard({
   dispatchFunc,
   selectDispatchFunc,
   list,
-  security
+  security,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEdit, setCurrentEdit] = useState("");
-  console.log(db)
-  console.log(allowedUpdates)
+  console.log(db);
+  console.log(allowedUpdates);
 
+  // Set current edit by the key(field we edit) and open the modal
   const handleEditDetails = (key) => {
     setCurrentEdit(key.charAt(0).toLowerCase() + key.slice(1));
     setIsModalOpen(true);
+  };
+
+
+// Currently used only for technologies in the FormComponent
+  const onSubmit = (field,newValue) => {
+    console.log("currentEdit",currentEdit)
+    setCurrentEdit(field)
+    console.log("currentEdit2",currentEdit)
+    handleEdit(currentEdit, newValue); // Pass the field and value to handleEdit
   };
 
   return (
@@ -74,11 +84,19 @@ export default function DisplayCard({
                 <ul>
                   {value.map((tech, techIndex) => (
                     <li key={techIndex}>
-                      <Typography className="profileInfo" >
+                      <Typography className="profileInfo">
                         {tech.name}
                         {value.length > 1 && allowedUpdates[key] && (
-                          <IconButton onClick={() => handleDeleteList(tech._id)}>
-                            <DeleteIcon sx={{ marginRight: 1, color: "#1976D2", fontSize: 20 }} />
+                          <IconButton
+                            onClick={() => handleDeleteList(tech._id)}
+                          >
+                            <DeleteIcon
+                              sx={{
+                                marginRight: 1,
+                                color: "#1976D2",
+                                fontSize: 20,
+                              }}
+                            />
                           </IconButton>
                         )}
                       </Typography>
@@ -89,7 +107,7 @@ export default function DisplayCard({
             );
           } else if (key === "gitHubUrl" || key === "linkedInUrl") {
             return (
-              <Typography className="profileInfo" key={index} >
+              <Typography className="profileInfo" key={index}>
                 {key === "gitHubUrl" ? (
                   <a href={value} target="_blank" rel="noopener noreferrer">
                     <IconButton>
@@ -105,18 +123,26 @@ export default function DisplayCard({
                 )}
                 {allowedUpdates[key] && (
                   <IconButton onClick={() => handleEditDetails(key)}>
-                    <EditIcon sx={{margin:"0", color: "#1976D2", fontSize: 20 }} />
+                    <EditIcon
+                      sx={{ margin: "0", color: "#1976D2", fontSize: 20 }}
+                    />
                   </IconButton>
                 )}
               </Typography>
             );
           } else {
             return (
-              <Typography className="profileInfo" key={index} sx={{marginBottom:"15px"}}>
+              <Typography
+                className="profileInfo"
+                key={index}
+                sx={{ marginBottom: "15px" }}
+              >
                 <span style={{ fontWeight: "bold" }}>{key}</span>: {value}
                 {allowedUpdates[key] && (
                   <IconButton onClick={() => handleEditDetails(key)}>
-                    <EditIcon sx={{margin:"0", color: "#1976D2", fontSize: 20 }} />
+                    <EditIcon
+                      sx={{ margin: "0", color: "#1976D2", fontSize: 20 }}
+                    />
                   </IconButton>
                 )}
               </Typography>
@@ -133,7 +159,6 @@ export default function DisplayCard({
         description={`Enter your new ${currentEdit} and press the submit button`}
         open={isModalOpen}
         setOpen={setIsModalOpen}
-        onSubmit={(newValue) => handleEdit(currentEdit, newValue)} // Pass the field and value to handleEdit
         type={"other"}
       />
       {list && list.length > 0 && (
@@ -148,17 +173,14 @@ export default function DisplayCard({
               checkedList: checkedList,
               dispatchFunc: dispatchFunc,
               selectDispatchFunc: selectDispatchFunc,
+              onSubmit: onSubmit,
+              currentEdit: currentEdit,
             },
           ]}
         />
       )}
-      {security &&(
-
-        <CustomLinkNavigate
-           to={"/security"}
-           label={"Change Password"}
-         />
-
+      {security && (
+        <CustomLinkNavigate to={"/security"} label={"Change Password"} />
       )}
     </Card>
   );

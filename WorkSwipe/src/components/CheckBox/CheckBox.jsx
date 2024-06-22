@@ -3,28 +3,28 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import './CheckBox.css';
 
-const CheckBox = ({ options, dispatchFunc, checkedList = [], name }) => {
+const CheckBox = ({ options, dispatchFunc, checkedList = [], name, onSubmit }) => {
   const dispatch = useDispatch();
-  const [checkedOptions, setCheckedOptions] = useState(checkedList);
+  const [checkedOptions, setCheckedOptions] = useState([]);
 
   useEffect(() => {
-    console.log('Updated checkedList:', checkedList);
     setCheckedOptions(checkedList);
+    onSubmit(name, checkedOptions);
   }, [checkedList]);
 
   const handleCheckboxChange = (option) => {
-    const newCheckedOptions = checkedOptions.includes(option._id)
-      ? checkedOptions.filter((item) => item !== option._id)
-      : [...checkedOptions, option._id];
-      
+    const isChecked = checkedOptions.includes(option._id);
+    let newCheckedOptions;
+
+    if (isChecked) {
+      newCheckedOptions = checkedOptions.filter((item) => item !== option._id);
+    } else {
+      newCheckedOptions = [...checkedOptions, option._id];
+    }
 
     setCheckedOptions(newCheckedOptions);
-    console.log('Dispatching:', { value: newCheckedOptions, name: name });
-    dispatch(dispatchFunc({ value: newCheckedOptions, name: name }));
-
+    dispatch(dispatchFunc(newCheckedOptions));
   };
-
-
 
   return (
     <div className="scrollable-container">

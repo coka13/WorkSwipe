@@ -57,13 +57,17 @@ export const createJobSeekerController = async (req, res) => {
 export const updateJobSeekerController = async (req, res) => {
     const jobSeekerAllowedUpdates = ["technologies", "location", "linkedInUrl", "gitHubUrl", "experience"];
     const updates = Object.keys(req.body);
-    console.log(updates)
+    
+  
     // We assume there is only one key to update
     if (updates.length !== 1) {
         return serverResponse(res, 400, { message: "Only one update at a time is allowed" });
     }
     
     const update = updates[0];
+    if(update==="technologies" && req.body[update].length===0){
+        return serverResponse(res, 400, { message: "Technologies cannot be empty" });  
+    }
     
     if (!jobSeekerAllowedUpdates.includes(update)) {
         return serverResponse(res, 400, { message: "Invalid update field" });
@@ -75,7 +79,7 @@ export const updateJobSeekerController = async (req, res) => {
             return serverResponse(res, 400, { message: "Invalid argument" });
         }
     }
-    
+
     try {
         const id = req.params.id;
         const jobSeeker = await getSingleJobSeekerService(id);

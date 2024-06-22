@@ -53,12 +53,12 @@ export const deleteTechnologyController = async (req, res) => {
 }
 
 export const getTechnologiesByListOfIDsController = async (req, res) => {
-    console.log("req",req.body)
   try {
-    const results = {};
+    let results = {};
 
     for (const key in req.body) {
       const idsList = req.body[key];
+      console.log("idsList",idsList)
       const technologies = await getTechnologiesByListOfIDsService(idsList);
       results[key] = technologies;
     }

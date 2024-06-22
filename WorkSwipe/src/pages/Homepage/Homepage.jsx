@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import "./Homepage.css";
 import { useEffect } from "react";
 import { setOpportunities } from "../../store/slices/jobOffersSlice";
-import { baseUrl, jobOpportunityRoute } from "../../utils/routes";
+import { baseUrl, jobOpportunityRoute, technologyRoute } from "../../utils/routes";
 
 
 

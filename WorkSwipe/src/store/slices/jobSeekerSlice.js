@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const initialState = {
   username: "",
@@ -23,7 +24,10 @@ const jobSeekerSlice = createSlice({
       }
     },
     setJobSeekerTechnologies: (state, action) => {
-      state.technologies = action.payload
+      if(action.payload.length>0){
+
+        state.technologies = action.payload
+      }
     },
     updateJobSeekerField: (state, action) => {
 

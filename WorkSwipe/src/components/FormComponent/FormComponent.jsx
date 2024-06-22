@@ -41,18 +41,21 @@ export default function FormComponent({ props }) {
                 </IconButton>
 
                 {prop.options.length > 0 && (
+                  
                   <CustomChildrenModal
                     open={isModalOpen}
                     setOpen={setIsModalOpen}
                     title={prop.title}
                     description={prop.description}
-                    checkedList={prop.checkedList}
+                  
+                   
                   >
                     <CheckBox
                       options={prop.options}
-                      name={prop.name}
+                      name={prop.title}
                       checkedList={prop.checkedList}
                       dispatchFunc={prop.selectDispatchFunc}
+                      onSubmit={prop.onSubmit}
                     />
                   </CustomChildrenModal>
                 )}
