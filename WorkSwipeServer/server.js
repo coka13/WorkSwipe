@@ -11,6 +11,7 @@ import employerRoutes from './routes/Employer.js'
 import matchRoutes from './routes/Match.js'
 import technologyRoutes from './routes/Technology.js'
 import jobOpportunityRoutes from './routes/JobOpportunity.js'
+import messageRoutes from './routes/Message.js'
 import { connectionString } from "./config/config.js";
 
 //const __filename = fileURLToPath(import.meta.url);
@@ -21,7 +22,7 @@ import { connectionString } from "./config/config.js";
 const app = express()
 app.use(express.json())
 app.use(cors({
-  origin: 'http://localhost:5173', // Replace with your frontend URL
+  origin: ['http://localhost:5173', 'http://localhost:5174'], // Multiple frontend URLs
   credentials: true // Enable credentials
 }));
 //app.use(express.static("Client/dist")) 
@@ -32,6 +33,7 @@ app.use('/api/jobSeeker', jobSeekerRoutes)
 app.use('/api/jobOpportunity', jobOpportunityRoutes)
 app.use('/api/match', matchRoutes)
 app.use('/api/technology', technologyRoutes)
+app.use('/api/message', messageRoutes)
 
 
 // app.get("*", (req, res) => {
@@ -39,10 +41,10 @@ app.use('/api/technology', technologyRoutes)
 //     res.sendFile(__dirname + "/Client/dist/index.html");//still not used
 //   });
 
-app.listen(3000, async () => {
+app.listen(3001, async () => {
   try {
     await mongoose.connect(connectionString)
-    console.log(`Example app listening on port 3000`);
+    console.log(`Server listening on port 3001`);
   } catch (e) {
     console.log(e);
   }
