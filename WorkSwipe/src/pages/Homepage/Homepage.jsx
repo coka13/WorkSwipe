@@ -77,19 +77,60 @@ useEffect(() => {
 
   return (
     <div className="homePage">
-      <div className="swipeArea">
-        {userRole === "Job Seeker" && ( 
-          <SimpleCard db={swipeProps} handleRightSwipe={handleRightSwipe} />
+      <div className="homeContainer">
+        {userRole === "Job Seeker" && (
+          <div className="jobSeekerSection">
+            <div className="homeHeader">
+              <h2 className="homeTitle">Discover Opportunities</h2>
+              <p className="homeSubtitle">Swipe to find your perfect match</p>
+            </div>
+            <div className="swipeArea">
+              <SimpleCard db={swipeProps} handleRightSwipe={handleRightSwipe} />
+            </div>
+          </div>
         )}
-   {userRole === "Admin" && (
-    <div className="admin">
-  <img src="src/assets/admin.png"  style={{width:"500px",height:"500px"}}/>
-  <h3>Admin mode</h3>
-  </div>
-)}
-   
+        
+        {userRole === "Admin" && (
+          <div className="adminSection">
+            <div className="adminCard">
+              <div className="adminHeader">
+                <h2 className="adminTitle">Admin Dashboard</h2>
+                <p className="adminSubtitle">Manage WorkSwipe platform</p>
+              </div>
+              <div className="adminContent">
+                <img src="src/assets/admin.png" alt="Admin" className="adminImage"/>
+                <div className="adminStats">
+                  <div className="statCard">
+                    <h3>Platform Overview</h3>
+                    <p>Monitor and manage the WorkSwipe ecosystem</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {userRole === "Employer" && (
+          <div className="employerSection">
+            <div className="employerCard">
+              <div className="employerHeader">
+                <h2 className="employerTitle">Welcome, Employer</h2>
+                <p className="employerSubtitle">Find the perfect candidates for your team</p>
+              </div>
+              <div className="employerActions">
+                <div className="actionCard">
+                  <h3>Post New Job</h3>
+                  <p>Create job opportunities to attract talent</p>
+                </div>
+                <div className="actionCard">
+                  <h3>View Applications</h3>
+                  <p>Review candidates and manage applications</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-  
     </div>
   );
 };

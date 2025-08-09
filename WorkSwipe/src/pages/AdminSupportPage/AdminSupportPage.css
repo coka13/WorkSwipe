@@ -1,0 +1,218 @@
+/* Admin Support Page Styling */
+.admin-support-page {
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    padding: var(--space-5);
+    font-family: var(--font-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: var(--space-20); /* Account for drawer */
+}
+
+.admin-support-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+    color: var(--text-white);
+}
+
+.admin-support-header h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    margin: 0 0 var(--space-3) 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: -0.025em;
+}
+
+.admin-support-header p {
+    font-family: var(--font-primary);
+    font-size: var(--text-lg);
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.admin-chat-container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.admin-intro {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-3xl);
+    padding: var(--space-8);
+    text-align: center;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.admin-intro h3 {
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    margin: 0 0 var(--space-4) 0;
+}
+
+.admin-intro p {
+    color: var(--text-secondary);
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    margin: 0 0 var(--space-5) 0;
+    line-height: 1.6;
+}
+
+.admin-features {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.admin-feature {
+    background: var(--bg-gradient-light);
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-full);
+    color: var(--primary-blue);
+    font-weight: 500;
+    font-size: var(--text-sm);
+    border: 1px solid rgba(66, 133, 244, 0.2);
+    font-family: var(--font-primary);
+    white-space: nowrap;
+}
+
+/* Admin status indicator */
+.admin-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    color: var(--text-white);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-5);
+    font-family: var(--font-primary);
+}
+
+.admin-status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--success-green);
+    animation: pulse 2s infinite;
+}
+
+.admin-controls {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    margin-top: var(--space-5);
+}
+
+.admin-control-btn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-white);
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.admin-control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Conversation container for admin */
+.admin-chat-container .chat {
+    box-shadow: var(--shadow-2xl);
+    border: 2px solid rgba(66, 133, 244, 0.2);
+}
+
+.admin-chat-container .chat-title {
+    background: linear-gradient(135deg, var(--success-green) 0%, #059669 100%);
+}
+
+/* Special styling for admin messages */
+.admin-chat-container .message.new {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.admin-chat-container .message.new::before {
+    border-top-color: #dbeafe;
+    border-right-color: #dbeafe;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admin-support-page {
+        padding-top: 100px; /* More space for mobile header */
+    }
+    
+    .admin-support-header h2 {
+        font-size: var(--text-3xl);
+    }
+    
+    .admin-support-header p {
+        font-size: var(--text-base);
+    }
+    
+    .admin-chat-container {
+        max-width: 95%;
+    }
+    
+    .admin-intro {
+        padding: var(--space-6) var(--space-5);
+        margin: 0 var(--space-3);
+    }
+    
+    .admin-features {
+        flex-direction: column;
+        gap: var(--space-3);
+        align-items: center;
+    }
+    
+    .admin-feature {
+        font-size: var(--text-xs);
+        padding: var(--space-2) var(--space-4);
+    }
+    
+    .admin-controls {
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+}
+
+/* Accessibility enhancements */
+@media (prefers-reduced-motion: reduce) {
+    .admin-control-btn:hover {
+        transform: none;
+    }
+    
+    .admin-status-dot {
+        animation: none;
+    }
+}
+
+/* Focus states */
+.admin-control-btn:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}

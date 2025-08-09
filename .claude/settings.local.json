@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(npm run reset:*)",
+      "Bash(npm start)",
+      "Bash(npm run:*)",
+      "Bash(find:*)",
+      "Bash(taskkill:*)",
+      "Bash(git checkout:*)"
+    ],
+    "deny": []
+  }
+}

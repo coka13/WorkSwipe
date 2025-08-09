@@ -135,120 +135,158 @@ const RegisterPage = () => {
 
   return (
     <div className="registerPage">
-      <h4>Register</h4>
-      <div className="registerBox">
-        <CustomRadioButton
-          onClick={handleRoleChange}
-          title={"Choose role"}
-          list={["Job Seeker", "Employer"]}
-        />
-        <FormComponent
-          props={[
-            {
-              name: "username",
-              type: "text",
-              formType: "username",
-              label: "Username",
-              required: true,
-              form: registerForm,
-              dispatchFunc: setRegisterForm,
-            },
-            {
-              name: "password",
-              formType: "password",
-              type: "password",
-              label: "Password",
-              required: true,
-              form: registerForm,
-              dispatchFunc: setRegisterForm,
-            },
-            {
-              name: "email",
-              formType: "email",
-              type: "email",
-              label: "Email",
-              required: true,
-              form: registerForm,
-              dispatchFunc: setRegisterForm,
-            },
-            {
-              name: "name",
-              type: "text",
-              label: "Name",
-              required: true,
-              form: registerForm,
-              dispatchFunc: setRegisterForm,
-            },
-          ]}
-        />
-        {role === "Job Seeker" && (
-          <FormComponent
-            props={[
-              {
-                name: "image",
-                type: "text",
-                label: "Image link",
-                required: false,
-                form: registerForm,
-                dispatchFunc: setRegisterForm,
-              },
-              {
-                name: "linkedInUrl",
-                type: "text",
-                label: "LinkedIn link",
-                required: false,
-                form: registerForm,
-                dispatchFunc: setRegisterForm,
-              },
-              {
-                name: "gitHubUrl",
-                type: "text",
-                label: "GitHub link",
-                required: false,
-                form: registerForm,
-                dispatchFunc: setRegisterForm,
-              },
-              {
-                name: "location",
-                type: "text",
-                label: "Residence",
-                required: false,
-                form: registerForm,
-                dispatchFunc: setRegisterForm,
-              },
-              {
-                name: "experience",
-                type: "select",
-                label: "Experience in years",
-                options: Array.from({ length: 21 }, (_, i) => i),
-                required: true,
-                form: registerForm,
-                dispatchFunc: setRegisterForm,
-              },
-              {
-                title: "Choose technologies",
-                description:
-                  "Select the technologies you are competent in and press Submit",
-                type: "check",
-                label: "Technologies",
-                name: "technologies",
-                options: techData,
-                required: true,
-                checkedList: registerForm.technologies,
-                Icon: <ScienceIcon />,
-                dispatchFunc: setRegisterForm,
-              },
-            ]}
-          />
-        )}
+      <div className="registerContainer">
+        <div className="registerHeader">
+          <h2 className="registerTitle">Join WorkSwipe</h2>
+          <p className="registerSubtitle">Create your professional profile</p>
+        </div>
+        
+        <div className="registerCard">
+          <div className="roleSection">
+            <h3 className="sectionTitle">Choose Your Role</h3>
+            <CustomRadioButton
+              onClick={handleRoleChange}
+              title={""}
+              list={["Job Seeker", "Employer"]}
+            />
+          </div>
+
+          <div className="formSection">
+            <h3 className="sectionTitle">Basic Information</h3>
+            <FormComponent
+              props={[
+                {
+                  name: "username",
+                  type: "text",
+                  formType: "username",
+                  label: "Username",
+                  required: true,
+                  value: registerForm.username || "",
+                  onChange: (e) => dispatch(setRegisterForm({ name: "username", value: e.target.value })),
+                },
+                {
+                  name: "password",
+                  formType: "password",
+                  type: "password",
+                  label: "Password",
+                  required: true,
+                  value: registerForm.password || "",
+                  onChange: (e) => dispatch(setRegisterForm({ name: "password", value: e.target.value })),
+                },
+                {
+                  name: "email",
+                  formType: "email",
+                  type: "email",
+                  label: "Email",
+                  required: true,
+                  value: registerForm.email || "",
+                  onChange: (e) => dispatch(setRegisterForm({ name: "email", value: e.target.value })),
+                },
+                {
+                  name: "name",
+                  type: "text",
+                  label: "Full Name",
+                  required: true,
+                  value: registerForm.name || "",
+                  onChange: (e) => dispatch(setRegisterForm({ name: "name", value: e.target.value })),
+                },
+              ]}
+            />
+          </div>
+
+          {role === "Job Seeker" && (
+            <>
+              <div className="formSection">
+                <h3 className="sectionTitle">Professional Details</h3>
+                <FormComponent
+                  props={[
+                    {
+                      name: "experience",
+                      type: "select",
+                      label: "Years of Experience",
+                      options: Array.from({ length: 21 }, (_, i) => i),
+                      required: true,
+                      value: registerForm.experience || "",
+                      onChange: (e) => dispatch(setRegisterForm({ name: "experience", value: e.target.value })),
+                    },
+                    {
+                      name: "location",
+                      type: "text",
+                      label: "Location",
+                      required: false,
+                      value: registerForm.location || "",
+                      onChange: (e) => dispatch(setRegisterForm({ name: "location", value: e.target.value })),
+                    },
+                  ]}
+                />
+              </div>
+
+              <div className="formSection">
+                <h3 className="sectionTitle">Skills & Technologies</h3>
+                <FormComponent
+                  props={[
+                    {
+                      title: "Choose your tech stack",
+                      description:
+                        "Select the technologies you're skilled in",
+                      type: "check",
+                      label: "Technologies",
+                      name: "technologies",
+                      options: techData,
+                      required: true,
+                      checkedList: registerForm.technologies || [],
+                      Icon: <ScienceIcon />,
+                      selectDispatchFunc: (technologies) => setRegisterForm({ name: "technologies", value: technologies }),
+                      onSubmit: (name, value) => dispatch(setRegisterForm({ name, value })),
+                    },
+                  ]}
+                />
+              </div>
+
+              <div className="formSection">
+                <h3 className="sectionTitle">Links & Profile</h3>
+                <FormComponent
+                  props={[
+                    {
+                      name: "image",
+                      type: "text",
+                      label: "Profile Picture URL",
+                      required: false,
+                      value: registerForm.image || "",
+                      onChange: (e) => dispatch(setRegisterForm({ name: "image", value: e.target.value })),
+                    },
+                    {
+                      name: "linkedInUrl",
+                      type: "text",
+                      label: "LinkedIn Profile",
+                      required: false,
+                      value: registerForm.linkedInUrl || "",
+                      onChange: (e) => dispatch(setRegisterForm({ name: "linkedInUrl", value: e.target.value })),
+                    },
+                    {
+                      name: "gitHubUrl",
+                      type: "text",
+                      label: "GitHub Profile",
+                      required: false,
+                      value: registerForm.gitHubUrl || "",
+                      onChange: (e) => dispatch(setRegisterForm({ name: "gitHubUrl", value: e.target.value })),
+                    },
+                  ]}
+                />
+              </div>
+            </>
+          )}
+
+          <div className="submitSection">
+            <BasicButtons text={"Create Account"} onClick={handleSubmit} />
+            <CustomLinkNavigate
+              text={"Already have an account?"}
+              to={"/"}
+              label={"Sign In"}
+            />
+          </div>
+        </div>
       </div>
-      <BasicButtons text={"Submit"} onClick={handleSubmit} />
-      <CustomLinkNavigate
-        text={"Already have an account?"}
-        to={"/"}
-        label={"Log In"}
-      />
-      <Waves color={"#1976D2"} />
     </div>
   );
 };

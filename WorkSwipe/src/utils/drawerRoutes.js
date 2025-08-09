@@ -21,7 +21,6 @@ export function useDrawerLogic(userRole) {
         location.pathname === "/contact" ||
         location.pathname === "/support" ||
         location.pathname === "/matches" ||
-        location.pathname === "/register" ||
         location.pathname === "/admin" ||
         location.pathname === "/adminsupport" ||
         location.pathname === "/recruit" 

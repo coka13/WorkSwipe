@@ -84,45 +84,60 @@ const LoginPage = () => {
 
   return (
     <div className="loginPage">
-      <h4>Login</h4>
-      <div className="loginBox">
-        <CustomRadioButton
-          onClick={handleRoleChange}
-          title={"Choose role"}
-          list={["Job Seeker", "Employer", "Admin"]}
-        />
+      <div className="loginContainer">
+        <div className="loginHeader">
+          <h2 className="loginTitle">Welcome Back</h2>
+          <p className="loginSubtitle">Sign in to your WorkSwipe account</p>
+        </div>
+        
+        <div className="loginCard">
+          <div className="roleSection">
+            <h3 className="sectionTitle">Select Your Role</h3>
+            <CustomRadioButton
+              onClick={handleRoleChange}
+              title={""}
+              list={["Job Seeker", "Employer", "Admin"]}
+            />
+          </div>
 
-        <FormComponent
-          props={[
-            {
-              name: "username",
-              type: "textarea",
-              label: "Username",
-              required: true,
-              onChange: handleInputChange,
-              value: formData.username,
-            },
-            {
-              name: "password",
-              formType:"password",
-              type: "textarea",
-              label: "Password",
-              required: true,
-              onChange: handleInputChange,
-              value: formData.password,
-            },
-          ]}
-        />
+          <div className="formSection">
+            <h3 className="sectionTitle">Credentials</h3>
+            <FormComponent
+              props={[
+                {
+                  name: "username",
+                  type: "text",
+                  label: "Username",
+                  required: true,
+                  onChange: handleInputChange,
+                  value: formData.username,
+                },
+                {
+                  name: "password",
+                  formType: "password",
+                  type: "password",
+                  label: "Password",
+                  required: true,
+                  onChange: handleInputChange,
+                  value: formData.password,
+                },
+              ]}
+            />
+          </div>
+
+          {isLoading && <div className="loadingMessage">Signing you in...</div>}
+          {error && <div className="errorMessage">Login failed. Please check your credentials.</div>}
+
+          <div className="submitSection">
+            <BasicButtons text={"Sign In"} onClick={handleSubmit} />
+            <CustomLinkNavigate
+              text={"Don't have an account yet?"}
+              to={"/register"}
+              label={"Create Account"}
+            />
+          </div>
+        </div>
       </div>
-      <BasicButtons text={"Submit"} onClick={handleSubmit} />
-      {isLoading && <div>Loading...</div>}
-      {error && <div>Error: {error.message}</div>}
-      <CustomLinkNavigate
-        text={"Don't have an account yet?"}
-        to={"/register"}
-        label={"Sign Up"}
-      />
-      <Waves color={"#1976D2"} />
     </div>
   );
 };

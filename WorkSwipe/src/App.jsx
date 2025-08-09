@@ -73,8 +73,9 @@ function App() {
   
     
     return (
-      <>
+      <div className="app-layout">
       {showDrawer && <CustomDrawer items={items} icons={icons} hrefs={hrefs} />}
+      <main className={showDrawer ? 'main-content with-drawer' : 'main-content'}>
       <Routes>
         <Route path="/" element={<LoginPage />} index={true} />
         <Route path="/register" element={<RegisterPage />} />
@@ -191,7 +192,8 @@ function App() {
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </>
+      </main>
+      </div>
   );
 }
 

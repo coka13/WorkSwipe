@@ -196,60 +196,60 @@ useEffect(() => {
   };
 
   return (
-    <>
-      <div className="title">
-        <h4>Profile</h4>
+    <div className="profilePage">
+      <div className="profileContainer">
+        <div className="profileHeader">
+          <h2 className="profileTitle">My Profile</h2>
+          <p className="profileSubtitle">Manage your {role.toLowerCase()} information</p>
+        </div>
+        
+        <div className="profileCard">
+          {role === "Job Seeker" && (
+            <DisplayCard
+              allowedUpdates={allowedUpdates}
+              db={personProfile}
+              img={img}
+              handleEdit={handleEdit}
+              handleDeleteList={handleDeleteTech}
+              checkedList={userTechnologies}
+              formIcon={<ScienceIcon />}
+              title={"Choose your technologies"}
+              description={
+                "Choose the technologies you are competent in and press Submit"
+              }
+              type={"check"}
+              dispatchFunc={jobSeekerDispatchFunc}
+              selectDispatchFunc={jobSeekerSelectDispatchFunc}
+              role={role}
+              list={systemTechnologies}
+              security={true}
+            />
+          )}
+          {role === "Admin" && (
+            <DisplayCard
+              db={personProfile}
+              img={img}
+              handleEdit={handleEdit}
+              dispatchFunc={adminDispatchFunc}
+              role={role}
+              security={false}
+              allowedUpdates={allowedUpdates}
+            />
+          )}
+          {role === "Employer" && (
+            <DisplayCard
+              allowedUpdates={allowedUpdates}
+              db={personProfile}
+              img={img}
+              handleEdit={handleEdit}
+              dispatchFunc={employerDispatchFunc}
+              role={role}
+              security={true}
+            />
+          )}
+        </div>
       </div>
-      {role === "Job Seeker" && (
-        <div className="card">
-          <DisplayCard
-            allowedUpdates={allowedUpdates}
-            db={personProfile}
-            img={img}
-            handleEdit={handleEdit}
-            handleDeleteList={handleDeleteTech}
-            checkedList={userTechnologies} // Use the derived list
-            formIcon={<ScienceIcon />}
-            title={"Choose your technologies"}
-            description={
-              "Choose the technologies you are competent in and press Submit"
-            }
-            type={"check"}
-            dispatchFunc={jobSeekerDispatchFunc}
-            selectDispatchFunc={jobSeekerSelectDispatchFunc}
-            role={role}
-            list={systemTechnologies}
-            security={true}
-          />
-        </div>
-      )}
-      {role === "Admin" && (
-        <div className="card">
-          <DisplayCard
-            db={personProfile}
-            img={img}
-            handleEdit={handleEdit}
-            dispatchFunc={adminDispatchFunc}
-            role={role}
-            security={false}
-            allowedUpdates={allowedUpdates}
-          />
-        </div>
-      )}
-      {role === "Employer" && (
-        <div className="card">
-          <DisplayCard
-            allowedUpdates={allowedUpdates}
-            db={personProfile}
-            img={img}
-            handleEdit={handleEdit}
-            dispatchFunc={employerDispatchFunc}
-            role={role}
-            security={true}
-          />
-        </div>
-      )}
-    </>
+    </div>
   );
 };
 

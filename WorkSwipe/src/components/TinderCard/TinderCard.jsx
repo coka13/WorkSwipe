@@ -95,127 +95,161 @@ const SimpleCard = ({ db, handleRightSwipe }) => {
   }
 
   return (
-    <>
+    <div className="swipe-container">
       {match === true && <Handshake />}
       {!match && db[currentIndex] && (
-        <TinderCard
-          className={expanded ? 'expanded' : ''}
-          key={db[currentIndex]?.name}
-          onSwipe={(dir) => swiped(dir, db[currentIndex]?.name, currentIndex)}
-          onCardLeftScreen={() => outOfFrame(db[currentIndex]?.name, currentIndex)}
-          preventSwipe={["up", "down"]}
-        >
-          {db[currentIndex] && (
-            <Card sx={{ width: 300, overflowY: "scroll" }}>
-              <CardHeader
-                avatar={
-                  <Avatar sx={{ bgcolor: "#1976D2" }}>
-                    {db[currentIndex].name.charAt(0)}
-                  </Avatar>
-                }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon sx={{ color: "#1976D2" }} />
-                  </IconButton>
-                }
-                title={
-                  <Typography variant="h5" style={{ fontWeight: "bold" }}>
-                    {db[currentIndex].name}
-                  </Typography>
-                }
-              />
-
-              <CardContent
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  image={db[currentIndex].image}
-                  alt={db[currentIndex].name}
-                  sx={{
-                    pointerEvents: "none",
-                    padding: "0.6rem",
-                    width: "100px",
-                    height: "100px",
-                    objectFit: "contain",
-                    marginBottom: "20px",
-                    display: "flex",
-                    alignSelf: "center",
-                  }}
-                />
-                <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
-                  <WorkIcon sx={{ marginRight: 1, color: "#1976D2" }} />
-                  {db[currentIndex].position}
-                </Typography>
-                <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
-                  <StarIcon sx={{ marginRight: 1, color: "#1976D2" }} />
-                  {db[currentIndex].experience + " years of experience"} 
-                </Typography>
-                <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
-                  <PlaceIcon sx={{ marginRight: 1, color: "#1976D2" }} />
-                  {db[currentIndex].location}
-                </Typography>
-                <Typography className="profileInfo" sx={{ fontWeight: "bold" }}>
-                  <MailIcon sx={{ marginRight: 1, color: "#1976D2" }} />
-                  <a
-                    href={`mailto:${db[currentIndex].emailHR}`}
-                    style={{ color: "#1976D2" }}
-                  >
-                    {db[currentIndex].emailHR}
-                  </a>
-                </Typography>
-              </CardContent>
-              <div className="buttons">
-                <CardActions>
-                  <a
-                    href={db[currentIndex].linkedInUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <IconButton aria-label="LinkedIn">
-                      <LinkedInIcon sx={{ color: "#1976D2" }} />
-                    </IconButton>
-                  </a>
-                  <IconButton
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon sx={{ color: "black" }} />
-                    <span style={{ color: "#1976D2", fontWeight: "bold" }}>
-                      Technologies
-                    </span>
-                  </IconButton>
-                </CardActions>
+        <div className="card-stack">
+          {/* Show next card behind current one for depth */}
+          {db[currentIndex + 1] && (
+            <div className="card-background">
+              <div className="job-card preview-card">
+                <div className="card-image-container">
+                  <img 
+                    src={db[currentIndex + 1].image} 
+                    alt={db[currentIndex + 1].name}
+                    className="card-image"
+                  />
+                  <div className="gradient-overlay" />
+                </div>
+                <div className="card-content-preview">
+                  <h3 className="company-name">{db[currentIndex + 1].name}</h3>
+                  <p className="job-position">{db[currentIndex + 1].position}</p>
+                </div>
               </div>
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                  <h4>Required:</h4>
-                  <ul className="list">
-                    {data?.required && data.required.map((tech, index) => (
-                      <li style={{ fontWeight: "bold" }} key={index}>
-                        {tech.name}
-                      </li>
-                    ))}
-                  </ul>
-                  <h4>Advantage:</h4>
-                  <ul className="list">
-                    {data?.niceToHave && data.niceToHave.map((tech, index) => (
-                      <li style={{ fontWeight: "bold" }} key={index}>
-                        {tech.name}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Collapse>
-            </Card>
+            </div>
           )}
-        </TinderCard>
+          
+          <TinderCard
+            className="tinder-card-modern"
+            key={db[currentIndex]?.name}
+            onSwipe={(dir) => swiped(dir, db[currentIndex]?.name, currentIndex)}
+            onCardLeftScreen={() => outOfFrame(db[currentIndex]?.name, currentIndex)}
+            preventSwipe={["up", "down"]}
+          >
+            <div className="job-card">
+              <div className="card-image-container">
+                <img 
+                  src={db[currentIndex].image} 
+                  alt={db[currentIndex].name}
+                  className="card-image"
+                />
+                <div className="gradient-overlay" />
+                <div className="company-info-overlay">
+                  <h2 className="company-name">{db[currentIndex].name}</h2>
+                  <div className="company-details">
+                    <span className="company-size">{db[currentIndex].companySize || "Growing Team"}</span>
+                    <span className="location">📍 {db[currentIndex].location}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="card-content">
+                <div className="job-header">
+                  <h3 className="job-title">{db[currentIndex].position}</h3>
+                  <div className="salary-range">
+                    {db[currentIndex].salary || "$70,000 - $90,000"}
+                  </div>
+                </div>
+                
+                <div className="job-description">
+                  <p>{db[currentIndex].description || "Join our innovative team and make an impact!"}</p>
+                </div>
+                
+                <div className="job-details">
+                  <div className="detail-item">
+                    <div className="detail-icon">💼</div>
+                    <span>{db[currentIndex].experience} years experience</span>
+                  </div>
+                  
+                  <div className="detail-item">
+                    <div className="detail-icon">🌐</div>
+                    <span>{db[currentIndex].website}</span>
+                  </div>
+                </div>
+                
+                <div className="tech-stack-section">
+                  <h4 className="section-title">Required Technologies</h4>
+                  <div className="tech-tags">
+                    {data?.required && data.required.map((tech, index) => (
+                      <span key={index} className="tech-tag required">
+                        {tech.name}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  {data?.niceToHave && data.niceToHave.length > 0 && (
+                    <>
+                      <h4 className="section-title bonus-title">Nice to Have</h4>
+                      <div className="tech-tags">
+                        {data.niceToHave.map((tech, index) => (
+                          <span key={index} className="tech-tag bonus">
+                            {tech.name}
+                          </span>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+                
+                {db[currentIndex].perks && (
+                  <div className="perks-section">
+                    <h4 className="section-title">Perks & Benefits</h4>
+                    <div className="perks-list">
+                      {db[currentIndex].perks.map((perk, index) => (
+                        <span key={index} className="perk-item">
+                          ✨ {perk}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                <div className="action-buttons">
+                  <button 
+                    className="action-btn contact-btn"
+                    onClick={() => window.open(`mailto:${db[currentIndex].emailHR}`, '_blank')}
+                  >
+                    📧 Contact HR
+                  </button>
+                  <button 
+                    className="action-btn linkedin-btn"
+                    onClick={() => window.open(db[currentIndex].linkedInUrl, '_blank')}
+                  >
+                    💼 LinkedIn
+                  </button>
+                </div>
+              </div>
+            </div>
+          </TinderCard>
+          
+          {/* Swipe indicators */}
+          <div className="swipe-indicators">
+            <div className="swipe-indicator left">
+              <div className="indicator-icon">❌</div>
+              <span>Pass</span>
+            </div>
+            <div className="swipe-indicator right">
+              <div className="indicator-icon">💚</div>
+              <span>Apply</span>
+            </div>
+          </div>
+        </div>
       )}
-    </>
+      
+      {/* No more cards message */}
+      {db.length === 0 && (
+        <div className="no-cards-container">
+          <div className="no-cards-animation">
+            <div className="empty-stack-icon">📋</div>
+            <h3>No More Opportunities</h3>
+            <p>You've reviewed all available positions! Check back later for new opportunities.</p>
+            <button className="refresh-btn" onClick={() => window.location.reload()}>
+              🔄 Refresh
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
