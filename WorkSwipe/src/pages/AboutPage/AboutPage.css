@@ -1,21 +1,198 @@
-.aboutUs{
-    font-weight: bold;
-    width: 50%;
-    
+/* Modern About Page Styling */
+.aboutPageContainer {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.aboutPage{
+
+.aboutContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 80px; /* Account for drawer and mobile header */
+}
+
+.aboutHeader {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.aboutTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.aboutSubtitle {
+    font-size: 1.1rem;
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.aboutCard {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    padding: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Legacy styles with modern enhancements */
+.aboutPage {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2.5rem;
+    text-align: center;
+    gap: 30px;
 }
-.Img{
-    width:250px;
-    height: 250px;
-    margin:2rem;
-    border-radius: 50%;
+
+.aboutUs {
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #2d3748;
+    max-width: 700px;
+    margin: 0;
+    text-align: justify;
 }
-.imgBox{
+
+.imgBox {
     display: flex;
-    flex-direction: row;  
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.Img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 4px solid rgba(102, 126, 234, 0.2);
+}
+
+.Img:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+    border-color: rgba(102, 126, 234, 0.4);
+}
+
+.aboutPage > p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #4a5568;
+    margin: 20px 0;
+    max-width: 600px;
+    line-height: 1.7;
+}
+
+/* Custom link styling in about page */
+.aboutPage a {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.aboutPage a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(240, 147, 251, 0.4);
+}
+
+/* Legacy title styling with modern enhancements */
+.title {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    padding-top: 80px; /* Account for drawer and mobile header */
+}
+
+.title h4 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Add page background for legacy layout */
+body:has(.aboutPage) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Team section styling */
+.team-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+}
+
+.team-section h3 {
+    color: #2d3748;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .aboutContainer,
+    .title {
+        padding-top: 100px; /* More space for mobile header */
+    }
+    
+    .aboutCard {
+        padding: 30px 25px;
+        margin: 10px;
+    }
+    
+    .aboutTitle, .title h4 {
+        font-size: 2rem;
+    }
+    
+    .aboutSubtitle {
+        font-size: 1rem;
+    }
+    
+    .imgBox {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .Img {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .aboutUs {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    
+    .aboutPage > p {
+        font-size: 1rem;
+    }
+    
+    body:has(.aboutPage) {
+        padding: 15px;
+    }
 }

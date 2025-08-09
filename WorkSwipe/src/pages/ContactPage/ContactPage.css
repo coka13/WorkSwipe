@@ -1,22 +1,206 @@
-.contactBox{
+/* Modern Contact Page Styling */
+.contactPageContainer {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contactContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 80px; /* Account for drawer and mobile header */
+}
+
+.contactHeader {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.contactTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.contactSubtitle {
+    font-size: 1.1rem;
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Legacy styles with modern enhancements */
+.contactBox {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2.5rem;
-    height: 500px;  
+    gap: 30px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    padding-top: 120px; /* Account for drawer and mobile header */
 }
-.contactUs{
-    font-weight: bold;
-    width: 50%;
-}
-.contactForm{
+
+.contactForm {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width:25%;
-    border-radius: 8%;
-    background-color: #cfedff;
-    margin: 15px;
-    padding: 10px; 
+}
+
+.contactUs {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2d3748;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Contact form styling enhancements */
+.contactForm .MuiTextField-root {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.contactForm .MuiOutlinedInput-root {
+    border-radius: 12px;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.contactForm .MuiOutlinedInput-root:hover {
+    background-color: #f1f5f9;
+}
+
+.contactForm .MuiOutlinedInput-root.Mui-focused {
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.contactForm .MuiInputLabel-root {
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.contactForm .MuiInputLabel-root.Mui-focused {
+    color: #667eea;
+}
+
+.contactForm .MuiButton-root {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 32px;
+    font-weight: 600;
+    text-transform: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.contactForm .MuiButton-root:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Support link styling */
+.contactBox a {
+    display: inline-block;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+    transition: all 0.3s ease;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contactBox a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(240, 147, 251, 0.4);
+}
+
+/* Info cards */
+.contact-info-section {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-info-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 200px;
+}
+
+.contact-info-card .icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.contact-info-card h4 {
+    margin: 0 0 8px 0;
+    font-weight: 600;
+}
+
+.contact-info-card p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contactContainer,
+    .contactBox {
+        padding-top: 100px; /* More space for mobile header */
+    }
+    
+    .contactForm {
+        padding: 30px 25px;
+        margin: 10px;
+        max-width: 90%;
+    }
+    
+    .contactTitle {
+        font-size: 2rem;
+    }
+    
+    .contactSubtitle {
+        font-size: 1rem;
+    }
+    
+    .contact-info-section {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .contact-info-card {
+        min-width: auto;
+        margin: 0 10px;
+    }
 }

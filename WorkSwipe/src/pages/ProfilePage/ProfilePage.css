@@ -1,12 +1,158 @@
-.card {
-  margin: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.profilePage {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    padding-top: 80px; /* Account for drawer */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.title{
+.profileContainer {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.profileHeader {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.profileTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.profileSubtitle {
+    font-size: 1.1rem;
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.profileCard {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
     display: flex;
     justify-content: center;
+}
+
+/* DisplayCard styling enhancements */
+.profileCard .MuiCard-root {
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.profileCard .MuiCardContent-root {
+    padding: 0 !important;
+}
+
+/* Form field styling for profile */
+.profileCard .MuiTextField-root {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.profileCard .MuiOutlinedInput-root {
+    border-radius: 12px;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.profileCard .MuiOutlinedInput-root:hover {
+    background-color: #f1f5f9;
+}
+
+.profileCard .MuiOutlinedInput-root.Mui-focused {
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.profileCard .MuiInputLabel-root {
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.profileCard .MuiInputLabel-root.Mui-focused {
+    color: #667eea;
+}
+
+/* Button styling for profile */
+.profileCard .MuiButton-root {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 10px 24px;
+    font-weight: 600;
+    text-transform: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+    margin: 8px;
+}
+
+.profileCard .MuiButton-root:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Technology selection button in profile */
+.profileCard .MuiIconButton-root {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+    color: white !important;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+    transition: all 0.3s ease;
+}
+
+.profileCard .MuiIconButton-root:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 25px rgba(240, 147, 251, 0.4);
+}
+
+/* Profile section titles */
+.profileCard h3 {
+    color: #2d3748;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e2e8f0;
+    position: relative;
+}
+
+.profileCard h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 1px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .profilePage {
+        padding-top: 60px;
+    }
+    
+    .profileCard {
+        padding: 24px;
+        margin: 10px;
+    }
+    
+    .profileTitle {
+        font-size: 2rem;
+    }
+    
+    .profileSubtitle {
+        font-size: 1rem;
+    }
 }

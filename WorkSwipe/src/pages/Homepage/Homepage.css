@@ -1,11 +1,224 @@
-.swipeArea{
+.homePage {
+    min-height: 100vh;
+    background: var(--gradient-primary);
+    padding: 20px;
+    font-family: var(--font-primary);
+}
+
+.homeContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 60px; /* Account for drawer */
+}
+
+/* Job Seeker Section */
+.jobSeekerSection {
+    text-align: center;
+}
+
+.homeHeader {
+    margin-bottom: 40px;
+    color: white;
+}
+
+.homeTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    text-shadow: var(--shadow-text);
+    font-family: var(--font-heading);
+}
+
+.homeSubtitle {
+    font-size: 1.2rem;
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 300;
+    font-family: var(--font-primary);
+}
+
+.swipeArea {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 30px;
 }
 
-.admin{
+/* Admin Section */
+.adminSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.adminCard {
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-elevated);
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.adminHeader {
+    margin-bottom: 30px;
+}
+
+.adminTitle {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 10px 0;
+    font-family: var(--font-heading);
+}
+
+.adminSubtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0;
+    font-family: var(--font-primary);
+}
+
+.adminContent {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 30px;
+}
+
+.adminImage {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.adminStats {
+    width: 100%;
+}
+
+.statCard {
+    background: var(--gradient-accent);
+    color: white;
+    padding: 25px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-card);
+}
+
+.statCard h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.statCard p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Employer Section */
+.employerSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.employerCard {
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-elevated);
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+}
+
+.employerHeader {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.employerTitle {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 10px 0;
+    font-family: var(--font-heading);
+}
+
+.employerSubtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0;
+    font-family: var(--font-primary);
+}
+
+.employerActions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.actionCard {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 30px;
+    border-radius: var(--border-radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.actionCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.actionCard h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.actionCard p {
+    margin: 0;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .homeContainer {
+        padding-top: 40px;
+    }
+    
+    .homeTitle,
+    .adminTitle,
+    .employerTitle {
+        font-size: 1.8rem;
+    }
+    
+    .homeSubtitle,
+    .adminSubtitle,
+    .employerSubtitle {
+        font-size: 1rem;
+    }
+    
+    .adminCard,
+    .employerCard {
+        padding: 25px;
+        margin: 10px;
+    }
+    
+    .employerActions {
+        grid-template-columns: 1fr;
+    }
+    
+    .actionCard {
+        padding: 25px;
+    }
 }

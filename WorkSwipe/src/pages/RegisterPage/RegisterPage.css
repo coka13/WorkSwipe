@@ -1,31 +1,182 @@
-.registerBox {
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #cfedff;
-    border-radius: 8%;
-    margin: 15px;
-    padding: 10px;
-    width: 30%;
-    font-size: 22px;
-    overflow-y: scroll ; /* Enable vertical scrolling if content overflows */
-
-}
-.alreadyHaveAccount{
-    font-size: x-small;
-    margin-top: 1rem;
-}
-.loginLink{
-   
-    border:transparent;
-    background-color: #cfedff;
-}
-
-
 .registerPage {
+    min-height: 100vh;
+    background: var(--gradient-primary);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
+    padding: 20px;
+    font-family: var(--font-primary);
+}
+
+.registerContainer {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.registerHeader {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.registerTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 8px;
+    text-shadow: var(--shadow-text);
+    font-family: var(--font-heading);
+}
+
+.registerSubtitle {
+    font-size: 1.1rem;
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.registerCard {
+    background: white;
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-elevated);
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.roleSection,
+.formSection {
+    margin-bottom: 32px;
+}
+
+.sectionTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-light);
+    position: relative;
+}
+
+.sectionTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--gradient-primary);
+    border-radius: 1px;
+}
+
+.submitSection {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.submitSection .MuiButton-root {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 12px 32px;
+    font-weight: 600;
+    text-transform: none;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-button);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.submitSection .MuiButton-root:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Form field styling */
+.formSection .MuiTextField-root {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.formSection .MuiOutlinedInput-root {
+    border-radius: 12px;
+    background-color: var(--bg-gray-50);
+    transition: all 0.3s ease;
+}
+
+.formSection .MuiOutlinedInput-root:hover {
+    background-color: var(--bg-gray-100);
+}
+
+.formSection .MuiOutlinedInput-root.Mui-focused {
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.formSection .MuiInputLabel-root {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.formSection .MuiInputLabel-root.Mui-focused {
+    color: var(--primary-blue);
+}
+
+/* Radio button styling */
+.roleSection .MuiFormControl-root {
+    margin-top: 10px;
+}
+
+.roleSection .MuiRadio-root {
+    color: var(--primary-blue);
+}
+
+.roleSection .MuiRadio-root.Mui-checked {
+    color: var(--primary-blue);
+}
+
+/* Technology selection button styling */
+.formSection .MuiIconButton-root {
+    background: var(--gradient-accent);
+    color: white;
+    padding: 12px 24px;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    box-shadow: var(--shadow-button);
+    transition: all 0.3s ease;
+}
+
+.formSection .MuiIconButton-root:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 25px rgba(240, 147, 251, 0.4);
+}
+
+/* Link styling */
+.submitSection a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.submitSection a:hover {
+    color: var(--primary-purple);
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .registerCard {
+        padding: 24px;
+        margin: 10px;
+    }
+    
+    .registerTitle {
+        font-size: 2rem;
+    }
+    
+    .registerSubtitle {
+        font-size: 1rem;
+    }
+}

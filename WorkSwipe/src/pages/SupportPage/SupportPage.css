@@ -1,16 +1,295 @@
-.supportPage{
+/* Modern Support Page Styling */
+.supportPageContainer {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.supportContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 80px; /* Account for drawer and mobile header */
+}
+
+.supportHeader {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.supportTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.supportSubtitle {
+    font-size: 1.1rem;
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 400;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Legacy styles with modern enhancements */
+.supportPage {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2.5rem;
-    height: 500px;
-   
-}
-.supportPage>h4{
-    text-align: center;
+    gap: 30px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    padding-top: 120px; /* Account for drawer and mobile header */
 }
 
-.title{
+.supportPage h4 {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 30px 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Legacy title styling with modern enhancements */
+.title {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    padding-top: 80px; /* Account for drawer and mobile header */
+}
+
+.title h4 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Support options */
+.support-options {
     display: flex;
     justify-content: center;
+    gap: 25px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.support-option {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 200px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.support-option:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.support-option .icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.support-option h4 {
+    margin: 0 0 10px 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.support-option p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.9rem;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Chat introduction */
+.chat-introduction {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.chat-introduction h3 {
+    color: #2d3748;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.chat-introduction p {
+    color: #4a5568;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    line-height: 1.6;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.support-features {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.support-feature {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: #667eea;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Contact us link styling */
+.supportPage a {
+    display: inline-block;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+    transition: all 0.3s ease;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.supportPage a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(240, 147, 251, 0.4);
+}
+
+/* Chat container styling */
+.chat-container {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Status indicator */
+.support-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: white;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(74, 222, 128, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .supportContainer,
+    .supportPage,
+    .title {
+        padding-top: 100px; /* More space for mobile header */
+    }
+    
+    .supportTitle, .title h4, .supportPage h4 {
+        font-size: 2rem;
+    }
+    
+    .supportSubtitle {
+        font-size: 1rem;
+    }
+    
+    .chat-container {
+        max-width: 95%;
+    }
+    
+    .support-options {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .support-option {
+        min-width: auto;
+        margin: 0 10px;
+    }
+    
+    .chat-introduction {
+        padding: 25px 20px;
+        margin: 0 10px 25px;
+    }
+    
+    .support-features {
+        gap: 10px;
+    }
+    
+    .support-feature {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Accessibility enhancements */
+@media (prefers-reduced-motion: reduce) {
+    .support-option:hover {
+        transform: none;
+    }
+    
+    .status-dot {
+        animation: none;
+    }
+    
+    .supportPage a:hover {
+        transform: none;
+    }
+}
+
+/* Focus states for better accessibility */
+.support-option:focus,
+.supportPage a:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
 }
